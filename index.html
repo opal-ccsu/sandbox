@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to the Sandbox</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f6f4ef;
+      --fg: #1c1b19;
+      --muted: #6b675f;
+      --accent: #2f6f5e;
+      --card: #ffffffcc;
+      --border: #1c1b1914;
+      --dot: #1c1b1922;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #121312;
+        --fg: #ecebe6;
+        --muted: #9a978f;
+        --accent: #7cc4ad;
+        --card: #1c1d1ccc;
+        --border: #ecebe61a;
+        --dot: #ecebe626;
+      }
+    }
+    :root[data-theme="dark"] {
+      --bg: #121312;
+      --fg: #ecebe6;
+      --muted: #9a978f;
+      --accent: #7cc4ad;
+      --card: #1c1d1ccc;
+      --border: #ecebe61a;
+      --dot: #ecebe626;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body { height: 100%; }
+
+    body {
+      font-family: "Space Grotesk", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      padding: 16px;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+    }
+
+    main {
+      position: relative;
+      z-index: 1;
+      max-width: 560px;
+      width: 100%;
+      text-align: center;
+      padding: 48px 32px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      animation: rise 0.8s cubic-bezier(.2,.8,.2,1) both;
+    }
+
+    .eyebrow {
+      font-size: 0.8rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    h1 {
+      font-size: clamp(2.2rem, 7vw, 3.4rem);
+      line-height: 1.05;
+      margin: 12px 0 16px;
+      font-weight: 700;
+    }
+
+    h1 .wave {
+      display: inline-block;
+      transform-origin: 70% 70%;
+      animation: wave 2.4s ease-in-out 1s infinite;
+    }
+
+    .greeting {
+      font-size: 1.05rem;
+      color: var(--muted);
+      min-height: 1.6em;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1.1em;
+      background: var(--accent);
+      vertical-align: -0.15em;
+      margin-left: 2px;
+      animation: blink 1s steps(1) infinite;
+    }
+
+    .actions {
+      margin-top: 32px;
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    button {
+      font: inherit;
+      font-weight: 600;
+      padding: 12px 22px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--fg);
+      cursor: pointer;
+      transition: transform 0.15s, background 0.2s;
+    }
+    button:hover { transform: translateY(-2px); }
+    button.primary {
+      background: var(--accent);
+      color: var(--bg);
+      border-color: transparent;
+    }
+
+    footer {
+      margin-top: 28px;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: none; }
+    }
+    @keyframes wave {
+      0%, 60%, 100% { transform: rotate(0); }
+      10%, 30% { transform: rotate(14deg); }
+      20% { transform: rotate(-8deg); }
+      40% { transform: rotate(-4deg); }
+      50% { transform: rotate(10deg); }
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="field"></canvas>
+
+  <main>
+    <p class="eyebrow">opal-ccsu / sandbox</p>
+    <h1>Welcome <span class="wave">👋</span></h1>
+    <p class="greeting"><span id="typed"></span><span class="cursor"></span></p>
+
+    <div class="actions">
+      <button class="primary" id="shuffle">Say something else</button>
+      <button id="theme">Toggle theme</button>
+    </div>
+
+    <footer id="clock"></footer>
+  </main>
+
+  <script>
+    // --- Typed greeting ---
+    const lines = [
+      "This is a place to play.",
+      "Break things. Nobody's watching.",
+      "Every good project starts as an experiment.",
+      "Try moving your mouse around.",
+      "Nothing here is permanent.",
+    ];
+    const typed = document.getElementById("typed");
+    let current = 0, timer;
+
+    function typeLine(text) {
+      clearTimeout(timer);
+      let i = 0;
+      typed.textContent = "";
+      (function step() {
+        typed.textContent = text.slice(0, ++i);
+        if (i < text.length) timer = setTimeout(step, 35 + Math.random() * 40);
+      })();
+    }
+
+    document.getElementById("shuffle").addEventListener("click", () => {
+      current = (current + 1) % lines.length;
+      typeLine(lines[current]);
+    });
+    setTimeout(() => typeLine(lines[0]), 600);
+
+    // --- Theme toggle ---
+    document.getElementById("theme").addEventListener("click", () => {
+      const root = document.documentElement;
+      const isDark = root.dataset.theme
+        ? root.dataset.theme === "dark"
+        : matchMedia("(prefers-color-scheme: dark)").matches;
+      root.dataset.theme = isDark ? "light" : "dark";
+    });
+
+    // --- Time-aware footer ---
+    function tick() {
+      const now = new Date();
+      const h = now.getHours();
+      const part = h < 12 ? "morning" : h < 18 ? "afternoon" : "evening";
+      document.getElementById("clock").textContent =
+        `Good ${part} · ${now.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })}`;
+    }
+    tick();
+    setInterval(tick, 10000);
+
+    // --- Dot field that leans away from the cursor ---
+    const canvas = document.getElementById("field");
+    const ctx = canvas.getContext("2d");
+    const mouse = { x: -9999, y: -9999 };
+    const GAP = 28, RADIUS = 120;
+    let dots = [], dpr = 1;
+
+    function resize() {
+      dpr = window.devicePixelRatio || 1;
+      canvas.width = innerWidth * dpr;
+      canvas.height = innerHeight * dpr;
+      canvas.style.width = innerWidth + "px";
+      canvas.style.height = innerHeight + "px";
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      dots = [];
+      for (let y = GAP / 2; y < innerHeight; y += GAP)
+        for (let x = GAP / 2; x < innerWidth; x += GAP)
+          dots.push({ ox: x, oy: y, x, y });
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, innerWidth, innerHeight);
+      ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue("--dot");
+      for (const d of dots) {
+        const dx = d.ox - mouse.x, dy = d.oy - mouse.y;
+        const dist = Math.hypot(dx, dy);
+        let tx = d.ox, ty = d.oy;
+        if (dist < RADIUS) {
+          const push = (1 - dist / RADIUS) * 18;
+          tx += (dx / dist) * push;
+          ty += (dy / dist) * push;
+        }
+        d.x += (tx - d.x) * 0.15;
+        d.y += (ty - d.y) * 0.15;
+        ctx.beginPath();
+        ctx.arc(d.x, d.y, 1.6, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      requestAnimationFrame(draw);
+    }
+
+    addEventListener("resize", resize);
+    addEventListener("pointermove", e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+    addEventListener("pointerleave", () => { mouse.x = mouse.y = -9999; });
+    resize();
+    draw();
+  </script>
+</body>
+</html>
