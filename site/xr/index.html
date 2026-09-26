@@ -69,9 +69,19 @@
   .btn:hover{background:var(--panel);color:var(--indigo);}
   .band .actions a:not(.btn){color:#fff;font-weight:400;}
 
-  .labline{background:var(--indigo);padding:0 0 1.4rem;}
-  .labline p{max-width:34rem;color:var(--on-indigo);font-size:.98rem;line-height:1.55;}
-  .labline b{display:block;font-weight:600;font-size:1.15rem;color:#fff;margin-bottom:.15rem;}
+  .photo{position:relative;margin:-1px 0 0;background:var(--indigo);overflow:hidden;}
+  .photo img{width:100%;height:clamp(10rem,24vw,17rem);object-fit:cover;object-position:62% 55%;}
+  .photo .scrim{position:absolute;inset:-1px 0 0;background:var(--indigo);clip-path:polygon(0 0,max(calc(50% - 7rem),24rem) 0,max(calc(50% - 10rem),21rem) 100%,0 100%);}
+  .photo figcaption{position:absolute;inset:0;display:flex;align-items:center;}
+  .photo figcaption .wrap{width:100%;}
+  .photo figcaption p{max-width:17rem;color:var(--on-indigo);font-size:.98rem;line-height:1.55;}
+  .photo figcaption b{display:block;font-weight:600;font-size:1.15rem;color:#fff;margin-bottom:.15rem;}
+  .photo figcaption a{color:#fff;}
+  @media (max-width:44rem){
+    .photo .scrim{display:none;}
+    .photo figcaption{position:static;background:var(--indigo);padding:.9rem 0 1.2rem;}
+    .photo figcaption p{max-width:none;}
+  }
 
   .visit{margin-top:1.6rem;}
   .bar{display:flex;height:2.6rem;border-radius:4px;overflow:hidden;}
@@ -152,7 +162,7 @@
   }
   @media print{
     .skip,.actions,.btn{display:none !important;}
-    .band,.labline{background:#fff;color:var(--indigo);}
+    .band,.photo{background:#fff;color:var(--indigo);}
     .band h1,.lead,.lockup,.facts dd{color:var(--indigo);}
     .facts div{background:#fff;}
     section{padding-top:1.6rem;break-inside:avoid;}
@@ -192,9 +202,11 @@
   </div>
 </header>
 
-<div class="labline">
-  <div class="wrap"><p><b>The <a href="https://ccsu.edu/xr-lab" style="color:#fff">CCSU XR Lab</a>.</b>Twelve headsets, one room, and a research team that wants to know what actually works.</p></div>
-</div>
+<figure class="photo">
+  <img src="../assets/xr-lab-photo.jpg" alt="A workstation in the CCSU XR Lab: a desktop PC, a VR headset with controllers, and a monitor showing the XR Lab logo" width="1400" height="1169">
+  <div class="scrim" aria-hidden="true"></div>
+  <figcaption><div class="wrap"><p><b>The <a href="https://ccsu.edu/xr-lab">CCSU XR Lab</a>.</b>Twelve headsets, one room, and a research team that wants to know what actually works.</p></div></figcaption>
+</figure>
 
 <main id="main">
 
