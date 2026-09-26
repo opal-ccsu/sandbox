@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Caleb Bragg, Ph.D.</title>
+<meta name="description" content="Caleb Bragg, Ph.D. Industrial/organizational psychologist at Central Connecticut State University. Career readiness, scientific communication, AI literacy, and immersive learning. Projects, publications, and whitepapers.">
+<meta name="author" content="Caleb B. Bragg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/icon-180.png">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Caleb Bragg, Ph.D.">
+<meta property="og:description" content="Career readiness, scientific communication, AI literacy, and immersive learning. Projects, publications, and whitepapers.">
+<meta property="og:image" content="https://cbraggphd.github.io/assets/icon-512.png">
+<meta property="og:url" content="https://cbraggphd.github.io/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&display=swap">
+<style>
+  :root {
+    --indigo: #372b68;
+    --slate: #314f75;
+    --coral: #f2513e;
+    --grayblue: #798fa8;
+    --line: #e6e9ec;
+    --bg: #ffffff;
+    --bg-alt: #f5f6f8;
+    --card: #ffffff;
+    --text: #1f2a44;
+    --text-strong: #372b68;
+    --text-muted: #314f75;
+    --link: #314f75;
+    --link-hover: #372b68;
+    --shadow: 0 1px 2px rgba(31, 42, 68, 0.06), 0 8px 24px rgba(31, 42, 68, 0.06);
+    --radius: 14px;
+    --heading: "Poppins", "Segoe UI", system-ui, -apple-system, sans-serif;
+    --body: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #1b1734;
+      --bg-alt: #221c40;
+      --card: #2a2350;
+      --line: #3f3768;
+      --text: #e8e6f0;
+      --text-strong: #ffffff;
+      --text-muted: #c3c9d6;
+      --link: #b8c6da;
+      --link-hover: #ffffff;
+      --grayblue: #9fb0c5;
+      --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.25);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #1b1734;
+    --bg-alt: #221c40;
+    --card: #2a2350;
+    --line: #3f3768;
+    --text: #e8e6f0;
+    --text-strong: #ffffff;
+    --text-muted: #c3c9d6;
+    --link: #b8c6da;
+    --link-hover: #ffffff;
+    --grayblue: #9fb0c5;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.25);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--body);
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  a:hover { color: var(--link-hover); }
+  h1, h2, h3 { font-family: var(--heading); color: var(--text-strong); line-height: 1.2; margin: 0 0 0.4em; }
+  h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; letter-spacing: -0.01em; }
+  h2 { font-size: clamp(1.4rem, 3vw, 1.85rem); font-weight: 600; }
+  h3 { font-size: 1.15rem; font-weight: 600; }
+  p { margin: 0 0 1em; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 16px; }
+  .eyebrow {
+    font-family: var(--heading);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--grayblue);
+    margin: 0 0 0.6em;
+  }
+
+  /* Header */
+  header.site {
+    position: sticky; top: 0; z-index: 10;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px; padding: 12px 0;
+  }
+  .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text-strong); }
+  .brand img { width: 40px; height: 40px; border-radius: 8px; }
+  .brand span { font-family: var(--heading); font-weight: 600; font-size: 1.05rem; }
+  nav ul { list-style: none; display: flex; gap: 20px; margin: 0; padding: 0; }
+  nav a { text-decoration: none; font-weight: 600; font-size: 0.95rem; color: var(--text-muted); }
+  nav a:hover { color: var(--text-strong); }
+  @media (max-width: 640px) {
+    nav ul { gap: 14px; }
+    nav a { font-size: 0.85rem; }
+    .brand span { display: none; }
+  }
+
+  /* Hero */
+  .hero { padding: 56px 0 40px; }
+  .hero-grid { display: grid; grid-template-columns: 1fr; gap: 28px; align-items: center; }
+  @media (min-width: 760px) { .hero-grid { grid-template-columns: 1.6fr 1fr; gap: 48px; } }
+  .hero .roles { color: var(--text-muted); font-size: 1.05rem; margin: 0 0 1.2em; }
+  .hero .roles span { display: block; }
+  .hero .lede { font-size: 1.15rem; max-width: 56ch; }
+  .hero-marks {
+    display: flex; gap: 28px; align-items: center; justify-content: center;
+    padding: 24px; border-radius: var(--radius); background: var(--bg-alt);
+  }
+  .hero-marks img { width: 120px; height: 120px; object-fit: contain; }
+  .hero-marks figure { margin: 0; text-align: center; }
+  .hero-marks figcaption { font-family: var(--heading); font-weight: 700; color: var(--text-strong); font-size: 1.1rem; margin-top: 6px; }
+  .btns { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
+  .btn {
+    display: inline-block; padding: 10px 18px; border-radius: 999px;
+    font-family: var(--heading); font-weight: 600; font-size: 0.95rem;
+    text-decoration: none; border: 2px solid var(--indigo); color: var(--indigo); background: transparent;
+  }
+  .btn.primary { background: var(--indigo); color: #ffffff; }
+  .btn:hover { background: var(--slate); border-color: var(--slate); color: #ffffff; }
+  :root[data-theme="dark"] .btn, :root:not([data-theme="light"]) .btn { }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .btn { border-color: #b8c6da; color: #ffffff; }
+    :root:not([data-theme="light"]) .btn.primary { background: var(--coral); border-color: var(--coral); }
+  }
+  :root[data-theme="dark"] .btn { border-color: #b8c6da; color: #ffffff; }
+  :root[data-theme="dark"] .btn.primary { background: var(--coral); border-color: var(--coral); }
+
+  /* Sections */
+  section { padding: 48px 0; }
+  section.alt { background: var(--bg-alt); }
+  .grid { display: grid; gap: 20px; grid-template-columns: 1fr; }
+  @media (min-width: 700px) { .grid.two { grid-template-columns: 1fr 1fr; } }
+  .card {
+    background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 22px 22px 18px; box-shadow: var(--shadow);
+    display: flex; flex-direction: column;
+  }
+  .card h3 { margin-bottom: 0.3em; }
+  .card .tag {
+    font-family: var(--heading); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--slate); margin-bottom: 8px;
+  }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .card .tag { color: var(--grayblue); } }
+  :root[data-theme="dark"] .card .tag { color: var(--grayblue); }
+  .card p { font-size: 0.98rem; }
+  .card ul.links { list-style: none; padding: 0; margin: auto 0 0; display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 0.92rem; }
+  .card ul.links li::before { content: "\2192\00a0"; color: var(--coral); }
+  .card.feature { border-top: 4px solid var(--coral); }
+  .pillars { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 14px; margin: 8px 0 14px; padding: 0; list-style: none; font-size: 0.92rem; }
+  .pillars li { padding-left: 14px; position: relative; }
+  .pillars li::before { content: ""; position: absolute; left: 0; top: 0.55em; width: 7px; height: 7px; border-radius: 50%; background: var(--indigo); }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .pillars li::before { background: var(--grayblue); } }
+  :root[data-theme="dark"] .pillars li::before { background: var(--grayblue); }
+
+  figure.graphic { margin: 24px 0 0; }
+  figure.graphic img { width: 100%; max-width: 620px; height: auto; display: block; border-radius: 10px; border: 1px solid var(--line); background: #ffffff; }
+  figure.graphic figcaption { font-size: 0.85rem; color: var(--text-muted); margin-top: 8px; }
+
+  /* Publications */
+  ol.pubs { list-style: none; padding: 0; margin: 0; }
+  ol.pubs li { padding: 14px 0; border-top: 1px solid var(--line); }
+  ol.pubs li:last-child { border-bottom: 1px solid var(--line); }
+  ol.pubs .title { font-weight: 600; color: var(--text-strong); }
+  ol.pubs .meta { display: block; color: var(--text-muted); font-size: 0.95rem; }
+  ol.pubs .actions { display: block; margin-top: 4px; font-size: 0.9rem; }
+  ol.pubs .actions a + a::before { content: "\00b7\00a0"; color: var(--grayblue); margin-left: 6px; }
+  .soon { color: var(--grayblue); font-size: 0.9rem; }
+
+  /* About */
+  .about { display: grid; gap: 28px; grid-template-columns: 1fr; }
+  @media (min-width: 760px) { .about { grid-template-columns: 1.4fr 1fr; } }
+  .aside { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px 22px; box-shadow: var(--shadow); font-size: 0.95rem; }
+  .aside h3 { font-size: 1rem; }
+  .aside dl { margin: 0; }
+  .aside dt { font-weight: 600; color: var(--text-strong); margin-top: 10px; }
+  .aside dd { margin: 0; color: var(--text-muted); }
+
+  footer.site { border-top: 1px solid var(--line); padding: 28px 0 40px; font-size: 0.88rem; color: var(--text-muted); }
+  footer.site p { margin: 0 0 6px; }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap nav">
+    <a class="brand" href="#top" aria-label="Home">
+      <img src="assets/opal-mark-indigo.png" alt="">
+      <span>Caleb Bragg, Ph.D.</span>
+    </a>
+    <nav aria-label="Sections">
+      <ul>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="#about">About</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <div class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">Industrial/Organizational Psychology</p>
+        <h1>Caleb Bragg, Ph.D.</h1>
+        <p class="roles">
+          <span>Professor, Industrial/Organizational Psychology</span>
+          <span>Department of Psychological Science, Central Connecticut State University</span>
+          <span>Principal Investigator, SCALE Pilot</span>
+        </p>
+        <p class="lede">
+          I study how college turns into a career: how students learn to name what they know,
+          how experiential learning and mentorship build career readiness, and how properly
+          calibrated AI fits into scientific work and teaching.
+        </p>
+        <div class="btns">
+          <a class="btn primary" href="#projects">Current projects</a>
+          <a class="btn" href="#publications">Publications</a>
+        </div>
+      </div>
+      <div class="hero-marks" aria-label="Lab marks">
+        <figure>
+          <img src="assets/opal-mark.png" alt="OPAL mark: an indigo octagon ring with one coral segment">
+          <figcaption>OPAL</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/scale-mark.png" alt="SCALE mark: five rounded bars in descending length, indigo to coral">
+          <figcaption>SCALE</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+
+  <section id="projects" class="alt">
+    <div class="wrap">
+      <p class="eyebrow">Current projects</p>
+      <h2>What the lab is building</h2>
+      <p>
+        The Organizational Psychology Answers Lab (OPAL) at Central Connecticut State University
+        builds tools that help students say what they can do, and studies whether those tools work.
+      </p>
+
+      <div class="grid two">
+
+        <article class="card feature">
+          <div class="tag">Framework and tools</div>
+          <h3>CR Path: the Career Readiness Pathway</h3>
+          <p>
+            A framework, published with James M. Conway, that describes career readiness as four
+            components developed through iteration rather than in sequence:
+          </p>
+          <ul class="pillars">
+            <li>Career-specific knowledge, skills, and abilities</li>
+            <li>Core competencies</li>
+            <li>Experiential learning opportunities</li>
+            <li>Career mentorship</li>
+          </ul>
+          <p>
+            Module 0 is the interactive entry point. Students work through reflective prompts,
+            rename the framework in their own words, and leave with an articulation they can use in
+            advising, interviews, and course planning. In fall 2026 it runs in courses across
+            fourteen instructors and in Central Career Launch, the university's student
+            employment program, where supervisors have been trained on it.
+          </p>
+          <ul class="links">
+            <li><a href="https://opal.ccsu.edu/crpath-vk/demo/?audience=guest">Module 0 guest walkthrough</a></li>
+            <li><a href="https://opal.ccsu.edu/matches/demo/?audience=guest">PathwayU unit guest walkthrough</a></li>
+            <li><a href="https://doi.org/10.1037/stl0000480">Framework paper</a></li>
+          </ul>
+        </article>
+
+        <article class="card feature">
+          <div class="tag">Funded pilot</div>
+          <h3>SCALE: Scientific Communication + AI Literacy Experience</h3>
+          <p>
+            A pilot funded in 2026 by Connecticut's Tech Talent Accelerator. A spring 2027
+            course, Translational Literacy in Science, is co-delivered by natural science,
+            social science, and library faculty, with discipline-specific modules from creators
+            across the university. Students who earn them go on to employer-matched summer
+            micro-internships.
+          </p>
+          <p>
+            SCALE is built on the Translational Literacy Framework: the capacity to read,
+            evaluate, and communicate scientific evidence across disciplinary boundaries and
+            from experts to the public, with generative AI treated as an instrument to be
+            calibrated and questioned rather than trusted.
+          </p>
+          <ul class="links">
+            <li><a href="https://doi.org/10.31234/osf.io/5uefd_v1">Translational Literacy Framework</a></li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <div class="tag">Immersive learning</div>
+          <h3>XR for skill training and reflection</h3>
+          <p>
+            A faculty research grant supports a study of whether custom-calibrated XR meditation
+            transfers to skill training, run with undergraduate research assistants in the
+            university's XR Lab. Students in the college-to-career course also practice mock
+            interviews in the lab with an AI interviewer asking the questions.
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="tag">Faculty development and partnerships</div>
+          <h3>Taking the framework beyond one department</h3>
+          <p>
+            Two campus workshops in July 2026 prepared faculty and staff from a dozen disciplines
+            to deploy Module 0 in their own courses. The framework was the keynote at the
+            Connecticut Department of Labor's Learns and Works symposium in April 2026, and the
+            work continues through the Business-Higher Education Forum's Faculty Innovation
+            Fellowship.
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="tag">Teaching</div>
+          <h3>Statistics with logged AI</h3>
+          <p>
+            Psychological Statistics and its lab were rebuilt for fall 2026 around one rule.
+            Students must use AI to generate their own practice datasets and log every
+            generation. They may not use it to interpret output or write results, because the
+            interpretation is the assignment.
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="tag">Whitepaper</div>
+          <h3>Knowledge: the real durable skill</h3>
+          <p>
+            Employers say they want durable skills such as communication and critical thinking.
+            This paper argues those are knowledge in use, and shows how the measurement tradition
+            that could see knowledge was abandoned. It closes with practical moves for employers
+            and educators.
+          </p>
+          <ul class="links">
+            <li><a href="https://doi.org/10.31234/osf.io/zr8u5_v1">Read the whitepaper</a></li>
+          </ul>
+        </article>
+
+      </div>
+
+      <figure class="graphic">
+        <img src="assets/cr-path-graphic.png" alt="CR Path diagram: Career Readiness at the center of a cycle connecting career-specific KSAs, career mentorship, core competencies, and experiential learning opportunities, with focused reflection between steps">
+        <figcaption>
+          CR Path: Career Readiness Through Iteration. &copy; 2026 Caleb B. Bragg. Licensed under
+          <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a>.
+          Preferred citation: Bragg, C. B. (2026). <em>CR Path: Career Readiness Through Iteration.</em> CC BY-NC 4.0.
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section id="publications">
+    <div class="wrap">
+      <p class="eyebrow">Publications</p>
+      <h2>Peer-reviewed articles</h2>
+      <ol class="pubs">
+        <li>
+          <span class="title">Career readiness pathway (CR Path): How a degree in psychology answers the stakeholder's call for career-ready students.</span>
+          <span class="meta">Bragg, C. B., &amp; Conway, J. M. (2026). <em>Scholarship of Teaching and Learning in Psychology.</em></span>
+          <span class="actions"><a href="https://doi.org/10.1037/stl0000480">Publisher</a><span class="soon"> &middot; Accepted manuscript PDF coming soon</span></span>
+        </li>
+        <li>
+          <span class="title">Engaging for the future: Student perspectives on experiential learning and workforce preparation.</span>
+          <span class="meta">Schnobrich-Davis, J., Bragg, C. B., &amp; Soper, C. (2025). <em>Journal of Experiential Education, 49</em>(2), 400&ndash;425.</span>
+          <span class="actions"><a href="https://doi.org/10.1177/10538259251391349">Publisher</a></span>
+        </li>
+        <li>
+          <span class="title">One psychology department's home-grown programmatic assessment of their curriculum.</span>
+          <span class="meta">Rimzhim, A., Heinly, M. T., Bragg, C., et al. (2020). <em>Scholarship of Teaching and Learning in Psychology, 6</em>(4), 316&ndash;341.</span>
+          <span class="actions"><a href="https://doi.org/10.1037/stl0000179">Publisher</a></span>
+        </li>
+        <li>
+          <span class="title">Not all forms of misbehavior are created equal: Differential personality facet&ndash;counterproductive work behavior relations.</span>
+          <span class="meta">Bragg, C. B., &amp; Bowling, N. A. (2018). <em>International Journal of Selection and Assessment, 26</em>(1), 27&ndash;35.</span>
+          <span class="actions"><a href="https://doi.org/10.1111/ijsa.12200">Publisher</a></span>
+        </li>
+        <li>
+          <span class="title">The quick and the careless: The construct validity of page time as a measure of insufficient effort responding to surveys.</span>
+          <span class="meta">Bowling, N. A., Huang, J. L., Brower, C. K., et al., with C. B. Bragg (2021). <em>Organizational Research Methods, 26</em>(2), 323&ndash;352.</span>
+          <span class="actions"><a href="https://doi.org/10.1177/10944281211056520">Publisher</a></span>
+        </li>
+        <li>
+          <span class="title">A meta-analytic examination of the potential correlates and consequences of workload.</span>
+          <span class="meta">Bowling, N. A., Alarcon, G. M., Bragg, C. B., et al. (2015). <em>Work &amp; Stress, 29</em>(2), 95&ndash;113.</span>
+          <span class="actions"><a href="https://doi.org/10.1080/02678373.2015.1033037">Publisher</a></span>
+        </li>
+      </ol>
+
+      <h2 style="margin-top:40px">Preprints and whitepapers</h2>
+      <ol class="pubs">
+        <li>
+          <span class="title">Knowledge: The real durable skill. What the skills conversation lost, and how employers, educators, and the workforce field can put it back.</span>
+          <span class="meta">Bragg, C. B. (2026). Whitepaper. PsyArXiv.</span>
+          <span class="actions"><a href="https://doi.org/10.31234/osf.io/zr8u5_v1">Read</a></span>
+        </li>
+        <li>
+          <span class="title">Articulation through iteration: The Career Readiness Pathway as a boundary-crossing framework for student development and stakeholder alignment.</span>
+          <span class="meta">Bragg, C. B. (2026). Preprint. PsyArXiv.</span>
+          <span class="actions"><a href="https://doi.org/10.31234/osf.io/7avsq_v1">Read</a></span>
+        </li>
+        <li>
+          <span class="title">Translational Literacy Framework (TLF): A pedagogical architecture for cross-disciplinary evidence evaluation and communication in the AI era.</span>
+          <span class="meta">Bragg, C. B. (2026). Preprint. PsyArXiv. Authoritative version on OSF under CC BY-NC 4.0.</span>
+          <span class="actions"><a href="https://doi.org/10.31234/osf.io/5uefd_v1">Read</a><a href="https://doi.org/10.17605/osf.io/q69vd">OSF project</a></span>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="about" class="alt">
+    <div class="wrap about">
+      <div>
+        <p class="eyebrow">About</p>
+        <h2>Caleb B. Bragg</h2>
+        <p>
+          I am a professor of industrial/organizational psychology at Central Connecticut State
+          University, where I have taught research methods since I was hired and now also teach
+          psychological statistics, I/O psychology, and a college-to-career course built to
+          close the gap between what students can do and what they can say.
+        </p>
+        <p>
+          My early research was on personality and counterproductive work behavior, including a
+          trait self-control measure built for my dissertation. Since 2022 the work has centered
+          on the college-to-career transition: the Career Readiness Pathway, the tools students
+          use to walk it, and the Translational Literacy Framework that extends it into
+          cross-disciplinary scientific communication. I use generative AI as a production layer
+          for that work and teach students to calibrate it rather than trust it.
+        </p>
+        <p>
+          I served as the college's leadership fellow for career preparation and experiential
+          learning, built its Board of Advisors, and replaced the university's typology-based
+          career assessment with a validated instrument. I was a Faculty Innovation Fellow with
+          the Business-Higher Education Forum and now lead the SCALE Pilot.
+        </p>
+      </div>
+      <aside class="aside">
+        <h3>At a glance</h3>
+        <dl>
+          <dt>Position</dt>
+          <dd>Professor, Department of Psychological Science, Central Connecticut State University</dd>
+          <dt>Office</dt>
+          <dd>Marcus White 202, New Britain, Connecticut</dd>
+          <dt>Lab</dt>
+          <dd>Organizational Psychology Answers Lab (OPAL)</dd>
+          <dt>Areas</dt>
+          <dd>Career readiness, scientific communication, AI literacy, human-computer interaction, immersive learning</dd>
+          <dt>Elsewhere</dt>
+          <dd><a href="https://github.com/cbraggphd">GitHub</a> &middot; <a href="https://github.com/opal-ccsu">OPAL on GitHub</a></dd>
+        </dl>
+      </aside>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <p>&copy; 2026 Caleb B. Bragg. Text and original graphics on this site are licensed under
+      <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a> unless noted. The OPAL and SCALE marks are not covered by that license.</p>
+    <p>This page was drafted with AI as a production layer and reviewed by its author.</p>
+  </div>
+</footer>
+
+</body>
+</html>
