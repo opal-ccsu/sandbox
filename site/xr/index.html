@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Employer Partner Sessions | XR Meditation Skill Transfer Study | OPAL at CCSU</title>
+<meta name="description" content="CCSU's OPAL lab invites employers to try an XR meditation and AI-powered interview training protocol and tell us whether it belongs in hiring, training, and onboarding. Join this fall; sessions run February to early March 2027.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Test-drive the future of workforce training">
+<meta property="og:description" content="Employer partner sessions for CCSU's XR Meditation Skill Transfer study. One 60–75 minute visit to the CCSU XR Lab, February to early March 2027. No cost.">
+<meta name="theme-color" content="#372B68">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/icon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!--
+  XR Meditation Skill Transfer study: employer partner page.
+  Page content current as of September 26, 2026.
+  To update dates or status, search this file for "UPDATE".
+-->
+<style>
+  :root{
+    --indigo:#372B68; --slate:#314F75; --steel:#4A6486; --mist:#798FA8; --coral:#F2513E;
+    --rule:#E6E9EC; --panel:#F4F6F8; --paper:#FFFFFF; --on-indigo:#D7D3E6;
+    --font:"Poppins",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+    --measure:40rem;
+    box-sizing:border-box;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  *,*::before,*::after{box-sizing:inherit;margin:0;padding:0;}
+  html{scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%;}
+  body{font-family:var(--font);font-size:1rem;line-height:1.72;color:var(--slate);background:var(--paper);}
+  img{max-width:100%;height:auto;display:block;}
+  a{color:var(--indigo);font-weight:500;text-underline-offset:.2em;text-decoration-thickness:1px;}
+  a:hover{text-decoration-color:var(--coral);text-decoration-thickness:2px;}
+  :focus-visible{outline:3px solid var(--coral);outline-offset:3px;border-radius:2px;}
+  .skip{position:absolute;left:-9999px;top:0;background:#fff;color:var(--indigo);padding:.6rem 1rem;z-index:10;}
+  .skip:focus{left:1rem;top:1rem;}
+  .vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
+  .wrap{max-width:62rem;margin:0 auto;padding:0 1.25rem;}
+  .prose{max-width:var(--measure);}
+  h1,h2,h3{font-family:var(--font);color:var(--indigo);line-height:1.15;}
+  h2{font-size:clamp(1.55rem,3.6vw,2.05rem);font-weight:600;letter-spacing:-.01em;margin-bottom:.9rem;}
+  h3{font-size:1.1rem;font-weight:600;margin-bottom:.35rem;}
+  p + p{margin-top:.85rem;}
+  section{padding:3.25rem 0 0;}
+
+  .band{background:var(--indigo);color:#fff;padding:1.5rem 0 2.4rem;}
+  .topline{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;}
+  .lockup{display:flex;align-items:center;gap:.85rem;color:#fff;}
+  .lockup .mark{width:40px;height:40px;flex:none;}
+  .lockup .wm{font-weight:600;font-size:1.3rem;letter-spacing:.12em;line-height:1;}
+  .lockup .sep{width:1px;height:1.6rem;background:rgba(255,255,255,.35);}
+  .lockup .org{font-weight:400;font-size:1.2rem;letter-spacing:.06em;line-height:1;color:var(--on-indigo);}
+  .home{color:var(--on-indigo);font-weight:400;font-size:.95rem;}
+  .home:hover{color:#fff;}
+  .band h1{color:#fff;font-size:clamp(2.3rem,7vw,3.9rem);font-weight:700;letter-spacing:-.02em;line-height:1.08;margin:2.3rem 0 1rem;max-width:18ch;}
+  .lead{font-size:1.1rem;line-height:1.65;max-width:36rem;color:#EEECF5;}
+  .facts{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.2);margin:2rem 0 1.8rem;}
+  .facts div{background:var(--indigo);padding:.8rem .9rem;}
+  .facts dt{font-weight:500;font-size:.82rem;letter-spacing:.04em;color:var(--on-indigo);}
+  .facts dd{font-size:.95rem;line-height:1.45;color:#fff;}
+  .facts .now{background:#fff;box-shadow:inset 0 4px 0 var(--coral);}
+  .facts .now dt{color:var(--steel);}
+  .facts .now dd{color:var(--indigo);font-weight:600;}
+  .actions{display:flex;flex-wrap:wrap;align-items:center;gap:.9rem 1.5rem;}
+  .btn{display:inline-block;font-family:var(--font);font-weight:600;font-size:1.05rem;line-height:1;text-decoration:none;padding:.95rem 1.35rem;border-radius:4px;background:#fff;color:var(--indigo);border:2px solid #fff;}
+  .btn:hover{background:var(--panel);color:var(--indigo);}
+  .band .actions a:not(.btn){color:#fff;font-weight:400;}
+
+  .labline{background:var(--indigo);padding:0 0 1.4rem;}
+  .labline p{max-width:34rem;color:var(--on-indigo);font-size:.98rem;line-height:1.55;}
+  .labline b{display:block;font-weight:600;font-size:1.15rem;color:#fff;margin-bottom:.15rem;}
+
+  .visit{margin-top:1.6rem;}
+  .bar{display:flex;height:2.6rem;border-radius:4px;overflow:hidden;}
+  .bar > div{display:flex;align-items:center;justify-content:center;font-weight:600;font-size:.95rem;color:#fff;white-space:nowrap;overflow:hidden;padding:0 .3rem;min-width:0;}
+  .seg-brief{flex:10 1 0;background:var(--mist);}
+  .seg-head{flex:25 1 0;background:var(--indigo);}
+  .seg-talk{flex:30 1 0;background:var(--steel);}
+  .caps{display:flex;margin-top:.45rem;font-size:.88rem;line-height:1.3;color:var(--steel);}
+  .caps > span{padding-right:.4rem;min-width:0;}
+  .c-brief{flex:10 1 0;} .c-head{flex:25 1 0;} .c-talk{flex:30 1 0;}
+  .caps b{display:block;color:var(--indigo);font-weight:600;}
+  .zoom{height:2.2rem;background:var(--panel);clip-path:polygon(15.4% 0,53.8% 0,100% 100%,0 100%);margin-top:.35rem;}
+  .detail{height:2.9rem;}
+  .d-q{flex:3 1 0;background:var(--mist);}
+  .d-q.end{flex-grow:4;}
+  .d-vs{flex:7 1 0;background:var(--slate);}
+  .d-med{flex:5 1 0;background:var(--indigo);box-shadow:inset 0 5px 0 var(--coral);padding-top:5px !important;}
+  .steps{list-style:none;margin-top:1.4rem;display:grid;gap:.85rem;}
+  .steps li{display:grid;grid-template-columns:1rem 1fr;gap:.8rem;align-items:start;}
+  .key{width:1rem;height:1rem;margin-top:.38rem;border-radius:2px;}
+  .k-q{background:var(--mist);} .k-vs{background:var(--slate);}
+  .k-med{background:var(--indigo);box-shadow:inset 0 3px 0 var(--coral);}
+  .steps strong{font-weight:600;color:var(--indigo);}
+  .note{margin-top:1.3rem;padding:.9rem 1rem;background:var(--panel);border-left:4px solid var(--indigo);max-width:var(--measure);}
+  .parts{display:grid;gap:1.6rem;margin-top:2.2rem;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));}
+  .parts h3 span{color:var(--steel);font-weight:400;}
+
+  .studies{list-style:none;margin-top:1.4rem;border-left:3px solid var(--rule);}
+  .studies > li{position:relative;padding:0 0 2.1rem 1.6rem;max-width:44rem;}
+  .studies > li:last-child{padding-bottom:0;}
+  .studies > li::before{content:"";position:absolute;left:-.62rem;top:.3rem;width:.95rem;height:.95rem;border-radius:50%;background:#fff;border:3px solid var(--steel);}
+  .studies > li.here::before{background:var(--coral);border-color:var(--coral);}
+  .num{font-weight:500;font-size:.88rem;letter-spacing:.03em;color:var(--steel);}
+  .status{display:inline-block;font-weight:500;font-size:.85rem;line-height:1.3;margin:.2rem 0 .6rem;padding:.25rem .6rem;border-radius:3px;background:var(--panel);color:var(--slate);}
+  .here .status{background:var(--indigo);color:#fff;}
+  details{margin-top:.9rem;border-top:1px solid var(--rule);padding-top:.7rem;}
+  summary{cursor:pointer;font-weight:600;font-size:.95rem;color:var(--indigo);}
+  details p{font-size:.9rem;margin-top:.6rem;color:var(--steel);}
+
+  .cols{display:grid;gap:2rem;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));margin-top:.4rem;}
+  .ticks{list-style:none;}
+  .ticks li{position:relative;padding-left:1.25rem;margin-top:.5rem;}
+  .ticks li::before{content:"";position:absolute;left:0;top:.66rem;width:.5rem;height:.5rem;background:var(--mist);}
+  .how{list-style:none;counter-reset:how;display:grid;gap:1.4rem;margin-top:1.2rem;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));}
+  .how li{counter-increment:how;border-top:3px solid var(--indigo);padding-top:.8rem;}
+  .how li::before{content:counter(how);display:block;font-weight:600;font-size:1.9rem;line-height:1;color:var(--indigo);margin-bottom:.45rem;}
+  .btn-solid{background:var(--indigo);color:#fff;border-color:var(--indigo);margin-top:.9rem;}
+  .btn-solid:hover{background:var(--slate);border-color:var(--slate);color:#fff;}
+  .qa{max-width:44rem;margin-top:.4rem;}
+  .qa dt{font-weight:600;font-size:1.05rem;color:var(--indigo);margin-top:1.3rem;}
+  .qa dd{margin-top:.2rem;}
+  .people{display:grid;gap:1.4rem;grid-template-columns:repeat(auto-fit,minmax(14.5rem,1fr));margin-top:1rem;}
+  .person{padding:1rem 1.1rem;background:var(--panel);}
+  .person h3{margin-bottom:.2rem;}
+  .person p{font-size:.9rem;line-height:1.5;color:var(--steel);}
+  .person > a{display:inline-block;margin-top:.5rem;font-size:.95rem;}
+  .partners{display:flex;flex-wrap:wrap;align-items:center;gap:1.4rem 2.6rem;margin-top:2.2rem;}
+  .sig{display:flex;align-items:center;gap:.9rem;}
+  .sig .mark{width:52px;height:52px;flex:none;}
+  .sig .wm{display:block;font-weight:600;font-size:1.55rem;letter-spacing:.1em;line-height:1.05;color:var(--indigo);}
+  .sig .tag{display:block;font-weight:400;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;line-height:1.4;color:var(--slate);margin-top:.2rem;}
+  footer{margin-top:3.5rem;padding:1.6rem 0 2.4rem;border-top:1px solid var(--rule);font-size:.85rem;color:var(--steel);}
+  footer p + p{margin-top:.4rem;}
+
+  @media (max-width:52rem){
+    .facts{grid-template-columns:1fr 1fr;}
+    .facts div:last-child{grid-column:1 / -1;}
+  }
+  @media (max-width:34rem){
+    .band h1{margin-top:1.7rem;}
+    .caps{flex-wrap:wrap;gap:.35rem 1rem;}
+    .caps > span{flex:none;display:flex;align-items:center;gap:.4rem;padding:0;}
+    .caps > span b{display:inline;}
+    .caps > span::before{content:"";width:.8rem;height:.8rem;border-radius:2px;flex:none;}
+    .c-brief::before{background:var(--mist);} .c-head::before{background:var(--indigo);} .c-talk::before{background:var(--steel);}
+    .bar > div{font-size:.8rem;}
+  }
+  @media print{
+    .skip,.actions,.btn{display:none !important;}
+    .band,.labline{background:#fff;color:var(--indigo);}
+    .band h1,.lead,.lockup,.facts dd{color:var(--indigo);}
+    .facts div{background:#fff;}
+    section{padding-top:1.6rem;break-inside:avoid;}
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="band">
+  <div class="wrap">
+    <div class="topline">
+      <div class="lockup">
+        <img class="mark" src="../assets/opal-mark-indigo.png" alt="" width="40" height="40">
+        <span class="wm">OPAL</span><span class="sep" aria-hidden="true"></span><span class="org">CCSU</span>
+        <span class="vh">, Organizational Psychology Answers Lab, Central Connecticut State University</span>
+      </div>
+      <a class="home" href="../">Caleb Bragg, Ph.D.</a>
+    </div>
+
+    <h1>Test-drive the future of workforce training</h1>
+    <p class="lead">Our lab is building an XR training protocol that pairs AI-powered interview practice with a short guided meditation. Before it goes further, we want the people who hire, train, and onboard to try it and tell us, candidly, whether it has a place in their organizations.</p>
+
+    <!-- UPDATE: dates and status -->
+    <dl class="facts">
+      <div class="now"><dt>Join</dt><dd>Now, during fall 2026</dd></div>
+      <div><dt>Sessions</dt><dd>February to early March 2027</dd></div>
+      <div><dt>Time</dt><dd>One visit, 60&ndash;75 minutes</dd></div>
+      <div><dt>Where</dt><dd>CCSU XR Lab, New Britain</dd></div>
+      <div><dt>Cost</dt><dd>None; we handle scheduling</dd></div>
+    </dl>
+
+    <div class="actions">
+      <a class="btn" href="mailto:bragg.cb@ccsu.edu?cc=delucat@ccsu.edu,njalaludin@ccsu.edu&amp;subject=XR%20employer%20session%3A%20interested&amp;body=Name%3A%0D%0AOrganization%3A%0D%0ARole%3A%0D%0AOthers%20from%20my%20organization%20who%20may%20join%3A%0D%0AWeeks%20that%20work%20in%20February%20or%20early%20March%202027%3A%0D%0ACampus%20events%20I%20am%20already%20attending%20(optional)%3A%0D%0A">Email to hold a spot</a>
+      <a href="#how">How to take part this fall</a>
+    </div>
+  </div>
+</header>
+
+<div class="labline">
+  <div class="wrap"><p><b>The <a href="https://ccsu.edu/xr-lab" style="color:#fff">CCSU XR Lab</a>.</b>Twelve headsets, one room, and a research team that wants to know what actually works.</p></div>
+</div>
+
+<main id="main">
+
+  <section aria-labelledby="why">
+    <div class="wrap"><div class="prose">
+      <h2 id="why">Why we're asking employers</h2>
+      <p>Immersive training is arriving in the workplace faster than the evidence about what it's good for. Our student research shows promise. What it can't tell us is whether the people who run hiring, training, and onboarding find the experience usable, credible, and worth their time. That judgment has to come from you, and critical reactions are the most useful ones.</p>
+    </div></div>
+  </section>
+
+  <section aria-labelledby="visit">
+    <div class="wrap">
+      <h2 id="visit">What your visit looks like</h2>
+      <p class="prose">One visit to the <a href="https://ccsu.edu/xr-lab">CCSU XR Lab</a>, about an hour. The middle of the visit is the protocol from our student research, run with the meditation our team built at CCSU.</p>
+
+      <figure class="visit" aria-hidden="true">
+        <div class="bar"><div class="seg-brief"></div><div class="seg-head"></div><div class="seg-talk"></div></div>
+        <div class="caps">
+          <span class="c-brief"><b>Briefing</b> 10 min</span>
+          <span class="c-head"><b>In the headset</b> 25 min</span>
+          <span class="c-talk"><b>Group discussion</b> 30 min</span>
+        </div>
+        <div class="zoom"></div>
+        <div class="bar detail">
+          <div class="d-q"></div>
+          <div class="d-vs">Interview</div>
+          <div class="d-med">Meditate</div>
+          <div class="d-vs">Interview</div>
+          <div class="d-q end"></div>
+        </div>
+      </figure>
+
+      <ol class="steps" aria-label="In the headset, step by step">
+        <li><span class="key k-q"></span><div><strong>Check-in questions.</strong> A few quick questions, answered in the headset.</div></li>
+        <li><span class="key k-vs"></span><div><strong>AI mock interview, 7 minutes.</strong> An interview with an AI interviewer in <a href="https://virtualspeech.com/">VirtualSpeech</a>, which scores your answers.</div></li>
+        <li><span class="key k-med"></span><div><strong>Guided meditation, 5 minutes.</strong> Box breathing in a VR environment our team built at CCSU.</div></li>
+        <li><span class="key k-vs"></span><div><strong>Second interview.</strong> Another VirtualSpeech session, so you can feel the before and after.</div></li>
+        <li><span class="key k-q"></span><div><strong>Check-out questions.</strong> A few more, plus your first impressions.</div></li>
+      </ol>
+
+      <p class="note">Trying the headset is optional. Observing works too, and you'll still have plenty to say in the discussion.</p>
+
+      <div class="parts">
+        <div><h3>Briefing <span>about 10 minutes</span></h3><p>The study, the protocol, and what we want your honest read on.</p></div>
+        <div><h3>Group discussion <span>about 30 minutes</span></h3><p>Five or six employer peers, two questions: how was the experience, and where could it earn a place in training, onboarding, hiring preparation, or workforce development?</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="stands">
+    <div class="wrap">
+      <h2 id="stands">Where the research stands</h2>
+      <p class="prose">The employer sessions are the third step in a program of research that began in 2025 in the <a href="https://ccsu.edu/xr-lab">CCSU XR Lab</a>. <!-- UPDATE: status as of --> Status as of September 2026.</p>
+
+      <ol class="studies">
+        <li>
+          <span class="num">Study 1, 2025&ndash;2026</span>
+          <h3>Meditation between two AI mock interviews</h3>
+          <span class="status">Data collected; analysis and write-up underway</span>
+          <p>CCSU students completed two AI-powered mock interviews in VirtualSpeech, with a short box-breathing meditation between them, delivered either in VR or in person by a researcher. From the first interview to the second, interview scores rose, state anxiety fell, and attitudes toward VR and AI became more positive. VR and in-person meditation produced similar results.</p>
+          <p>Practice alone can raise a second score, so in spring 2026 we added a comparison group that rested to music instead of meditating. That analysis, which separates the effect of meditation from the effect of practice, is underway. Early results were presented with undergraduate co-authors at the Eastern Psychological Association's 2026 Annual Meeting in Boston.</p>
+          <details>
+            <summary>Statistics for researchers</summary>
+            <p>Two-condition results (VR vs. in-person meditation). Interview performance, first to second session: <i>F</i>(1, 102) = 34.10, <i>p</i> &lt; .001, partial &eta;&sup2; = .251. VR vs. in-person: <i>F</i>(1, 102) = 0.71, <i>p</i> = .402, partial &eta;&sup2; = .007. Attitudes toward VR: <i>F</i>(1, 114) = 82.45, <i>p</i> &lt; .001, partial &eta;&sup2; = .420. Attitudes toward AI: <i>F</i>(1, 114) = 40.66, <i>p</i> &lt; .001, partial &eta;&sup2; = .263. State anxiety, controlling for trait anxiety: <i>F</i>(1, 113) = 15.92, <i>p</i> &lt; .001, partial &eta;&sup2; = .123.</p>
+            <p>A nonsignificant difference between VR and in-person meditation is not evidence that they are equivalent; a formal equivalence test is planned with the three-group analysis.</p>
+          </details>
+        </li>
+        <li>
+          <span class="num">Study 2, 2026&ndash;2027</span>
+          <h3>A VR meditation built at CCSU</h3>
+          <span class="status">Validation study, 2026&ndash;27 academic year</span>
+          <p>Commercial VR meditation apps run on subscriptions and can't be customized. With a CCSU computer science student, we built our own, using the same box-breathing narration as the commercial app so the two differ only in the visual environment and the platform. This year's validation study randomly assigns CCSU students to one or the other and compares state anxiety and attitudes toward VR and AI, with every survey answered inside the headset.</p>
+        </li>
+        <li class="here">
+          <span class="num">Study 3, spring 2027</span>
+          <h3>Employer sessions</h3>
+          <span class="status">Inviting partners now</span>
+          <p>Employers experience the protocol with the CCSU-built meditation and tell us how usable, credible, and relevant it is for workforce development, training, onboarding, and hiring preparation.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section aria-labelledby="who">
+    <div class="wrap">
+      <h2 id="who">Who we're looking for</h2>
+      <div class="prose">
+        <p>About 20&ndash;30 employer representatives across four or five small groups of 5&ndash;6, each with a stake in hiring, training, onboarding, or workforce development. Several people from one organization are welcome, since different roles see different value. If you've toured the XR Lab or asked about VR training, this is the invitation you've been waiting for.</p>
+        <p>Sessions are built around your schedule. They can run as a standalone visit or right after an employer event you're already attending on campus, such as a career fair, a convening, or a Hub program.</p>
+      </div>
+      <div class="cols" style="margin-top:2rem">
+        <div>
+          <h3>What we ask</h3>
+          <ul class="ticks">
+            <li>One session, 60&ndash;75 minutes, on campus</li>
+            <li>Your candid reactions; critical ones are the most useful</li>
+            <li>That's the whole commitment</li>
+          </ul>
+        </div>
+        <div>
+          <h3>What you get</h3>
+          <ul class="ticks">
+            <li>A hands-on first look at XR and AI training tools before they reach the market</li>
+            <li>A tour-level visit to the CCSU XR Lab</li>
+            <li>A direct line into research shaping workforce tools; your feedback steers the design</li>
+            <li>A seat alongside peer employers comparing notes on training and onboarding</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how" aria-labelledby="how-h">
+    <div class="wrap">
+      <h2 id="how-h">How to take part this fall</h2>
+      <ol class="how">
+        <li>
+          <h3>Send us a note</h3>
+          <p>Tell us your name, organization, role, and the weeks that work for you in February or early March. Prefer an introduction? Nesha Jalaludin at the <a href="https://www.ccsu.edu/hub">Central Workforce and Innovation Hub</a> can connect you.</p>
+          <a class="btn btn-solid" href="mailto:bragg.cb@ccsu.edu?cc=delucat@ccsu.edu,njalaludin@ccsu.edu&amp;subject=XR%20employer%20session%3A%20interested&amp;body=Name%3A%0D%0AOrganization%3A%0D%0ARole%3A%0D%0AOthers%20from%20my%20organization%20who%20may%20join%3A%0D%0AWeeks%20that%20work%20in%20February%20or%20early%20March%202027%3A%0D%0ACampus%20events%20I%20am%20already%20attending%20(optional)%3A%0D%0A">Email to hold a spot</a>
+        </li>
+        <li>
+          <h3>We follow up with dates</h3>
+          <p>We handle scheduling and logistics, and we can pair your visit with a campus event you're already attending.</p>
+        </li>
+        <li>
+          <h3>Visit the XR Lab</h3>
+          <p>Plan on 60&ndash;75 minutes at the <a href="https://ccsu.edu/campus-map/applied-innovation-hub">Applied Innovation Hub</a> on CCSU's New Britain campus.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section aria-labelledby="faq">
+    <div class="wrap">
+      <h2 id="faq">Common questions</h2>
+      <dl class="qa">
+        <dt>Do I have to wear the headset?</dt><dd>No. Observing works too.</dd>
+        <dt>What if VR makes me uncomfortable?</dt><dd>Some people feel mild discomfort in a headset. You can take it off at any time.</dd>
+        <dt>Will my name or organization appear in the results?</dt><dd>No. Reports describe participants by role and sector only.</dd>
+        <dt>Can several people from my organization come?</dt><dd>Yes. HR, a hiring manager, and a training lead often notice different things.</dd>
+        <dt>Is this research reviewed?</dt><dd>Yes. The employer sessions are reviewed by CCSU's Institutional Review Board before they begin, and participation is voluntary.</dd>
+        <dt>Who funds the work?</dt><dd>A 2026&ndash;2027 CSU-AAUP Faculty Research Grant. There is no cost to participants.</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section aria-labelledby="team">
+    <div class="wrap">
+      <h2 id="team">Contacts</h2>
+      <div class="people">
+        <div class="person">
+          <h3>Caleb Bragg, Ph.D.</h3>
+          <p>Principal Investigator; Professor, Psychological Science</p>
+          <a href="mailto:bragg.cb@ccsu.edu">bragg.cb@ccsu.edu</a>
+        </div>
+        <div class="person">
+          <h3>Tony DeLuca</h3>
+          <p>XR Program Manager, <a href="https://ccsu.edu/xr-lab">CCSU XR Lab</a>; Faculty, CEGT</p>
+          <a href="mailto:delucat@ccsu.edu">delucat@ccsu.edu</a>
+        </div>
+        <div class="person">
+          <h3>Nesha Jalaludin, MPA</h3>
+          <p>Program Navigator, <a href="https://www.ccsu.edu/hub">Central Workforce and Innovation Hub</a></p>
+          <a href="mailto:njalaludin@ccsu.edu">njalaludin@ccsu.edu</a>
+        </div>
+      </div>
+
+      <div class="partners">
+        <span class="sig">
+          <img class="mark" src="../assets/opal-mark.png" alt="" width="52" height="52">
+          <span><span class="wm">OPAL</span><span class="tag">Organizational Psychology Answers Lab</span></span>
+        </span>
+        <a href="https://ccsu.edu/xr-lab">CCSU XR Lab</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>XR Meditation Skill Transfer study, conducted by OPAL, the Organizational Psychology Answers Lab, Department of Psychological Science, Central Connecticut State University, in partnership with the <a href="https://ccsu.edu/xr-lab">CCSU XR Lab</a> and the Central Workforce and Innovation Hub.</p>
+    <!-- UPDATE: date -->
+    <p>Page updated September 26, 2026. <a href="../">Back to Caleb Bragg, Ph.D.</a></p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>SCALE Pilot: Translational Literacy in Science | Central Connecticut State University</title>
+<meta name="description" content="The SCALE Pilot at Central Connecticut State University teaches students to evaluate evidence, interrogate AI, and translate findings for decision-makers, then places them in paid summer micro-internships with Connecticut organizations.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="SCALE Pilot: Translational Literacy in Science at CCSU">
+<meta property="og:description" content="A new CCSU course and paid summer micro-internships that teach students to evaluate evidence, interrogate AI, and explain what they find to the people who decide.">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/icon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Source+Serif+4:wght@500;600&display=swap">
+<!--
+  SCALE Pilot partner page. Content current as of September 26, 2026.
+  Sources: TTA 3.0 application (June 12, 2026), BHEF award letter (Aug 6, 2026),
+  contingency memo (July 7, 2026), Spring 2027 course map, certificate outline,
+  and host/module status through Sept 24, 2026.
+-->
+<style>
+  :root {
+    --ink: #0D2137; --navy: #14406E; --blue: #2E6A9E; --red: #C1452B; --green: #1B6B54;
+    --slate: #33475B; --muted: #55606E; --paper: #FFFFFF; --wash: #F3F6FA; --rule: #D9DEE5;
+    --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --sans: "Source Sans 3", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+    --measure: 40rem; --wide: 72rem;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: 5rem; }
+  body { margin: 0; font-family: var(--sans); font-size: 1.125rem; line-height: 1.6; color: var(--ink); background: var(--paper); }
+  a { color: var(--blue); text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
+  a:hover { color: var(--navy); text-decoration-thickness: 2px; }
+  :focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; border-radius: 2px; }
+  .skip { position: absolute; left: -999px; top: 0; }
+  .skip:focus { left: 1rem; top: 1rem; z-index: 100; background: #fff; padding: 0.5rem 1rem; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+  .wrap { max-width: var(--wide); margin: 0 auto; padding-inline: clamp(1.25rem, 4vw, 2.5rem); }
+
+  .topbar { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,0.96); border-bottom: 1px solid var(--rule); }
+  .topbar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 1rem 2rem; min-height: 4rem; }
+  .brand { display: flex; align-items: center; gap: 0.9rem; text-decoration: none; }
+  .brand img { display: block; height: 2.5rem; width: auto; }
+  .wordmark { font-family: var(--serif); font-weight: 600; font-size: 1.5rem; letter-spacing: 0.03em; color: var(--navy); white-space: nowrap; }
+  .wordmark-sub { font-family: var(--sans); font-weight: 300; font-size: 0.78rem; letter-spacing: 0.26em; color: var(--slate); margin-left: 0.45rem; }
+  .topbar nav ul { display: flex; flex-wrap: wrap; gap: 0.3rem 1.4rem; list-style: none; margin: 0; padding: 0; justify-content: flex-end; }
+  .topbar nav a { color: var(--ink); text-decoration: none; font-weight: 600; font-size: 0.97rem; white-space: nowrap; }
+  .topbar nav a:hover { color: var(--blue); text-decoration: underline; }
+  .topbar nav a.home { color: var(--muted); font-weight: 400; }
+
+  h1, h2 { font-family: var(--serif); font-weight: 600; color: var(--navy); text-wrap: balance; }
+  h1 { font-size: clamp(2.25rem, 1.35rem + 3.3vw, 3.5rem); line-height: 1.08; letter-spacing: -0.012em; margin: 0 0 1.4rem; }
+  h2 { font-size: clamp(1.75rem, 1.35rem + 1.5vw, 2.4rem); line-height: 1.15; letter-spacing: -0.005em; margin: 0 0 1.25rem; }
+  h3 { font-size: 1.2rem; line-height: 1.3; font-weight: 700; color: var(--ink); margin: 3rem 0 1rem; }
+  h4 { font-size: 1.07rem; line-height: 1.35; font-weight: 700; margin: 0 0 0.4rem; }
+  p { margin: 0 0 1.1rem; text-wrap: pretty; }
+  .prose { max-width: var(--measure); }
+  .small { font-size: 0.95rem; color: var(--muted); }
+  .nw { white-space: nowrap; }
+  .section { padding-block: clamp(3.5rem, 8vw, 6rem); }
+  .section-alt { background: var(--wash); }
+  .section-ruled { border-top: 1px solid var(--rule); }
+
+  .hero { padding-block: clamp(2.75rem, 7vw, 5.5rem) clamp(3rem, 7vw, 5.5rem); }
+  .hero-grid { display: grid; gap: clamp(2.5rem, 5vw, 4.5rem); align-items: start; }
+  .lede { font-size: clamp(1.15rem, 1.05rem + 0.4vw, 1.3rem); line-height: 1.55; max-width: 36rem; margin: 0 0 2rem; }
+  .actions { display: flex; flex-wrap: wrap; gap: 0.75rem 1rem; align-items: center; }
+  .btn { display: inline-block; padding: 0.8rem 1.3rem; border-radius: 4px; font-weight: 600; font-size: 1rem; line-height: 1.2; text-decoration: none; }
+  .btn-primary { background: var(--navy); color: #fff; }
+  .btn-primary:hover { background: var(--ink); color: #fff; }
+  .btn-secondary { color: var(--navy); border: 1.5px solid var(--navy); padding: calc(0.8rem - 1.5px) calc(1.3rem - 1.5px); }
+  .btn-secondary:hover { background: var(--wash); color: var(--navy); }
+  .hero-note { margin: 1.6rem 0 0; font-size: 0.95rem; color: var(--muted); }
+
+  .brief { margin: 0; background: #fff; border: 1px solid var(--rule); border-top: 5px solid var(--navy); border-radius: 2px 2px 6px 6px; padding: clamp(1.25rem, 3vw, 1.9rem); box-shadow: 0 22px 44px -30px rgba(13,33,55,0.45); }
+  .brief-k { font-size: 0.85rem; font-weight: 700; color: var(--slate); margin: 0 0 0.4rem; }
+  .brief blockquote { margin: 0 0 1.2rem; font-family: var(--serif); font-size: 1.22rem; line-height: 1.45; color: var(--ink); }
+  .flag { background-image: linear-gradient(var(--red), var(--red)); background-repeat: no-repeat; background-position: 0 100%; background-size: 100% 2px; padding-bottom: 2px; -webkit-box-decoration-break: slice; box-decoration-break: slice; animation: draw 1.2s 0.6s ease-out both; }
+  @keyframes draw { from { background-size: 0 2px; } to { background-size: 100% 2px; } }
+  .brief-trace { border-top: 1px solid var(--rule); padding: 1rem 0 1.1rem; }
+  .brief-trace p:last-child { margin: 0; font-size: 1rem; }
+  .verdict { margin: 0; border-top: 1px solid var(--rule); padding-top: 1rem; display: grid; gap: 0.85rem; }
+  .verdict div { display: grid; gap: 0.2rem; }
+  .verdict dt { font-weight: 700; font-size: 0.97rem; display: flex; align-items: center; gap: 0.5rem; }
+  .verdict dt::before { content: ""; width: 0.6rem; height: 0.6rem; border-radius: 50%; background: currentColor; flex: none; transform: translateY(1px); }
+  .verdict dd { margin: 0; font-size: 1rem; }
+  .v-know dt { color: var(--green); } .v-dont dt { color: var(--red); } .v-next dt { color: var(--blue); }
+  .brief figcaption { margin-top: 1.2rem; font-size: 0.88rem; font-style: italic; color: var(--muted); }
+
+  .competencies { display: grid; gap: 2rem 3rem; margin-top: 2.25rem; }
+  .competency { border-top: 2px solid var(--navy); padding-top: 1rem; }
+  .competency h3 { color: var(--navy); font-size: 1.12rem; margin: 0 0 0.4rem; }
+  .competency p { margin: 0; }
+  .facts { margin: 2rem 0 0; border-top: 1px solid var(--rule); max-width: 52rem; }
+  .facts div { display: grid; grid-template-columns: 9rem 1fr; gap: 1rem; padding: 0.8rem 0; border-bottom: 1px solid var(--rule); }
+  .facts dt { font-weight: 700; color: var(--slate); }
+  .facts dd { margin: 0; }
+  .arc { list-style: none; margin: 0; padding: 0; max-width: 52rem; }
+  .arc li { display: grid; grid-template-columns: 7.5rem 1fr; gap: 1.25rem; padding: 1rem 0; border-top: 1px solid var(--rule); }
+  .arc li:last-child { border-bottom: 1px solid var(--rule); }
+  .arc .when { font-family: var(--serif); font-weight: 600; font-size: 1.12rem; color: var(--navy); font-variant-numeric: lining-nums tabular-nums; }
+  .arc p { margin: 0; }
+  .pull { font-family: var(--serif); font-size: clamp(1.35rem, 1.1rem + 1vw, 1.75rem); line-height: 1.35; color: var(--navy); margin: 2.75rem 0; padding-left: 1.25rem; border-left: 3px solid var(--red); max-width: 38rem; }
+  .clusters { display: grid; gap: 1.75rem 3rem; margin-top: 1.5rem; max-width: 60rem; }
+  .cluster h4 { padding-bottom: 0.5rem; border-bottom: 2px solid var(--green); margin-bottom: 0.7rem; }
+  .cluster-ss h4 { border-bottom-color: var(--blue); }
+  .cluster ul { list-style: none; margin: 0; padding: 0; columns: 2; column-gap: 1.5rem; }
+  .cluster li { padding: 0.2rem 0; break-inside: avoid; }
+  .team { list-style: none; margin: 1rem 0 0; padding: 0; display: grid; gap: 1.5rem 2.5rem; }
+  .team li { border-top: 1px solid var(--rule); padding-top: 0.9rem; }
+  .team strong { display: block; font-family: var(--serif); font-weight: 600; font-size: 1.2rem; color: var(--navy); }
+  .team span { display: block; font-size: 0.98rem; color: var(--muted); }
+  .sectors { display: grid; gap: 1.75rem 3rem; margin-top: 1.5rem; }
+  .sector h4 { color: var(--navy); } .sector p { margin: 0; }
+  .roles { display: grid; gap: 2rem 3rem; margin-top: 1rem; }
+  .role h4 { font-family: var(--serif); font-weight: 600; font-size: 1.3rem; color: var(--navy); margin-bottom: 0.75rem; }
+  .role ul { margin: 0; padding-left: 1.15rem; } .role li { margin-bottom: 0.55rem; } .role li::marker { color: var(--slate); }
+  .faq { display: grid; gap: 1.75rem 3rem; margin: 1rem 0 0; }
+  .faq dt { font-weight: 700; margin-bottom: 0.3rem; } .faq dd { margin: 0; }
+  .callout { margin-top: 3rem; padding: 1.5rem 1.75rem; background: #fff; border: 1px solid var(--rule); border-left: 4px solid var(--navy); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem 2rem; }
+  .callout p { margin: 0; max-width: 40rem; }
+  .partners { list-style: none; margin: 1.5rem 0 0; padding: 0; display: grid; gap: 0 3rem; }
+  .partner { border-top: 1px solid var(--rule); padding: 1.3rem 0 1.5rem; }
+  .partner h3 { font-family: var(--serif); font-weight: 600; font-size: 1.4rem; color: var(--navy); margin: 0; }
+  .partner-role { font-weight: 700; color: var(--slate); margin: 0.15rem 0 0.6rem; }
+  .partner p:last-child { margin-bottom: 0; }
+  .discussing { list-style: none; margin: 0.5rem 0 0; padding: 0; display: grid; gap: 0.35rem 3rem; max-width: 60rem; }
+  .discussing li { padding: 0.55rem 0; border-top: 1px solid var(--rule); }
+  .legend { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; margin: 0.5rem 0 0; font-size: 0.95rem; color: var(--muted); }
+  .legend span { display: inline-flex; align-items: center; gap: 0.45rem; }
+  .dot { display: inline-block; width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--navy); background: #fff; flex: none; }
+  .dot-done { background: var(--navy); }
+  .dot-progress { background: linear-gradient(90deg, var(--navy) 50%, #fff 50%); }
+  .dot-next { border-color: var(--slate); }
+  .timeline { list-style: none; margin: 1.75rem 0 0; padding: 0; position: relative; max-width: 54rem; }
+  .timeline::before { content: ""; position: absolute; top: 0.6rem; bottom: 0.6rem; width: 2px; background: var(--rule); left: calc(10.5rem + 0.75rem + 0.875rem - 1px); }
+  .timeline li { display: grid; grid-template-columns: 10.5rem 1.75rem 1fr; grid-template-areas: "date dot body"; column-gap: 0.75rem; padding: 0.65rem 0; position: relative; }
+  .t-date { grid-area: date; white-space: nowrap; font-weight: 700; color: var(--slate); font-variant-numeric: tabular-nums; }
+  .timeline .dot { grid-area: dot; justify-self: center; margin-top: 0.35rem; position: relative; z-index: 1; }
+  .t-body { grid-area: body; } .t-body p { margin: 0; }
+  .timeline li.now { padding-block: 0.9rem; }
+  .now .t-date { color: var(--red); }
+  .now .dot { width: 10px; height: 10px; border: 0; background: var(--red); margin-top: 0.5rem; box-shadow: 0 0 0 4px #fff; }
+  .now .t-body { color: var(--red); font-weight: 700; border-top: 2px solid var(--red); padding-top: 0.35rem; }
+  .next-grid { display: grid; gap: 2rem 3rem; margin-top: 1.5rem; }
+  .next-grid h3 { margin-top: 0; } .next-grid p { margin: 0 0 0.8rem; }
+  .refs { list-style: none; margin: 1rem 0 0; padding: 0; max-width: 54rem; }
+  .refs li { padding: 1.2rem 0; border-top: 1px solid var(--rule); }
+  .refs li:last-child { border-bottom: 1px solid var(--rule); }
+  .refs h3 { margin: 0 0 0.3rem; color: var(--navy); font-size: 1.12rem; }
+  .refs p { margin: 0 0 0.5rem; }
+  .refs cite { display: block; font-style: normal; font-size: 0.98rem; color: var(--muted); padding-left: 2em; text-indent: -2em; }
+  .contact { background: var(--navy); color: #fff; }
+  .contact h2 { color: #fff; } .contact a { color: #fff; }
+  .contact :focus-visible { outline-color: #fff; }
+  .contact .btn-primary { background: #fff; color: var(--navy); }
+  .contact .btn-primary:hover { background: var(--wash); color: var(--navy); }
+  .contact .btn-secondary { color: #fff; border-color: rgba(255,255,255,0.75); }
+  .contact .btn-secondary:hover { background: rgba(255,255,255,0.1); color: #fff; }
+  .contacts { display: grid; gap: 1.25rem 3rem; margin-bottom: 0.5rem; }
+  .contact-name { font-family: var(--serif); font-size: 1.3rem; margin: 0; }
+  .contact-meta { margin: 0 0 1.75rem; opacity: 0.9; }
+  footer { background: var(--wash); padding-block: 2.5rem; font-size: 0.93rem; color: var(--muted); }
+  footer p { max-width: 54rem; margin: 0 0 0.6rem; }
+  .lockup { display: flex; align-items: center; gap: 1.5rem; margin: 0 0 1.5rem; }
+  .lockup img { height: 3.5rem; width: auto; }
+
+  @media (min-width: 48rem) {
+    .competencies, .clusters, .sectors, .roles, .faq, .partners, .discussing { grid-template-columns: 1fr 1fr; }
+    .team { grid-template-columns: repeat(3, 1fr); }
+    .contacts { grid-template-columns: 1fr 1fr; max-width: 60rem; }
+  }
+  @media (min-width: 62rem) {
+    .hero-grid { grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.95fr); }
+    .next-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 40rem) {
+    body { font-size: 1.0625rem; }
+    .topbar { position: static; }
+    .topbar .wrap { flex-direction: column; align-items: flex-start; gap: 0.35rem; padding-block: 0.75rem; }
+    .topbar nav ul { justify-content: flex-start; gap: 0.3rem 1.1rem; }
+    .topbar nav a { font-size: 0.95rem; }
+    html { scroll-padding-top: 1rem; }
+    .callout .btn { width: 100%; text-align: center; }
+    .facts div { grid-template-columns: 1fr; gap: 0.15rem; }
+    .arc li { grid-template-columns: 1fr; gap: 0.25rem; }
+    .cluster ul { columns: 1; }
+    .timeline::before { left: calc(0.875rem - 1px); }
+    .timeline li { grid-template-columns: 1.75rem 1fr; grid-template-areas: "dot date" ". body"; }
+  }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .flag { animation: none; } }
+  @media print {
+    .topbar, .skip, .actions, .callout .btn { display: none !important; }
+    body { font-size: 11pt; }
+    .section, .hero { padding-block: 1.25rem; }
+    .section-alt, footer { background: none; }
+    .brief { box-shadow: none; } .flag { animation: none; }
+    .contact { background: none; color: var(--ink); }
+    .contact h2, .contact a { color: var(--navy); }
+    a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 0.85em; color: var(--muted); word-break: break-all; }
+    .partner, .faq div, .timeline li, .refs li, .competency, .sector { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="#top">
+      <img src="../assets/scale-mark.png" alt="">
+      <span class="wordmark">SCALE<span class="wordmark-sub">SCIENTIFIC COMMUNICATION + AI LITERACY EXPERIENCE</span></span>
+    </a>
+    <nav aria-label="Page sections">
+      <ul>
+        <li><a class="home" href="../">Caleb Bragg, Ph.D.</a></li>
+        <li><a href="#course">The course</a></li>
+        <li><a href="#internships">Micro-internships</a></li>
+        <li><a href="#partners">Partners</a></li>
+        <li><a href="#pilot">The pilot</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="hero" id="top" aria-labelledby="hero-title">
+    <div class="wrap hero-grid">
+      <div>
+        <h1 id="hero-title">Finding information takes seconds. Knowing whether to act on it takes training.</h1>
+        <p class="lede">The SCALE Pilot (Scientific Communication + AI Literacy Experience) teaches Central Connecticut State University students to evaluate evidence across disciplines, test AI output against primary sources, and explain what they find to the people who make decisions. In summer 2027, students apply those skills to real projects in paid <span class="nw">micro-internships</span> with Connecticut organizations.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="mailto:bragg.cb@ccsu.edu?subject=SCALE%20Pilot%3A%20hosting%20a%20micro-internship">Email about hosting a student</a>
+          <a class="btn btn-secondary" href="#course">See how it works</a>
+        </div>
+        <p class="hero-note">Funded by a <a href="#pilot">Connecticut Tech Talent Accelerator 3.0 Innovation Grant</a>. Prefer paper? <a href="../assets/SCALE_Pilot_Flyer_Partners.pdf">Download the one-page flyer (PDF)</a>.</p>
+      </div>
+
+      <figure class="brief" aria-labelledby="brief-cap">
+        <p class="brief-k">The claim</p>
+        <blockquote>An AI-drafted summary for a board meeting says a vendor's reading app "<span class="flag">improves literacy outcomes by 30%</span>."</blockquote>
+        <div class="brief-trace">
+          <p class="brief-k">Traced to the source</p>
+          <p>The vendor's own pilot: one school, 48 students, no comparison group. The 30% is a gain on the app's built-in quiz, not on an independent reading test.</p>
+        </div>
+        <dl class="verdict">
+          <div class="v-know"><dt>What we know</dt><dd>Students who used the app scored higher on the app's own quiz.</dd></div>
+          <div class="v-dont"><dt>What we don't know</dt><dd>Whether the app caused the gain, or whether reading improved anywhere outside the app.</dd></div>
+          <div class="v-next"><dt>What to verify next</dt><dd>Results from a study with a comparison group and an independent reading measure.</dd></div>
+        </dl>
+        <figcaption id="brief-cap">Illustrative example, condensed from the one-page brief a SCALE student writes for a decision-maker.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section section-alt" aria-labelledby="gap-title">
+    <div class="wrap">
+      <div class="prose">
+        <h2 id="gap-title">The gap employers describe</h2>
+        <p>Early-career hires can pull up a study, a vendor report, or an AI summary in seconds. Many cannot yet judge whether the evidence behind it is strong enough to act on, or explain that judgment to the person who has to decide.</p>
+        <p>SCALE teaches that step. We call it translational literacy: evaluating, verifying, and communicating complex evidence accurately across fields, tools, and audiences. Students learn to use AI as a decision-support tool they question, not a substitute for judgment.</p>
+      </div>
+      <div class="competencies">
+        <div class="competency"><h3>Cross-disciplinary evidence evaluation</h3><p>Judge a claim by the evidence standards of the field that produced it, and separate warranted findings from overclaims.</p></div>
+        <div class="competency"><h3>AI interrogation</h3><p>Use generative AI to find leads, check what it says against primary sources, document where it fails, and leave a verification trail anyone can follow.</p></div>
+        <div class="competency"><h3>Expert-to-public boundary crossing</h3><p>Turn complex evidence into plain language for non-specialists without losing the meaning or the uncertainty.</p></div>
+        <div class="competency"><h3>Metacognitive calibration and integration</h3><p>Match confidence to the evidence and deliver a clear recommendation: what we know, what we don't know, and what to verify next.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="course" aria-labelledby="course-title">
+    <div class="wrap">
+      <div class="prose">
+        <h2 id="course-title">The course: Translational Literacy in Science</h2>
+        <p>Every field decides what counts as evidence in its own way. A biologist, an economist, and an anthropologist can study the same question and hold their findings to different standards. The course makes those standards explicit, so students can judge a claim by the rules of the field it came from and then explain it to someone outside that field.</p>
+      </div>
+      <dl class="facts">
+        <div><dt>Credits</dt><dd>3</dd></div>
+        <div><dt>Term</dt><dd>Spring 2027, January to May</dd></div>
+        <div><dt>Enrollment</dt><dd>Up to 40 students, recruited through Communication and writing courses</dd></div>
+        <div><dt>Taught by</dt><dd>A natural scientist, a social scientist, and an AI librarian, co-teaching all semester</dd></div>
+      </dl>
+
+      <h3>How the semester runs</h3>
+      <ol class="arc">
+        <li><span class="when">Weeks 1&ndash;2</span><p>Foundations, information literacy, and the AI interrogation protocol students use all semester.</p></li>
+        <li><span class="when">Weeks 3&ndash;12</span><p>Ten discipline modules, alternating natural and social science in deliberate pairs. Biology meets psychology: both run experiments, one on organisms and one on people. Physics meets political science: both build predictive models, one with mathematical certainty and one with probabilistic inference.</p></li>
+        <li><span class="when">Weeks 13&ndash;15</span><p>The final project, pitches to a panel, and reflection.</p></li>
+      </ol>
+
+      <h3>The final project: a cross-domain evidence pitch</h3>
+      <div class="prose">
+        <p>Each student teaches themselves two discipline modules not covered in class, builds a realistic problem for a Connecticut employer that needs both, runs the AI interrogation protocol, writes a one-page brief for a non-specialist decision-maker, and delivers a seven-minute pitch. The three instructors, faculty from Communication and English, and partner representatives hear the pitches. Five criteria carry equal weight: module comprehension, synthesis, AI interrogation, calibration, and translation.</p>
+      </div>
+
+      <p class="pull">The course is the dress rehearsal. The <span class="nw">micro-internship</span> is the performance.</p>
+
+      <h3>Fifteen discipline modules</h3>
+      <div class="prose"><p>CCSU faculty write each module in their own field from a shared template, so students see how each discipline builds and tests its claims.</p></div>
+      <div class="clusters">
+        <div class="cluster">
+          <h4>Natural sciences</h4>
+          <ul><li>Biology</li><li>Biomolecular Sciences</li><li>Chemistry</li><li>Physics</li><li>Astronomy</li><li>Earth and Geological Sciences</li><li>Exercise Science</li><li>Physical Geography</li></ul>
+        </div>
+        <div class="cluster cluster-ss">
+          <h4>Social and behavioral sciences</h4>
+          <ul><li>Psychological Science</li><li>Criminology</li><li>Economics</li><li>Political Science</li><li>Sociology</li><li>Human Geography</li><li>Anthropology</li></ul>
+        </div>
+      </div>
+
+      <h3>Teaching team</h3>
+      <ul class="team">
+        <li><strong>Caleb Bragg</strong><span>Professor, Psychological Science. Principal investigator and social science lead.</span></li>
+        <li><strong>Mark Jackson</strong><span>Professor and Chair, Biology. Natural science lead.</span></li>
+        <li><strong>Sharon Clapp</strong><span>Digital Projects &amp; AI Librarian, Elihu Burritt Library. Library and AI lead.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section-alt" id="internships" aria-labelledby="intern-title">
+    <div class="wrap">
+      <div class="prose">
+        <h2 id="intern-title">The micro-internship</h2>
+        <p>Up to 20 students, selected on final-project performance, complete paid micro-internships with Connecticut organizations in summer 2027. Each one applies the four competencies to a real problem the host cares about, with a real audience for the result. We are recruiting 20 host positions for summer 2027.</p>
+      </div>
+      <dl class="facts">
+        <div><dt>Hours</dt><dd>20&ndash;25 hours of project work, plus 5&ndash;10 hours of career readiness and articulation instruction with Caleb Bragg</dd></div>
+        <div><dt>Credit</dt><dd>1 academic credit; summer tuition is covered for interns</dd></div>
+        <div><dt>Pay</dt><dd>$1,000 per student: $500 from the grant and a $500 match from the host</dd></div>
+        <div><dt>Timing</dt><dd>Projects scoped in April 2027; work runs in summer 2027</dd></div>
+        <div><dt>Format</dt><dd>Hybrid or virtual, arranged with each host</dd></div>
+        <div><dt>Supervision</dt><dd>Caleb Bragg supervises every intern; each host names a project contact</dd></div>
+      </dl>
+
+      <h3>What the work looks like</h3>
+      <div class="prose"><p>Any organization that explains evidence to people who are not experts can host. The host keeps every deliverable.</p></div>
+      <div class="sectors">
+        <div class="sector"><h4>Libraries and cultural organizations</h4><p>Turn program outcome data into a report the community can read. Evaluate a digital platform vendor's claims. Produce patron-facing materials. Examine how outreach reaches underserved communities.</p></div>
+        <div class="sector"><h4>Nonprofits</h4><p>Check an AI-drafted grant narrative against its sources. Weigh a vendor's pitch for donor software. Summarize a funder's guidelines for the board.</p></div>
+        <div class="sector"><h4>Manufacturers</h4><p>Evaluate a safety vendor's injury-reduction claim. Turn a revised safety data sheet into a one-page notice for the floor with the caveats intact. Trace an AI-drafted handbook update back to statute and agency guidance.</p></div>
+        <div class="sector"><h4>Finance, technology, and health</h4><p>Translate regulatory changes for clients. Check AI-generated recommendations before they reach a client. Explain health evidence to the public without distorting it.</p></div>
+      </div>
+
+      <h3>Who does what</h3>
+      <div class="roles">
+        <div class="role">
+          <h4>The host provides</h4>
+          <ul>
+            <li>A project, scoped with us at the April 2027 employer convening</li>
+            <li>A project contact for a short weekly check-in</li>
+            <li>A one-page evaluation at the end of the project</li>
+            <li>A $500 match per student</li>
+          </ul>
+        </div>
+        <div class="role">
+          <h4>CCSU provides</h4>
+          <ul>
+            <li>Faculty supervision for every intern</li>
+            <li>Career readiness and articulation instruction from Caleb Bragg as part of the internship coursework, so interns can name what they learned in terms employers recognize</li>
+            <li>Payroll, onboarding, timesheets, and match invoicing through the <a href="https://www.ccsu.edu/hub">Central Workforce and Innovation Hub</a>, which serves as employer of record</li>
+            <li>An orientation for project contacts, plus the evaluation rubric</li>
+            <li>Check-ins from a Hub navigator during the placement</li>
+            <li>A student who has already produced this kind of deliverable under graded conditions</li>
+            <li>Recognition as a partner in a state-backed workforce initiative</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>Questions hosts ask</h3>
+      <dl class="faq">
+        <div><dt>Do we need AI expertise?</dt><dd>No. Students bring the method. You bring the problem.</dd></div>
+        <div><dt>Will the student see confidential material?</dt><dd>Only what you choose to share. Projects are designed to work from documents you select, and they do not require personnel records or proprietary data.</dd></div>
+        <div><dt>What won't the student do?</dt><dd>Select vendors, set policy, make regulatory determinations, or release anything outside your organization without your review. Students recommend; your staff decide.</dd></div>
+        <div><dt>How many students can we host?</dt><dd>One is fine, and a site can take more than one. We need 20 positions in total, so hosts that can support several interns help most.</dd></div>
+        <div><dt>Can we keep working with a strong student?</dt><dd>Talk with us. The credit-bearing project runs 20 to 25 hours, and it gives you a close look at a student you might want to bring back.</dd></div>
+        <div><dt>What if the match is a barrier?</dt><dd>Tell us. For small nonprofits, match support may be available.</dd></div>
+      </dl>
+
+      <div class="callout">
+        <p><strong>Planning to host in summer 2027?</strong> Reach out by early spring so there is time to shape your project before the April convening.</p>
+        <a class="btn btn-primary" href="mailto:bragg.cb@ccsu.edu?subject=SCALE%20Pilot%3A%20hosting%20a%20micro-internship">Email about hosting a student</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="partners" aria-labelledby="partners-title">
+    <div class="wrap">
+      <div class="prose">
+        <h2 id="partners-title">Partners</h2>
+        <p>SCALE uses a tiered model: a lead host, a lead sector partner that opens its statewide network, and individual hosts across sectors, with CCSU carrying the administrative load.</p>
+        <p>We are actively recruiting host partners for summer 2027. We need 20 positions in total, and a host site can take more than one SCALE intern.</p>
+      </div>
+      <ul class="partners">
+        <li class="partner">
+          <h3>New Britain Public Library</h3>
+          <p class="partner-role">Lead host partner</p>
+          <p>Hosts students on projects across library units, provides the wage match, and co-designs project scopes at the April convening.</p>
+          <p><a href="https://www.nbpl.info">nbpl.info</a></p>
+        </li>
+        <li class="partner">
+          <h3>CT Humanities</h3>
+          <p class="partner-role">Lead sector partner</p>
+          <p>Connecticut's independent nonprofit affiliate of the National Endowment for the Humanities. Recruits host organizations from its statewide network of cultural and community organizations, co-designs projects, and confirms that the competencies match real communication work in the sector.</p>
+          <p><a href="https://cthumanities.org">cthumanities.org</a></p>
+        </li>
+        <li class="partner">
+          <h3>Central Workforce and Innovation Hub</h3>
+          <p class="partner-role">CCSU placement administration</p>
+          <p>Serves as employer of record and manages placement logistics, so hosts carry no hiring paperwork.</p>
+          <p><a href="https://www.ccsu.edu/hub">The Hub</a> and <a href="https://www.ccsu.edu/hub/how-partner-central">how to partner with Central</a></p>
+        </li>
+      </ul>
+
+      <h3>In discussion to host SCALE interns</h3>
+      <ul class="discussing">
+        <li><a href="https://www.cfgnb.org">Community Foundation of Greater New Britain</a></li>
+        <li><a href="https://www.jonal.com">Jonal Laboratories</a>, Meriden</li>
+        <li>Unapen</li>
+        <li><a href="https://www.midstatechamber.com">Midstate Chamber of Commerce</a>, Meriden</li>
+      </ul>
+
+      <div class="callout">
+        <p><strong>Your organization?</strong> Libraries, museums, nonprofits, manufacturers, financial firms, health organizations, and consultancies can all host.</p>
+        <a class="btn btn-primary" href="mailto:bragg.cb@ccsu.edu?subject=SCALE%20Pilot%3A%20hosting%20a%20micro-internship">Email about hosting a student</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt" id="pilot" aria-labelledby="pilot-title">
+    <div class="wrap">
+      <div class="prose">
+        <h2 id="pilot-title">The pilot and the grant</h2>
+        <p>Central Connecticut State University is an Innovation Grant recipient in the <a href="https://www.bhef.com/techtalentaccelerator">Connecticut Tech Talent Accelerator 3.0</a>, a statewide AI workforce initiative supported by the <a href="https://portal.ct.gov/ows">Connecticut Office of Workforce Strategy</a> and administered by the <a href="https://www.bhef.com">Business-Higher Education Forum</a> and the <a href="https://nebhe.org">New England Board of Higher Education</a>.</p>
+        <p>The $75,000 grant runs from September 1, 2026, to August 31, 2027. It supports two program priorities: aligning postsecondary programs with industry AI needs, and expanding innovative work-based learning models. Provost Kimberly Kostelis is the executive sponsor.</p>
+      </div>
+
+      <h3>Where things stand</h3>
+      <p class="small">As of September 26, 2026.</p>
+      <div class="legend" aria-hidden="true">
+        <span><i class="dot dot-done"></i>Done</span>
+        <span><i class="dot dot-progress"></i>In progress</span>
+        <span><i class="dot dot-next"></i>Next</span>
+      </div>
+      <ol class="timeline">
+        <li class="done"><span class="t-date">June 2026</span><i class="dot dot-done" aria-hidden="true"></i><div class="t-body"><p><span class="sr-only">Done: </span>Proposal submitted with signed commitments from New Britain Public Library and CT Humanities.</p></div></li>
+        <li class="done"><span class="t-date">August 2026</span><i class="dot dot-done" aria-hidden="true"></i><div class="t-body"><p><span class="sr-only">Done: </span>Innovation Grant awarded.</p></div></li>
+        <li class="done"><span class="t-date">September 2026</span><i class="dot dot-done" aria-hidden="true"></i><div class="t-body"><p><span class="sr-only">Done: </span>Grant period opens. Faculty authors confirmed for 14 of the 15 discipline modules.</p></div></li>
+        <li class="now"><span class="t-date">Now</span><i class="dot" aria-hidden="true"></i><div class="t-body"><p>Late September 2026</p></div></li>
+        <li class="progress"><span class="t-date">Fall 2026</span><i class="dot dot-progress" aria-hidden="true"></i><div class="t-body"><p><span class="sr-only">In progress: </span>Faculty write the modules, with drafts due in late November. Actively recruiting host partners for 20 summer positions through CT Humanities' network, the Hub, and regional employers.</p></div></li>
+        <li class="next"><span class="t-date">January 2027</span><i class="dot dot-next" aria-hidden="true"></i><div class="t-body"><p><span class="sr-only">Next: </span>Translational Literacy in Science opens to up to 40 students.</p></div></li>
+        <li class="next"><span class="t-date">April 2027</span><i class="dot dot-next" aria-hidden="true"></i><div class="t-body"><p><span class="sr-only">Next: </span>Employer convening: hosts and faculty scope projects and confirm placements. Final pitches close out the month.</p></div></li>
+        <li class="next"><span class="t-date">Summer 2027</span><i class="dot dot-next" aria-hidden="true"></i><div class="t-body"><p><span class="sr-only">Next: </span>Micro-internships run; host evaluations collected by August.</p></div></li>
+        <li class="next"><span class="t-date">August 31, 2027</span><i class="dot dot-next" aria-hidden="true"></i><div class="t-body"><p><span class="sr-only">Next: </span>Grant period ends; final report to BHEF and NEBHE.</p></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="after-title">
+    <div class="wrap">
+      <h2 id="after-title">After the pilot</h2>
+      <div class="next-grid">
+        <div>
+          <h3>A certificate pathway</h3>
+          <p>The course is the first piece of a proposed Certificate in Applied Scientific Communication (11&ndash;12 credits), open to students in any major, including transfer students and returning adults. It pairs Translational Literacy in Science with a Communication course (COMM 115, 215, 334, or 356), Technical Writing (WRT 403), College to Career Transition (PSY/CLSS 413), and the micro-internship.</p>
+          <p>The proposal moves through CCSU governance after the pilot, informed by student outcomes and host feedback.</p>
+        </div>
+        <div>
+          <h3>More students, more hosts</h3>
+          <p>Plans for 2027&ndash;28 call for two sections of the course and more placements as the host network grows.</p>
+          <p>Students not placed in summer 2027 stay eligible for later placements through the Hub and CCSU's <a href="https://www.ccsu.edu/communityEngagement/community-engagement-experiential-learning-stipend-ceels">Community Engagement Experiential Learning Stipend</a>.</p>
+        </div>
+        <div>
+          <h3>Materials others can use</h3>
+          <p>The fifteen modules will be released under a <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a> license. The modular design lets other disciplines and campuses, including across the Connecticut State Colleges &amp; Universities system, adopt the course without redesign.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt section-ruled" aria-labelledby="research-title">
+    <div class="wrap">
+      <h2 id="research-title">The research behind it</h2>
+      <ul class="refs">
+        <li>
+          <h3>Translational Literacy Framework</h3>
+          <p>The pedagogical architecture the course is built on.</p>
+          <cite>Bragg, C. B. (2026). Translational literacy framework (TLF): A pedagogical architecture for cross-disciplinary evidence evaluation and communication in the AI era [Preprint]. PsyArXiv. <a href="https://doi.org/10.31234/osf.io/5uefd_v1">https://doi.org/10.31234/osf.io/5uefd_v1</a></cite>
+        </li>
+        <li>
+          <h3>Career Readiness Pathway (CR Path)</h3>
+          <p>The pre- and post-placement reflection sequence students complete around the micro-internship.</p>
+          <cite>Bragg, C. B., &amp; Conway, J. M. (2026). Career readiness pathway (CR Path): How a degree in psychology answers the stakeholder's call for career ready students. <em>Scholarship of Teaching and Learning in Psychology.</em> <a href="https://doi.org/10.1037/stl0000480">https://doi.org/10.1037/stl0000480</a></cite>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section contact" id="contact" aria-labelledby="contact-title">
+    <div class="wrap">
+      <h2 id="contact-title">Talk with us</h2>
+      <p class="prose">Questions about hosting, partnering, or the course go to the principal investigator.</p>
+      <div class="contacts">
+        <div>
+          <p class="contact-name">Caleb Bragg, Ph.D.</p>
+          <p class="contact-meta">Principal Investigator; Professor, Psychological Science, CCSU<br><a href="mailto:bragg.cb@ccsu.edu">bragg.cb@ccsu.edu</a></p>
+        </div>
+        <div>
+          <p class="contact-name">Nesha Jalaludin, MPA</p>
+          <p class="contact-meta">Program Navigator, Central Workforce and Innovation Hub<br><a href="mailto:njalaludin@ccsu.edu">njalaludin@ccsu.edu</a></p>
+        </div>
+      </div>
+      <div class="actions">
+        <a class="btn btn-primary" href="mailto:bragg.cb@ccsu.edu?subject=SCALE%20Pilot%3A%20hosting%20a%20micro-internship">Email about hosting a student</a>
+        <a class="btn btn-secondary" href="../assets/SCALE_Pilot_Flyer_Partners.pdf">Download the one-page flyer (PDF)</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="lockup">
+      <img src="../assets/opal-mark.png" alt="OPAL, the Organizational Psychology Answers Lab">
+      <img src="../assets/scale-mark.png" alt="SCALE, Scientific Communication + AI Literacy Experience">
+    </div>
+    <p>SCALE Pilot: Scientific Communication + AI Literacy Experience. Central Connecticut State University, 1615 Stanley Street, New Britain, CT 06050.</p>
+    <p>Supported by a Connecticut Tech Talent Accelerator 3.0 Innovation Grant from the Business-Higher Education Forum and the New England Board of Higher Education, funded by the Connecticut Office of Workforce Strategy. #TTAInnovation</p>
+    <p>Page current as of September 26, 2026. <a href="../">Back to Caleb Bragg, Ph.D.</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
