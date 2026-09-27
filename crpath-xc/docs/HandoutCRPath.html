@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CR Path Student Handout</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 11pt;
+      color: #2C2C2C;
+      background: #fff;
+      padding: 0;
+    }
+
+    @page {
+      size: letter portrait;
+      margin: 0.55in 0.65in 0.45in 0.65in;
+    }
+
+    @media print {
+      body { font-size: 10pt; }
+    }
+
+    :root {
+      --purple:      #3A0D7A;
+      --purple-light:#EDE5F7;
+      --coral:       #C93D20;
+      --coral-light: #FBEAE6;
+      --slate:       #2D4F82;
+      --slate-light: #E4EBF5;
+      --mid-purple:  #5B3490;
+      --mid-light:   #EDE5F7;
+      --gray:        #6B6B6B;
+    }
+
+    .page {
+      max-width: 7.8in;
+      margin: 0 auto;
+    }
+
+    /* ── TOP ZONE ── */
+    .top-zone {
+      border-top: 6px solid var(--purple);
+      padding-top: 12px;
+      margin-bottom: 10px;
+    }
+
+    .top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .title-block h1 {
+      font-size: 19pt;
+      font-weight: 800;
+      color: var(--purple);
+      line-height: 1.15;
+    }
+
+    .workshop-badge {
+      background: var(--coral);
+      color: #fff;
+      font-size: 8pt;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 20px;
+      white-space: nowrap;
+      margin-top: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .pull-quote {
+      margin-top: 8px;
+      padding: 9px 14px 9px 18px;
+      border-left: 4px solid var(--coral);
+      background: linear-gradient(135deg, var(--purple-light) 0%, #f9f6ff 100%);
+      border-radius: 0 6px 6px 0;
+      position: relative;
+    }
+
+    .pull-quote::before {
+      content: "\201C";
+      font-size: 42pt;
+      color: var(--coral);
+      opacity: 0.2;
+      position: absolute;
+      top: -6px;
+      left: 8px;
+      font-family: Georgia, serif;
+      line-height: 1;
+    }
+
+    .pull-quote blockquote {
+      font-size: 9.5pt;
+      font-style: italic;
+      color: var(--purple);
+      font-weight: 600;
+      line-height: 1.5;
+      padding-left: 24px;
+    }
+
+    .pull-quote cite {
+      display: block;
+      font-size: 7.5pt;
+      font-style: normal;
+      color: var(--gray);
+      margin-top: 3px;
+      padding-left: 24px;
+      font-weight: 600;
+    }
+
+    .header-rule {
+      height: 3px;
+      background: var(--coral);
+      margin-top: 10px;
+      border-radius: 2px;
+    }
+
+    /* ── MIDDLE ZONE ── */
+    .middle-zone {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .middle-zone img {
+      width: 100%;
+      max-width: 6in;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+
+    /* ── BOTTOM ZONE ── */
+    .bottom-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .col-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--gray);
+      margin-bottom: 5px;
+    }
+
+    /* Left: Pillars */
+    .pillar-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .pillar-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 6px 9px;
+      border-radius: 5px;
+      border-left: 3px solid transparent;
+    }
+
+    .pillar-item.p1 { background: var(--purple-light); border-left-color: var(--purple); }
+    .pillar-item.p2 { background: var(--coral-light);  border-left-color: var(--coral);  }
+    .pillar-item.p3 { background: var(--slate-light);  border-left-color: var(--slate);  }
+    .pillar-item.p4 { background: var(--mid-light);    border-left-color: var(--mid-purple); }
+
+    .pillar-item .pname {
+      font-size: 8.5pt;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .pillar-item.p1 .pname { color: var(--purple); }
+    .pillar-item.p2 .pname { color: var(--coral);  }
+    .pillar-item.p3 .pname { color: var(--slate);  }
+    .pillar-item.p4 .pname { color: var(--mid-purple); }
+
+    .pillar-item .pdesc {
+      font-size: 8pt;
+      color: #3A3A3A;
+      line-height: 1.35;
+    }
+
+    .pillar-item .preflect {
+      font-size: 7pt;
+      font-style: italic;
+      color: var(--coral);
+    }
+
+    /* Right: Entry Points */
+    .entry-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 8.5pt;
+    }
+
+    .entry-table tr {
+      border-bottom: 1px solid #E8E8E8;
+    }
+
+    .entry-table tr:last-child {
+      border-bottom: none;
+    }
+
+    .entry-table td {
+      padding: 5px 7px;
+      vertical-align: middle;
+      line-height: 1.3;
+    }
+
+    .entry-table td:first-child {
+      width: 10px;
+      padding-right: 4px;
+    }
+
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+
+    .dot-purple     { background: var(--purple); }
+    .dot-coral      { background: var(--coral);  }
+    .dot-slate      { background: var(--slate);  }
+    .dot-midpurple  { background: var(--mid-purple); }
+
+    .entry-table .etype {
+      font-weight: 700;
+      color: #2C2C2C;
+    }
+
+    .entry-table .epillar {
+      font-size: 7.5pt;
+      font-weight: 700;
+      color: #fff;
+      padding: 2px 6px;
+      border-radius: 8px;
+      white-space: nowrap;
+    }
+
+    .ep-purple    { background: var(--purple); }
+    .ep-coral     { background: var(--coral);  }
+    .ep-slate     { background: var(--slate);  }
+    .ep-midpurple { background: var(--mid-purple); }
+
+    .entry-q {
+      font-size: 7.5pt;
+      font-style: italic;
+      color: var(--gray);
+    }
+
+    /* ── Core Banner ── */
+    .core-banner {
+      background: var(--purple);
+      border-radius: 7px;
+      padding: 9px 18px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .banner-text .banner-main {
+      font-size: 10pt;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.3;
+    }
+
+    .banner-text .banner-sub {
+      font-size: 9pt;
+      font-style: italic;
+      color: var(--coral-light);
+      line-height: 1.3;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      border-top: 2px solid #E0E0E0;
+      padding-top: 7px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .footer-left {
+      font-size: 7pt;
+      color: var(--gray);
+      line-height: 1.5;
+    }
+
+    .footer-left a { color: var(--slate); }
+
+    .footer-right {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      flex-shrink: 0;
+    }
+
+    .footer-right img {
+      width: 72px;
+      height: 72px;
+      border: 2px solid var(--purple);
+      border-radius: 6px;
+      display: block;
+    }
+
+    .qr-label {
+      font-size: 6.5pt;
+      font-weight: 700;
+      color: var(--purple);
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- TOP ZONE -->
+  <div class="top-zone">
+    <div class="top-row">
+      <div class="title-block">
+        <h1>CR Path: Your Career Readiness Journey</h1>
+      </div>
+      <div class="workshop-badge">Workshop Handout</div>
+    </div>
+    <div class="pull-quote">
+      <blockquote>
+        "The CR Path is not a checklist, but a flexible framework where both specific and broad skills are acquired from a variety of learning arenas, tested and honed within controlled experiential environments, and lent credibility by connecting with career mentors."
+      </blockquote>
+      <cite>— Bragg, C. B., &amp; Conway, J. M. (2026). <em>Scholarship of Teaching and Learning in Psychology.</em> </cite>
+    </div>
+    <div class="header-rule"></div>
+  </div>
+
+  <!-- MIDDLE ZONE: INSERT YOUR GRAPHIC HERE -->
+  <div class="middle-zone">
+    <img
+      src="cr-path-graphic.png"
+      alt="CR Path: Career Readiness Through Iteration — iterative cycle diagram showing CS KSAs, ELOs, Career Mentorship, and Core Competencies with Most Likely Entry Point legend. © 2026 Caleb B. Bragg, CC BY-NC 4.0."
+      style="border-radius: 8px;"
+    />
+    <!-- 
+      ⬆ REPLACE src with your exported graphic file.
+      Recommended: export the CR Path iterative diagram as a PNG
+      and place it in the same folder as this HTML file, then use:
+      src="cr-path-graphic.png"
+    -->
+  </div>
+
+  <!-- BOTTOM ZONE -->
+  <div class="bottom-columns">
+
+    <!-- LEFT: Four Pillars -->
+    <div>
+      <div class="col-label">The Four Components</div>
+      <div class="pillar-list">
+
+        <div class="pillar-item p1">
+          <div>
+            <div class="pname">CS KSAs</div>
+            <div class="pdesc">Career-specific knowledge, skills &amp; abilities — your domain foundation.</div>
+          </div>
+        </div>
+
+        <div class="pillar-item p2">
+          <div>
+            <div class="pname">ELOs</div>
+            <div class="pdesc">Experiential learning — internships, research, service-learning.</div>
+            <div class="preflect">+ focused reflection</div>
+          </div>
+        </div>
+
+        <div class="pillar-item p3">
+          <div>
+            <div class="pname">Career Mentorship</div>
+            <div class="pdesc">Contextualizes experience, reveals gaps, surfaces what comes next.</div>
+          </div>
+        </div>
+
+        <div class="pillar-item p4">
+          <div>
+            <div class="pname">Core Competencies</div>
+            <div class="pdesc">Transferable NACE skills that deepen with every cycle.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- RIGHT: Entry Points -->
+    <div>
+      <div class="col-label">Most Likely Entry Point</div>
+      <table class="entry-table">
+        <tbody>
+          <tr>
+            <td><span class="dot dot-purple"></span></td>
+            <td>
+              <span class="etype">1st Year &amp; Sophomore</span><br>
+              <span class="epillar ep-purple">CS KSAs</span><br>
+              <span class="entry-q">"What does my degree teach me to do?"</span>
+            </td>
+          </tr>
+          <tr>
+            <td><span class="dot dot-coral"></span></td>
+            <td>
+              <span class="etype">Junior</span><br>
+              <span class="epillar ep-coral">ELOs</span><br>
+              <span class="entry-q">"What experiences will challenge me professionally?"</span>
+            </td>
+          </tr>
+          <tr>
+            <td><span class="dot dot-slate"></span></td>
+            <td>
+              <span class="etype">Senior &amp; Returning Adult</span><br>
+              <span class="epillar ep-slate">Career Mentorship</span><br>
+              <span class="entry-q">"What does my experience mean, and what's next?"</span>
+            </td>
+          </tr>
+          <tr>
+            <td><span class="dot dot-midpurple"></span></td>
+            <td>
+              <span class="etype">Transfer Student</span><br>
+              <span class="epillar ep-midpurple">Core Competencies</span><br>
+              <span class="entry-q">"What do I already have? What am I missing?"</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <!-- CORE BANNER -->
+  <div class="core-banner">
+    <div class="banner-text">
+      <div class="banner-main">Each pass through the cycle produces a more career-ready student.</div>
+      <div class="banner-sub">Career readiness is the emergent outcome of iteration — not a single event.</div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-left">
+      Bragg, C. B., &amp; Conway, J. M. (2026). Career readiness pathway (CR path).<br>
+      <em>Scholarship of Teaching and Learning in Psychology.</em>
+      <a href="https://doi.org/10.1037/stl0000480">doi:10.1037/stl0000480</a><br>
+      © 2026 Caleb B. Bragg &nbsp;|&nbsp; CC BY-NC 4.0 &nbsp;|&nbsp;
+      <a href="https://creativecommons.org/licenses/by-nc/4.0">creativecommons.org/licenses/by-nc/4.0</a>
+    </div>
+    <div class="footer-right">
+      <img
+        src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://doi.org/10.17605/OSF.IO/Q69VD&color=3A0D7A&bgcolor=ffffff&margin=4"
+        alt="QR code linking to CR Path OSF project page"
+      />
+      <div class="qr-label">Scan for full<br>OSF project</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 0: The CR Path (cross-campus build)</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#1B1F4B;--navy-lt:#2D3170;--orange:#E8733A;--orange-lt:#F4A574;
+  --purple:#5B4A9E;--green:#27ae60;--bg:#F7F8FA;--border:#E2E5EA;
+  --text:#2D2D2D;--muted:#5A6178;--white:#fff;
+  --r:8px;--rl:12px;--sh:0 1px 3px rgba(27,31,75,.06);--shm:0 4px 12px rgba(27,31,75,.10)
+}
+html{font-size:16px}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-size:1rem;line-height:1.7;color:var(--text);background:var(--bg);min-height:100vh}
+.hidden{display:none}
+#app-wrapper{display:flex;min-height:100vh}
+#sidebar{width:220px;min-width:220px;background:var(--navy);display:flex;flex-direction:column;position:fixed;top:0;left:0;height:100vh;overflow-y:auto;z-index:100}
+#module-shell{margin-left:220px;flex:1;display:flex;flex-direction:column;min-height:100vh}
+.nav-header{padding:20px 16px 16px;border-bottom:1px solid rgba(255,255,255,.1)}
+.nav-label{display:block;font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--orange-lt);margin-bottom:4px}
+.nav-title{display:block;font-size:15px;font-weight:700;color:#fff}
+#sidebar ul{list-style:none;padding:8px 0;flex:1}
+.nav-link{display:block;padding:9px 16px;font-size:13px;color:rgba(255,255,255,.7);text-decoration:none;transition:all .2s;border-left:3px solid transparent}
+.nav-link:hover,.nav-link.active{color:#fff;background:rgba(255,255,255,.08);border-left-color:var(--orange)}
+.nav-divider{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,.35);padding:14px 16px 4px}
+.nav-footer{padding:16px;border-top:1px solid rgba(255,255,255,.1);font-size:11px;color:rgba(255,255,255,.4);line-height:1.5}
+.nav-footer span{display:block}.nav-credit{margin-top:4px;font-size:10px}
+#module-header{background:var(--navy);color:#fff;padding:14px 32px;position:sticky;top:0;z-index:50;border-bottom:3px solid var(--orange)}
+#module-title{font-size:18px;font-weight:700;color:#fff;cursor:default;display:inline-block}
+#module-header .subtitle{font-size:13px;color:rgba(255,255,255,.65);margin-top:2px}
+#progress-container{margin-top:10px;display:flex;align-items:center;gap:12px}
+#progress-bar-track{flex:1;height:6px;background:rgba(255,255,255,.15);border-radius:3px;overflow:hidden}
+#progress-bar{height:100%;background:var(--orange);border-radius:3px;transition:width .4s ease;width:0%}
+#progress-label{font-size:12px;color:rgba(255,255,255,.6);white-space:nowrap}
+#page-container{flex:1;padding:0}
+.page{padding:36px 48px;max-width:820px;animation:fadeIn .3s ease}
+.page.hidden{display:none}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.section-header{margin-bottom:28px}
+.section-tag{display:inline-block;background:var(--orange);color:#fff;font-size:11px;text-transform:uppercase;letter-spacing:1.5px;padding:4px 12px;border-radius:20px;margin-bottom:10px}
+.section-header h1{font-size:26px;color:var(--navy);font-weight:800;line-height:1.2}
+.section-header .subtitle{font-size:15px;color:var(--muted);margin-top:6px;font-style:italic}
+.time-estimate{font-size:13px;color:var(--muted);margin-top:4px}
+.overview-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:20px 0}
+.overview-card{background:var(--white);border:1px solid var(--border);border-radius:var(--rl);padding:18px;box-shadow:var(--sh)}
+.overview-card h3{font-size:14px;color:var(--navy);margin-bottom:6px}
+.overview-card p{font-size:13px;color:var(--muted);line-height:1.5}
+.learning-objectives{background:var(--white);border:1px solid var(--border);border-left:4px solid var(--orange);border-radius:var(--rl);padding:22px 26px;margin:20px 0}
+.learning-objectives h2{font-size:15px;color:var(--navy);margin-bottom:14px}
+.learning-objectives li{font-size:14px;margin-bottom:9px;line-height:1.6}
+.learning-objectives ol{padding-left:20px}
+.key-message{background:linear-gradient(135deg,var(--navy),#2D3170);color:#fff;border-radius:var(--rl);padding:18px 22px;margin-bottom:24px;font-size:15px;font-style:italic;line-height:1.6}
+.key-message p{margin:0}
+.cr-path-diagram-container{margin:20px 0;text-align:center}
+.cr-path-diagram-container.compact{margin:12px 0}
+.cr-path-diagram-container img{width:100%;max-width:640px;height:auto}
+.cr-path-diagram-container.compact img{max-width:340px}
+.diagram-caption{font-size:11px;color:var(--muted);margin-top:6px}
+.component-card{background:var(--white);border:1px solid var(--border);border-radius:var(--rl);padding:26px;margin:20px 0;box-shadow:var(--sh)}
+.card-csksa{border-top:4px solid #4A3080}
+.card-core{border-top:4px solid #1B3A6B}
+.card-elo{border-top:4px solid #C94A2E}
+.card-cm{border-top:4px solid var(--orange)}
+.card-header{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.card-icon{font-size:22px}
+.component-card h3{font-size:19px;color:var(--navy);font-weight:700}
+.card-subtitle{font-size:13px;color:var(--muted);margin-bottom:14px}
+.component-card p{font-size:15px;margin-bottom:10px;line-height:1.6}
+.card-examples{margin:14px 0}
+.card-examples ul{padding-left:18px;margin-top:8px}
+.card-examples li{font-size:14px;margin-bottom:5px}
+.card-fact{background:var(--bg);border-radius:var(--r);padding:10px 14px;font-size:13px;color:var(--muted);margin-top:14px;display:flex;gap:8px;align-items:flex-start}
+.cycle-callout{background:rgba(27,31,75,.04);border:1px solid rgba(27,31,75,.1);border-radius:var(--rl);padding:20px;margin-top:20px}
+.cycle-callout h3{font-size:15px;color:var(--navy);margin-bottom:8px}
+.cycle-callout p{font-size:15px;margin-bottom:6px}
+.nace-grid{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+.nace-tag{display:inline-block;padding:8px 14px;background:var(--bg);border:1.5px solid var(--border);border-radius:20px;font-size:13px;font-weight:600;color:var(--navy);cursor:pointer;transition:all .2s;user-select:none}
+.nace-tag:hover,.nace-tag:focus,.nace-tag.active{background:var(--navy);color:#fff;border-color:var(--navy);outline:none}
+#nace-overlay.hidden{display:none}
+#nace-tooltip{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#fff;border:1px solid var(--border);border-radius:var(--rl);box-shadow:0 8px 32px rgba(27,31,75,.18);padding:26px;max-width:420px;width:90%;z-index:499;animation:tipIn .2s ease;max-height:80vh;overflow-y:auto}
+#nace-tooltip.hidden{display:none}
+body.no-catcher .catcher-only{display:none!important}
+body:not(.no-catcher) .no-catcher-only{display:none!important}
+.tip-absorb{font-size:13px;line-height:1.5;background:#FFF4EC;border:1px solid var(--orange-lt);border-radius:var(--r);padding:8px 12px;margin-top:10px}
+.tip-absorb b{display:block;font-size:10px;text-transform:uppercase;letter-spacing:1.2px;color:var(--orange);margin-bottom:2px}
+.tip-parts{margin-top:10px;font-size:13px}.tip-parts-label{display:block;font-size:10px;text-transform:uppercase;letter-spacing:1.2px;color:var(--muted);margin-bottom:4px}
+.tip-parts ul{padding-left:18px;margin:0}.tip-parts li{margin-bottom:2px}
+.tip-absorb.hidden,.tip-parts.hidden{display:none}
+/* page 7: inside the pillar */
+.pillar-intro{font-size:15px;line-height:1.6;margin:14px 0 4px}
+.piece{background:var(--white);border:1px solid var(--border);border-left:4px solid var(--orange);border-radius:var(--rl);padding:16px 18px;margin:14px 0;box-shadow:var(--sh)}
+.piece-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 12px;margin-bottom:4px}
+.piece-head h3{font-size:16px;color:var(--navy);font-weight:700}
+.piece-parent{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);background:var(--bg);border:1px solid var(--border);border-radius:20px;padding:2px 10px}
+.piece-what{font-size:14px;color:var(--text);margin-bottom:10px;line-height:1.5}
+.piece-status{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.piece-status label{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--navy);background:var(--bg);border:1.5px solid var(--border);border-radius:20px;padding:6px 12px;cursor:pointer}
+.piece-status label:has(input:checked){background:var(--navy);color:#fff;border-color:var(--navy)}
+.piece-status input{margin:0}
+.piece label.know-label{display:block;font-size:13px;font-weight:600;color:var(--navy);margin:6px 0 4px}
+.piece textarea{width:100%;font:inherit;font-size:14px;border:1.5px solid var(--border);border-radius:var(--r);padding:8px 10px;resize:vertical}
+.piece .piece-hint{font-size:12px;color:var(--muted);margin-top:4px}
+#nace-overlay{position:fixed;inset:0;background:rgba(0,0,0,.3);z-index:498}
+@keyframes tipIn{from{opacity:0;transform:translate(-50%,-47%)}to{opacity:1;transform:translate(-50%,-50%)}}
+.tip-header{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.tip-icon{font-size:26px}
+.tip-title{font-size:17px;color:var(--navy);font-weight:700}
+.tip-tagline{font-size:15px;font-weight:600;color:var(--orange);margin-bottom:10px}
+.tip-divider{border:none;border-top:1px solid var(--border);margin:10px 0}
+.tip-official{font-size:14px;color:var(--text);line-height:1.65;margin-bottom:8px}
+.tip-cite{font-size:11px;color:var(--muted);font-style:italic}
+#tip-close{position:absolute;top:10px;right:12px;background:none;border:none;font-size:22px;color:var(--muted);cursor:pointer;line-height:1;padding:4px}
+#tip-close:hover{color:var(--navy)}
+.activity-box{background:var(--white);border:2px solid var(--orange);border-radius:var(--rl);padding:26px;margin:20px 0;box-shadow:var(--sh)}
+.activity-box-light{border-color:var(--border)}
+.activity-header{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.activity-icon{font-size:20px}
+.activity-header h3{font-size:16px;color:var(--navy);font-weight:700}
+.activity-purpose{font-size:13px;color:var(--muted);margin-bottom:14px;font-style:italic}
+.activity-note{font-size:13px;color:var(--muted);font-style:italic;margin-top:10px}
+.scorm-input,.scorm-input-short,.scorm-select{width:100%;padding:9px 13px;border:1.5px solid var(--border);border-radius:var(--r);font-family:inherit;font-size:15px;color:var(--text);background:var(--bg);transition:border-color .2s,box-shadow .2s;margin-top:5px;margin-bottom:10px}
+.scorm-input:focus,.scorm-input-short:focus,.scorm-select:focus{outline:none;border-color:var(--orange);box-shadow:0 0 0 3px rgba(232,115,58,.12)}
+textarea.scorm-input{resize:vertical}
+label{display:block;font-size:14px;font-weight:600;color:var(--navy);margin-top:14px}
+.rank-grid{display:grid;gap:12px;margin:16px 0}
+.rank-item label{margin-top:0}
+.rank-desc{font-weight:400;color:var(--muted)}
+.follow-up-prompts{margin-top:18px}
+.follow-up{margin-bottom:14px}
+.form-group{margin-bottom:18px}
+.form-group label{margin-top:0}
+.context-message{background:var(--white);border:1px solid var(--border);border-radius:var(--rl);padding:22px;margin:20px 0}
+.context-message h3{font-size:15px;color:var(--navy);margin-bottom:12px}
+.context-message ul{padding-left:18px}
+.context-message li{font-size:14px;margin-bottom:9px;line-height:1.5}
+.handout-embed{background:rgba(27,31,75,.03);border:1px solid var(--border);border-radius:var(--r);padding:14px}
+.handout-note{font-size:12px;color:var(--muted);margin-top:6px}
+.toggle-btn{background:none;border:1.5px solid var(--border);border-radius:20px;padding:7px 15px;font-size:13px;color:var(--navy);cursor:pointer;transition:all .2s;font-family:inherit;margin:8px 0}
+.toggle-btn:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
+.toggle-btn-sm{background:none;border:1px solid var(--border);border-radius:12px;padding:4px 11px;font-size:12px;color:var(--muted);cursor:pointer;transition:all .2s;font-family:inherit}
+.toggle-btn-sm:hover{border-color:var(--orange);color:var(--orange)}
+.toggle-content{margin-top:8px}
+.toggle-content.hidden{display:none}
+.completion-card{background:linear-gradient(135deg,#E8F5E9,#F1F8E9);border:1px solid #A5D6A7;border-radius:var(--rl);padding:28px;text-align:center;margin-bottom:20px}
+.completion-card.final{background:linear-gradient(135deg,#EDE7F6,#F3E5F5);border-color:#CE93D8}
+.check-icon{font-size:38px;margin-bottom:10px}
+.completion-card h2{font-size:20px;color:var(--navy);margin-bottom:10px}
+.completion-card p{font-size:15px;margin-bottom:7px}
+.timer-card{background:var(--white);border:1px solid var(--border);border-radius:var(--rl);padding:26px;text-align:center;margin:20px 0}
+.timer-card h3{font-size:17px;color:var(--navy);margin-bottom:10px}
+.countdown-text{font-size:46px;font-weight:700;color:var(--navy);font-variant-numeric:tabular-nums;letter-spacing:4px;margin:6px 0}
+.timer-note{font-size:13px;color:var(--muted);margin-top:8px}
+.school-tabs{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:14px}
+.tab-btn{padding:7px 15px;border:1.5px solid var(--border);border-radius:20px;background:var(--white);font-size:13px;font-weight:600;color:var(--navy);cursor:pointer;transition:all .2s;font-family:inherit}
+.tab-btn.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+.tab-content{display:none}
+.tab-content.active{display:block}
+.tab-content h3{font-size:16px;color:var(--navy);margin-bottom:5px}
+.school-programs{font-size:13px;color:var(--muted);margin-bottom:14px}
+.example-table{width:100%;border-collapse:collapse;font-size:14px;margin:10px 0}
+.example-table th{text-align:left;padding:10px 12px;background:var(--navy);color:#fff;font-size:12px;text-transform:uppercase;letter-spacing:.5px}
+.example-table th:first-child{border-radius:var(--r) 0 0 0}
+.example-table th:last-child{border-radius:0 var(--r) 0 0}
+.example-table td{padding:11px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+.example-table tr:hover td{background:rgba(27,31,75,.02)}
+/* Rubric table (2026-09-19). The six rules that used to sit here were written as "rubric-table" with no leading dot,
+   so the browser never applied them and the rubric rendered as a bare default table. Styles only; no wording or markup changed. */
+.rubric-table{width:100%;table-layout:fixed;border-collapse:separate;border-spacing:0;font-size:14px;line-height:1.45;margin:14px 0 14px;border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+.rubric-table th{text-align:left;vertical-align:bottom;padding:11px 12px 10px;background:var(--navy);color:#fff;font-size:12px;font-weight:700;line-height:1.3;text-transform:uppercase;letter-spacing:.5px}
+.rubric-table th:first-child{width:30%}
+/* the three levels read left to right as a progression */
+.rubric-table th:nth-child(2){box-shadow:inset 0 -3px 0 #8E94AE}
+.rubric-table th:nth-child(3){box-shadow:inset 0 -3px 0 var(--orange-lt)}
+.rubric-table th:nth-child(4){box-shadow:inset 0 -3px 0 var(--orange)}
+.rubric-table td{padding:12px;border-top:1px solid var(--border);vertical-align:top;color:var(--text)}
+.rubric-table tbody tr:first-child td{border-top:0}
+.rubric-table td:first-child{background:#F3F4F9;color:var(--navy)}
+.rubric-table td:nth-child(3){background:#FFFAF5}   /* "Getting There" is the expected first pass; the note under the table says so */
+.rubric-table tbody tr:hover td{background-image:linear-gradient(rgba(27,31,75,.03),rgba(27,31,75,.03))}
+.rubric-preview .note-text{font-size:13.5px;line-height:1.6;color:var(--muted);margin:0}
+@media(max-width:600px){
+  /* phones: each criterion becomes a card and the level names move inside it, so the page never scrolls sideways.
+     The level names below repeat the table's header cells; if those headers are ever reworded, reword these too. */
+  .rubric-preview{padding:16px}
+  .rubric-table{display:block;border:0;border-radius:0;overflow:visible;margin-bottom:6px}
+  .rubric-table thead{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .rubric-table tbody,.rubric-table tr,.rubric-table td{display:block;width:100%}
+  .rubric-table tr{border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin:0 0 12px}
+  .rubric-table td{padding:9px 12px 10px}
+  .rubric-table tbody tr:first-child td{border-top:1px solid var(--border)}
+  .rubric-table td:first-child,.rubric-table tbody tr:first-child td:first-child{border-top:0;background:var(--navy);color:#fff;padding:10px 12px}
+  .rubric-table td:nth-child(n+2)::before{display:block;margin-bottom:1px;font-size:11px;font-weight:700;line-height:1.3;text-transform:uppercase;letter-spacing:.5px;color:var(--muted)}
+  .rubric-table td:nth-child(2)::before{content:"Not Yet (1)"}
+  .rubric-table td:nth-child(3)::before{content:"Getting There (2)";color:#B4541F}
+  .rubric-table td:nth-child(4)::before{content:"Solid (3)";color:var(--navy)}
+}
+.mapping-table{margin:18px 0}
+.map-row{background:var(--white);border:1px solid var(--border);border-radius:var(--rl);padding:18px;margin-bottom:14px;box-shadow:var(--sh)}
+.map-label{margin-bottom:10px}
+.map-label strong{display:block;font-size:15px;color:var(--navy);margin-bottom:2px}
+.map-label span{font-size:13px;color:var(--muted)}
+.map-fields label{margin-top:8px}
+.map-input{margin-bottom:6px}
+.map-help{margin-top:6px}
+.map-help .toggle-content{background:rgba(232,115,58,.04);border-left:3px solid var(--orange);padding:10px 14px;border-radius:0 var(--r) var(--r) 0;font-size:14px}
+.special-note{background:rgba(27,31,75,.04);border:1px solid rgba(27,31,75,.1);border-radius:var(--rl);padding:14px 18px;margin-top:18px;font-size:14px}
+special-note h4{color:var(--navy);margin-bottom:5px;font-size:14px}
+.word-count{font-size:13px;color:var(--muted);margin-top:4px}
+#word-count-display{font-weight:700}
+.baseline-input{min-height:190px}
+.prompt-highlight{background:rgba(27,31,75,.04);border-left:4px solid var(--navy);border-radius:0 var(--r) var(--r) 0;padding:14px 18px;margin:14px 0;font-size:16px}
+.rubric-preview{background:var(--white);border:1px solid var(--border);border-radius:var(--rl);padding:22px;margin-top:20px}
+.rubric-preview h3{font-size:15px;color:var(--navy);margin-bottom:10px}
+note-text{font-size:13px;color:var(--muted);font-style:italic;margin-top:8px}
+.iteration-section{background:linear-gradient(135deg,var(--navy),#2D3170);border-radius:var(--rl);padding:28px;margin:24px 0;color:#fff}
+.iteration-section h2{font-size:19px;color:#fff;margin-bottom:14px}
+.iteration-section h3{font-size:16px;color:var(--orange-lt);margin-bottom:10px}
+.iteration-section p{font-size:14px;opacity:.9;line-height:1.6;margin-bottom:9px}
+.iteration-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0}
+.iteration-item{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:var(--rl);padding:16px}
+.iteration-item h4{font-size:12px;color:var(--orange-lt);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px}
+.iteration-item p{font-size:13px;color:rgba(255,255,255,.8);margin:0;line-height:1.5}
+.iteration-item .example{font-size:12px;color:rgba(255,255,255,.55);font-style:italic;margin-top:5px}
+.return-instructions{background:rgba(232,115,58,.08);border:2px solid rgba(232,115,58,.3);border-radius:var(--rl);padding:22px;margin:20px 0}
+.return-instructions h3{font-size:16px;color:var(--navy);margin-bottom:10px}
+.return-instructions ol{padding-left:20px;margin:12px 0}
+.return-instructions li{font-size:14px;margin-bottom:9px;line-height:1.6}
+.return-instructions li strong{color:var(--navy)}
+.review-intro{margin-bottom:20px}
+.review-intro h3{font-size:16px;color:var(--navy);margin-bottom:5px}
+.review-intro p{font-size:13px;color:var(--muted)}
+.review-section{background:var(--white);border:1px solid var(--border);border-radius:var(--rl);padding:18px;margin-bottom:14px}
+.review-section h4{font-size:13px;text-transform:uppercase;letter-spacing:.8px;color:var(--navy);margin-bottom:8px}
+.review-display{font-size:14px;white-space:pre-wrap;color:var(--text);background:var(--bg);padding:10px 12px;border-radius:var(--r);min-height:36px;line-height:1.6}
+.email-capture{background:var(--white);border:1.5px solid var(--border);border-radius:var(--rl);padding:22px;margin:20px 0}
+.email-capture h4{font-size:15px;color:var(--navy);margin-bottom:7px}
+.email-capture>p{font-size:14px;color:var(--muted);margin-bottom:12px}
+.email-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.email-field label{margin-top:0}
+.email-warning{font-size:12px;color:#e53935;margin-top:3px;display:none}
+.email-warning.visible{display:block}
+/* Searchable Course Dropdown */
+.course-search-container{position:relative}
+#course-search{width:100%;padding:9px 13px;border:1.5px solid var(--border);border-radius:var(--r);font-family:inherit;font-size:15px;color:var(--text);background:var(--bg);transition:border-color .2s,box-shadow .2s;margin-top:5px;margin-bottom:4px}
+#course-search:focus{outline:none;border-color:var(--orange);box-shadow:0 0 0 3px rgba(232,115,58,.12)}
+#course-dropdown{position:absolute;top:100%;left:0;right:0;background:#fff;border:1.5px solid var(--border);border-top:none;border-radius:0 0 var(--r) var(--r);max-height:240px;overflow-y:auto;z-index:200;box-shadow:var(--shm)}
+#course-dropdown.hidden{display:none}
+.course-option{padding:10px 14px;font-size:14px;color:var(--text);cursor:pointer;transition:background .15s;border-bottom:1px solid rgba(226,229,234,.5)}
+.course-option:hover,.course-option.highlighted{background:rgba(232,115,58,.08);color:var(--navy)}
+.course-option:last-child{border-bottom:none}
+.course-option-other{font-style:italic;color:var(--muted)}
+.course-option-empty{padding:10px 14px;font-size:13px;color:var(--muted);font-style:italic;cursor:default}
+.course-option-divider{height:1px;background:var(--border);margin:4px 0}
+.required-star{color:#e53935;font-weight:700}
+.summary-stats{background:var(--white);border:1px solid var(--border);border-radius:var(--rl);padding:18px;margin-top:14px;font-size:14px}
+.summary-stats p{margin-bottom:5px}
+#override-modal{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:999;display:flex;align-items:center;justify-content:center}
+#override-modal.hidden{display:none}
+.modal-content{background:#fff;border-radius:var(--rl);padding:30px;max-width:380px;width:90%;box-shadow:0 16px 48px rgba(0,0,0,.2)}
+.modal-content>p:first-child{font-size:16px;font-weight:700;color:var(--navy);margin-bottom:14px}
+.modal-content input{width:100%;padding:9px 13px;border:1.5px solid var(--border);border-radius:var(--r);font-size:15px;margin-bottom:11px}
+.modal-content input:focus{outline:none;border-color:var(--orange)}
+.modal-buttons{display:flex;gap:9px}
+.error-text{color:#e53935;font-size:13px}
+#nav-footer{position:sticky;bottom:0;background:#fff;border-top:1px solid var(--border);padding:13px 48px;display:flex;align-items:center;gap:10px;box-shadow:0 -2px 8px rgba(27,31,75,.06);z-index:40}
+#nav-spacer{flex:1}
+.nav-btn{padding:9px 22px;border-radius:22px;font-size:14px;font-weight:600;cursor:pointer;border:1.5px solid var(--border);background:#fff;color:var(--navy);font-family:inherit;transition:all .2s}
+.nav-btn:hover:not(:disabled){border-color:var(--navy);background:var(--navy);color:#fff}
+.nav-btn:disabled{opacity:.4;cursor:not-allowed}
+.nav-btn.primary{background:var(--orange);border-color:var(--orange);color:#fff}
+.nav-btn.primary:hover:not(:disabled){background:#D4612A;border-color:#D4612A}
+.nav-btn.submit{background:var(--navy);border-color:var(--navy);color:#fff}
+.nav-btn.submit:hover:not(:disabled){background:#0F1235}
+.nav-btn.hidden{display:none}
+@media(max-width:768px){
+  #sidebar{display:none}
+  #module-shell{margin-left:0}
+  .page{padding:22px 18px}
+  .overview-grid,.email-row,.iteration-grid{grid-template-columns:1fr}
+  #nav-footer{padding:11px 18px}
+}
+
+.keep-notice{border:3px solid var(--navy);background:#fff8e6;border-radius:var(--rl);padding:14px 16px;margin:0 0 18px}
+/* v2.5: first-pass vs. returner copy, LMS-only hiding, previous answers, pass card */
+/* vK (2.6-K, 2026-09-12): knowledge line under each map row (fields 35-38), knowledge rubric row, Graduate Student option, CNSL 521 keys */
+.know-label{color:var(--navy)!important}.know-input{border-color:var(--navy)!important}
+.mode-first .return-only{display:none!important}.mode-return .first-only{display:none!important}
+.in-lms .resume-link-ui{display:none!important}
+.prev-answer{border:1px dashed var(--purple);background:#f6f4fb;border-radius:var(--r);padding:6px 10px;margin:6px 0 8px;font-size:13px}
+.prev-answer summary{cursor:pointer;font-weight:600;color:var(--purple)}.prev-answer-body{white-space:pre-wrap;margin-top:6px;color:var(--text)}
+.pass-card{background:var(--white);border:2px solid var(--navy);border-radius:var(--rl);padding:18px;margin:0 0 18px}
+.pass-card h3{font-size:16px;color:var(--navy);margin-bottom:8px}.pass-choices{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0}
+.pass-btn{flex:1 1 200px;padding:12px 14px;border:2px solid var(--border);border-radius:var(--r);background:#fff;font:inherit;font-weight:600;color:var(--navy);cursor:pointer;text-align:left}
+.pass-btn.selected{border-color:var(--orange);background:#fff4ec}.pass-btn small{display:block;font-weight:400;color:var(--muted);margin-top:3px}
+.pass-followup{margin-top:10px;display:grid;gap:10px}.pass-followup label{font-size:13px;font-weight:600;color:var(--navy)}
+.pass-followup select{width:100%;padding:8px;border:1.5px solid var(--border);border-radius:var(--r);font:inherit;margin-top:3px}
+.name-field input{width:100%;padding:8px;border:1.5px solid var(--border);border-radius:var(--r);font:inherit}
+.unlock-line{font-size:14px;color:var(--navy);margin-top:6px}.unlock-line strong{white-space:nowrap}
+.keep-notice h3{font-size:17px;font-weight:800;color:var(--navy);letter-spacing:.02em;margin:0 0 6px;text-transform:uppercase}
+.keep-notice p{font-size:14px;margin:0;line-height:1.55}
+.keep-notice strong{color:var(--navy)}
+.save-actions{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end;margin:6px 0 14px}
+#copy-fallback{position:fixed;inset:0;background:rgba(27,31,75,.55);z-index:400;display:flex;align-items:center;justify-content:center;padding:20px}
+#copy-fallback .cf-box{background:#fff;border-radius:var(--rl);padding:18px;max-width:640px;width:100%;box-shadow:var(--shm)}
+#copy-fallback h4{font-size:15px;color:var(--navy);margin-bottom:6px}
+#copy-fallback p{font-size:13px;color:var(--muted);margin-bottom:10px}
+#copy-fallback textarea{width:100%;height:260px;font:13px/1.5 monospace;border:1px solid var(--border);border-radius:var(--r);padding:10px}
+#copy-fallback .cf-actions{text-align:right;margin-top:10px}
+#print-sheet { display: none; }
+@media print {
+  body.print-full-record #app-wrapper, body.print-full-record #module-shell { display: none !important; }
+  body.print-full-record #print-sheet { display: block !important; font: 12pt/1.5 Georgia, serif; color: #000; }
+  #print-sheet .ps-title { font-weight: bold; font-size: 14pt; margin-bottom: 4px; }
+  #print-sheet .ps-note { font-size: 10pt; color: #333; margin-bottom: 14px; }
+  #print-sheet h3 { font-size: 13pt; margin: 14px 0 6px; border-bottom: 1px solid #000; }
+  #print-sheet .ps-sec { margin-bottom: 10px; page-break-inside: avoid; }
+  #print-sheet .ps-sec h4 { font-size: 10pt; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 3px; }
+  #print-sheet .ps-body { border: 1px solid #999; padding: 8px 10px; white-space: pre-wrap; }
+  #sidebar, #module-header, #nav-footer, .email-warning, video, .toggle-btn, #override-modal, #nace-tooltip, #nace-overlay, .print-btn { display: none !important; }
+  #app-wrapper, #module-shell, #page-container { display: block !important; height: auto !important; overflow: visible !important; }
+  .page.hidden { display: none !important; }
+  .page { page-break-inside: avoid; }
+  .review-display { border: 1px solid #999; padding: 10px; white-space: pre-wrap; }
+  body { background: #fff !important; }
+  .print-header-line { display: block !important; font-size: 12px; margin-bottom: 14px; }
+}
+.print-header-line { display: none; }
+</style>
+</head>
+<body>
+<div id="app-wrapper">
+
+<nav id="sidebar">
+  <div class="nav-header">
+    <span class="nav-label">Module 0</span>
+    <span class="nav-title">The CR Path</span>
+  </div>
+  <ul>
+    <li><a href="#" class="nav-link" onclick="goToPage(1);return false;">Overview</a></li>
+    <li class="nav-divider">Part A -- Framework</li>
+    <li><a href="#" class="nav-link" onclick="goToPage(2);return false;">0.0 Welcome &amp; Hook</a></li>
+    <li><a href="#" class="nav-link" onclick="goToPage(4);return false;">0.1 The Framework</a></li>
+    <li><a href="#" class="nav-link" onclick="goToPage(10);return false;">0.2 Where Do You Fit?</a></li>
+    <li class="nav-divider">Part B -- Application</li>
+    <li><a href="#" class="nav-link" onclick="goToPage(14);return false;">0.3 Your Degree &amp; the CR Path</a></li>
+    <li><a href="#" class="nav-link" onclick="goToPage(16);return false;">0.4 Your Baseline</a></li>
+    <li><a href="#" class="nav-link" onclick="goToPage(17);return false;">0.5 The Iteration Cycle</a></li>
+  </ul>
+  <div class="nav-footer">
+    <span>CR Path: Career Readiness Through Iteration</span>
+    <span class="nav-credit">Bragg, C. B. (2026). CC BY-NC 4.0</span>
+  </div>
+</nav>
+
+<div id="module-shell">
+  <header id="module-header">
+    <h1 id="module-title">Module 0: The CR Path</h1>
+    <p class="subtitle">"Where Are You Now -- and Where Are You Going?"</p>
+    <div id="progress-container">
+      <div id="progress-bar-track"><div id="progress-bar"></div></div>
+      <span id="progress-label">Page 1 of 19</span>
+    </div>
+  </header>
+
+  <div id="override-modal" class="hidden">
+    <div class="modal-content">
+      <p>Facilitator Override</p>
+      <input type="password" id="override-input" placeholder="Enter override code">
+      <div class="modal-buttons">
+        <button id="override-submit" class="nav-btn primary">Submit</button>
+        <button id="override-cancel" class="nav-btn">Cancel</button>
+      </div>
+      <p id="override-error" class="hidden error-text" style="margin-top:8px">Incorrect code.</p>
+    </div>
+  </div>
+
+  <div id="nace-overlay" class="hidden" onclick="closeNaceTooltip()"></div>
+  <div id="nace-tooltip" class="hidden" role="dialog" aria-modal="true">
+    <button id="tip-close" aria-label="Close">x</button>
+    <div class="tip-header"><span class="tip-icon" id="tip-icon"></span><h4 class="tip-title" id="tip-title"></h4></div>
+    <p class="tip-tagline" id="tip-tagline"></p>
+    <hr class="tip-divider">
+    <p class="tip-official" id="tip-official"></p>
+    <p class="tip-absorb hidden" id="tip-absorb"></p>
+    <div class="tip-parts hidden" id="tip-parts"><span class="tip-parts-label">Inside this one, and learnable on its own:</span><ul id="tip-parts-list"></ul></div>
+    <p class="tip-cite">Source: NACE Career Readiness Competencies (Rev. April 2024); AI-era content from BHEF, The AI-Enabled Professional Framework (2026).</p>
+  </div>
+
+  <main id="page-container">
+
+    <!-- PAGE 1: OVERVIEW -->
+    <div class="page" data-page="1" data-section="overview" data-part="A">
+      <div class="section-header"><span class="section-tag">Module 0</span><h1>The CR Path</h1><p class="subtitle">"Where Are You Now -- and Where Are You Going?"</p></div>
+      <div class="keep-notice"><h3>&#128190; Your work here gets saved &mdash; and travels with you</h3>
+<p>This module saves your progress as you go. <span class="resume-link-ui">When you finish Part A, you can copy a <strong>Resume Link</strong> that carries your answers and your 24-hour timer to any other device<span class="catcher-only">, and the confirmation email you receive after Part A carries the same link</span>. </span>At the end of Part B, <strong>Copy My Responses as Text</strong> puts a labeled copy of everything you wrote on your clipboard, and <strong>Print / Save</strong> gives you the same record as a sheet or PDF. Use them: you will come back to the CR Path as you gain new experiences, and your earlier answers are how you will see your own growth.</p></div>
+<div class="overview-grid">
+        <div class="overview-card"><h3>Estimated Time</h3><p><strong>Part A:</strong> 25-30 min<br><strong>Part B:</strong> 25-30 min<br><em>Part B unlocks 24 hours after Part A</em></p></div>
+        <div class="overview-card"><h3>Format</h3><p>Asynchronous (LMS). Mobile-friendly. All videos captioned.</p></div>
+        <div class="overview-card"><h3>What You'll Need</h3><p>Just yourself and honest answers. No preparation required.</p></div>
+        <div class="overview-card"><h3>What You'll Produce</h3><p>A CR Path Map and a Baseline Reflection. You'll return to update both as you gain new experiences.</p></div>
+      </div>
+      <div class="learning-objectives">
+        <h2>By the end of Module 0, you will be able to:</h2>
+        <ol>
+          <li><strong>Define</strong> each of the four CR Path components in your own words</li>
+          <li><strong>Locate</strong> yourself on the CR Path cycle based on your current experiences</li>
+          <li><strong>Connect</strong> at least one academic experience to a specific CR Path component</li>
+          <li><strong>Identify</strong> one area of the cycle that needs the most development</li>
+          <li><strong>Articulate</strong> a first-draft answer to: <em>"How does your degree prepare you for a career?"</em></li>
+        </ol>
+      </div>
+      <div class="key-message"><p>This module is designed to be returned to. Your first pass builds the map. Each time you come back with a new experience -- a course, a project, a mentor conversation, a micro-internship -- your map gets richer and your story gets stronger.</p></div>
+
+      <div class="pass-card" id="pass-card">
+        <h3>Is this your first time walking the CR Path?</h3>
+        <div class="pass-choices">
+          <button type="button" class="pass-btn" id="pass-first">First time<small>Build your map from scratch.</small></button>
+          <button type="button" class="pass-btn" id="pass-return">I've done this before<small>In a course, a workshop, or on your own.</small></button>
+        </div>
+        <div class="email-warning" id="pass-warn">Choose one to continue.</div>
+        <div class="pass-followup hidden" id="pass-followup">
+          <div><label for="prior-course">Where did you last walk it?</label>
+            <select id="prior-course" class="scorm-select" data-interaction="32">
+              <option value="">Select...</option>
+              <option value="Course">A course at my school</option>
+              <option value="Program">A program or student-employment site</option>
+              <option value="Workshop">A workshop or event</option>
+              <option value="OtherCampus">At another school</option>
+              <option value="Self">On my own</option>
+            </select></div>
+          <div><label for="pass-number">Counting this one, which pass is this?</label>
+            <select id="pass-number" class="scorm-select" data-interaction="33">
+              <option value="">Select...</option>
+              <option value="2">2nd</option><option value="3">3rd</option><option value="4">4th</option><option value="5">5th or more</option>
+            </select></div>
+          <p style="font-size:13px;color:var(--muted);margin:0">Returning? Your earlier answers are shown above each box once you get there. If they aren't, paste them in from your saved copy or email as you go.</p>
+        </div>
+        <input type="hidden" id="first-pass" class="scorm-select" data-interaction="31" value="">
+      </div>
+
+      <div class="pass-card hidden" id="pass-done-card">
+        <h3>Pass <span id="pass-done-num">1</span> complete <span style="font-weight:400;color:var(--muted)">(submitted <span id="pass-done-date"></span>)</span></h3>
+        <p style="font-size:14px;line-height:1.6;margin-bottom:10px">Come back when you have a new experience to add. Starting the next pass keeps your map, your details, and your email, and asks you to answer the reflection questions fresh -- your last answers stay visible above each box.</p>
+        <div class="pass-choices">
+          <button type="button" class="pass-btn" id="pass-start-next">Start pass <span id="pass-next-num">2</span><small>Part A again, then the 24-hour gate, then Part B.</small></button>
+          <button type="button" class="pass-btn" id="pass-review-last">Review or print my last responses<small>Nothing changes until you start the next pass.</small></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 2: WELCOME & HOOK -->
+    <div class="page hidden" data-page="2" data-section="0.0" data-part="A">
+      <div class="section-header"><span class="section-tag">Section 0.0 - Part A</span><h1>Welcome &amp; Hook</h1><p class="time-estimate">~4 minutes</p></div>
+      <div style="margin:20px auto; max-width: 400px;">
+        <video width="100%" controls>
+          <source src="videos/intro-cr-path.mp4" type="video/mp4">
+          Your browser does not support the video tag. Please use the "Show Video Transcript" button below to read the content.
+        </video>
+        <p style="font-size:12px;color:var(--muted);margin-top:8px;text-align:center">Video: Introduction to the CR Path (1 min) | Transcript available below</p>
+      </div>
+      <button class="toggle-btn" onclick="toggleContent('transcript-00')">Show Video Transcript</button>
+      <div id="transcript-00" class="toggle-content hidden">
+        <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--rl);padding:20px;font-style:italic;font-size:15px;line-height:1.7">
+          <p style="margin-bottom:10px">"If an employer asked you right now: 'What did you learn from your degree, and how does it prepare you for this job?' -- what would you say?</p>
+          <p style="margin-bottom:10px">If that question makes you even a little uncomfortable, you're in exactly the right place. And if you already have a great answer -- perfect, because by the end of this module, you're going to have an even better one.</p>
+          <p style="margin-bottom:10px">Here's something worth knowing: employers are increasingly hiring based on skills -- not just your GPA, not just your major, not just the name of your school. They want to know what you can actually do. And that means your job -- starting now, not senior year -- is to be able to tell that story clearly.</p>
+          <p>The CR Path is the framework that helps you do that."</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 3: OPENING RESPONSE -->
+    <div class="page hidden" data-page="3" data-section="0.0" data-part="A">
+      <div class="section-header"><span class="section-tag">Section 0.0 - Part A</span><h1>Your Starting Point</h1><p class="time-estimate">~2 minutes</p></div>
+      <div class="activity-box">
+        <div class="activity-header"><span class="activity-icon">&#9999;&#65039;</span><h3>Your Starting Point</h3></div>
+        <p class="activity-purpose first-only"><em>Why this matters: This is your "before." Each time you return with a new experience, you'll see how much your answer has changed.</em></p>
+        <p class="activity-purpose return-only"><em>Why this matters: This is pass <span class="pass-num">2</span>. Answer without rereading your last one first -- the distance between the two is the point.</em></p>
+        <p class="first-only">That employer question was intense. Let's start simpler:</p>
+        <p class="return-only">Same question as last time, asked fresh:</p>
+        <label for="response-opening"><strong class="first-only">"Right now, if someone asked you what you're learning in your program, what would you say?"</strong><strong class="return-only">"Since your last pass, what have you learned or done -- and what would you say now if someone asked what you're learning in your program?"</strong></label>
+        <textarea id="response-opening" class="scorm-input" data-interaction="0" rows="5" placeholder="There is no right answer. Write whatever comes to mind..."></textarea>
+        <p class="activity-note first-only">Unscored baseline -- just be honest. You'll compare this to your updated answer when you return.</p>
+        <p class="activity-note return-only">Unscored. When you're done, open "Your last answer" above and read the two side by side.</p>
+      </div>
+    </div>
+
+    <!-- PAGE 4: INTRODUCING THE CR PATH FRAMEWORK -->
+    <div class="page hidden" data-page="4" data-section="0.1" data-part="A">
+      <div class="section-header"><span class="section-tag">Section 0.1 - Part A</span><h1>Introducing the Career Readiness Pathway Framework</h1><p class="time-estimate">~3 minutes</p></div>
+      <div class="key-message"><p>"Everything you do in college -- your courses, your jobs, your mentors, your experiences -- fits together. The CR Path shows you how."</p></div>
+      <div class="cr-path-diagram-container" id="diagram-p4">
+        <img src="images/cr-path-full.png" alt="CR Path full diagram - all four components visible">
+      </div>
+      <p class="diagram-caption">CR Path: Career Readiness Through Iteration. (c) 2026 Caleb B. Bragg. CC BY-NC 4.0</p>
+      <p style="margin-top:16px;font-size:15px;line-height:1.6">The CR Path has <strong>four components</strong> that work together in an iterative cycle. Together, they help you understand what you're learning, name the skills you're building, and tell the story of how your degree prepares you for what comes next. Over the next few pages, we'll explore each component. Later in this module, you'll map your own experiences onto the cycle.</p>
+    </div>
+
+    <!-- PAGE 5: CS KSAs -->
+    <div class="page hidden" data-page="5" data-section="0.1" data-part="A">
+      <div class="section-header"><span class="section-tag">Section 0.1 - Part A</span><h1>The Framework</h1><p class="time-estimate">~8 minutes</p></div>
+      <div class="key-message"><p>"Career readiness isn't a destination you arrive at on graduation day. It's something that builds every time you move through this cycle."</p></div>
+      <div class="cr-path-diagram-container" id="diagram-p5">
+        <img src="images/cr-path-csksa.png" alt="CR Path diagram with CS KSAs pillar highlighted">
+      </div>
+      <p class="diagram-caption">CR Path: Career Readiness Through Iteration. (c) 2026 Caleb B. Bragg. CC BY-NC 4.0</p>
+      <div class="component-card card-csksa">
+        <div class="card-header"><span class="card-icon">&#129504;</span><h3>Component 1: CS KSAs</h3></div>
+        <p class="card-subtitle">Career-Specific Knowledge, Skills &amp; Abilities</p>
+        <p><strong>What it is:</strong> Your domain foundation -- the content you learn specifically in your major courses.</p>
+        <p><strong>In plain language:</strong> "This is what I know because I studied <em>[my field]</em> specifically."</p>
+<p><strong>Knowledge comes first:</strong> a skill is knowledge in use. "Communication" on a job posting is a label; what you know about the client, the method, the regulation, or the setting is what makes it work there. So every time this module asks you to name a skill, it will also ask what you had to know. A skill label costs nothing to claim. Named knowledge is something a hiring manager can check with one follow-up question.</p>
+        <div class="card-examples">
+          <button class="toggle-btn-sm" onclick="toggleContent('ex-csksa')">See examples across majors</button>
+          <div id="ex-csksa" class="toggle-content hidden"><ul style="margin-top:10px"><li><strong>Psychology:</strong> Research methods, data analysis, understanding human behavior</li><li><strong>Business:</strong> Financial modeling, market analysis, supply chain management</li><li><strong>Nursing:</strong> Patient assessment, clinical protocols, pharmacology</li><li><strong>Engineering:</strong> Programming languages, CAD design, circuit analysis</li><li><strong>Education:</strong> Lesson planning, classroom management, differentiated instruction</li></ul></div>
+        </div>
+        <div class="card-fact"><span>&#128202;</span> AI literacy and data analysis are among the fastest-growing in-demand skills (LinkedIn, 2026).</div>
+      </div>
+    </div>
+
+    <!-- PAGE 6: CORE COMPETENCIES -->
+    <div class="page hidden" data-page="6" data-section="0.1" data-part="A">
+      <div class="section-header"><span class="section-tag">Section 0.1 - Part A</span><h1>The Framework</h1></div>
+      <div class="cr-path-diagram-container" id="diagram-p6">
+        <img src="images/cr-path-core.png" alt="CR Path diagram with Core Competencies pillar highlighted">
+      </div>
+      <p class="diagram-caption">CR Path: Career Readiness Through Iteration. (c) 2026 Caleb B. Bragg. CC BY-NC 4.0</p>
+      <div class="component-card card-core">
+        <div class="card-header"><span class="card-icon">&#11088;</span><h3>Component 2: Core Competencies</h3></div>
+        <p class="card-subtitle">Transferable Skills That Belong to Every Career</p>
+        <p><strong>What it is:</strong> Eight competencies every employer looks for -- regardless of your field.</p>
+        <p><strong>In plain language:</strong> "These are the skills that travel with me no matter what career I enter."</p>
+        <p><strong>The eight are labels, not a fixed list.</strong> They are the words employers read. What sits under each label changes as the world does: AI and data literacy now live inside Technology, and things like budgeting, planning your time, and setting goals live inside Career &amp; Self-Development. The next page opens those up.</p>
+        <p style="font-size:14px;color:var(--muted);margin-bottom:4px">Click any competency to see what it holds:</p>
+        <div class="nace-grid">
+          <span class="nace-tag" data-key="career_dev" tabindex="0">Career &amp; Self-Development</span>
+          <span class="nace-tag" data-key="communication" tabindex="0">Communication</span>
+          <span class="nace-tag" data-key="critical_thinking" tabindex="0">Critical Thinking</span>
+          <span class="nace-tag" data-key="equity" tabindex="0">Equity &amp; Inclusion</span>
+          <span class="nace-tag" data-key="leadership" tabindex="0">Leadership</span>
+          <span class="nace-tag" data-key="professionalism" tabindex="0">Professionalism</span>
+          <span class="nace-tag" data-key="teamwork" tabindex="0">Teamwork</span>
+          <span class="nace-tag" data-key="technology" tabindex="0">Technology</span>
+        </div>
+        <div class="card-fact"><span>&#9888;&#65039;</span> Communication is rated critical by 99.5% of employers -- but only 55.2% of new graduates are proficient (NACE, 2023; 2026).</div>
+      </div>
+    </div>
+
+    <!-- PAGE 7: INSIDE THE PILLAR (XC) -->
+    <div class="page hidden" data-page="7" data-section="0.1" data-part="A">
+      <div class="section-header"><span class="section-tag">Section 0.1 - Part A</span><h1>Inside the Pillar</h1><p class="time-estimate">~6 minutes</p></div>
+      <div class="cr-path-diagram-container compact" id="diagram-p7">
+        <img src="images/cr-path-core.png" alt="CR Path diagram with Core Competencies pillar highlighted">
+      </div>
+      <div class="key-message"><p>"A label like Career &amp; Self-Development is what an employer reads. What you actually have to know to earn it is more specific: how to budget, how to plan a week, how to set a goal you can check. Those are learnable on their own."</p></div>
+      <p class="pillar-intro">Six things live inside the Core Competencies pillar that no job posting names but every job needs. Each one sits under one of the eight labels. For each, mark where you are and name what you would need to know. There is no score. <span class="return-only">This is pass <span class="pass-num">2</span>: answer for where you are now.</span></p>
+
+      <div class="piece">
+        <div class="piece-head"><h3>Financial literacy</h3><span class="piece-parent">Career &amp; Self-Development</span></div>
+        <p class="piece-what">Budgeting, credit, taxes, loans, interest, benefits. Demanded of every graduate in every field.</p>
+        <div class="piece-status" role="radiogroup" aria-label="Financial literacy status">
+          <label><input type="radio" name="st-finlit" value="have" data-status-for="39"> I have it</label>
+          <label><input type="radio" name="st-finlit" value="building" data-status-for="39"> Building it</label>
+          <label><input type="radio" name="st-finlit" value="need" data-status-for="39"> I need it</label>
+        </div>
+        <input type="hidden" id="cc-finlit-status" class="scorm-select" data-interaction="39" value="">
+        <label class="know-label" for="cc-finlit-know">What would you need to know to do this well?</label>
+        <textarea id="cc-finlit-know" class="scorm-input" data-interaction="40" rows="2" placeholder="e.g., how compound interest works on a loan; what comes out of a paycheck before I see it"></textarea>
+      </div>
+
+      <div class="piece">
+        <div class="piece-head"><h3>Time management</h3><span class="piece-parent">Career &amp; Self-Development</span></div>
+        <p class="piece-what">Planning, estimating, and prioritizing when several things are due at once.</p>
+        <div class="piece-status" role="radiogroup" aria-label="Time management status">
+          <label><input type="radio" name="st-time" value="have" data-status-for="41"> I have it</label>
+          <label><input type="radio" name="st-time" value="building" data-status-for="41"> Building it</label>
+          <label><input type="radio" name="st-time" value="need" data-status-for="41"> I need it</label>
+        </div>
+        <input type="hidden" id="cc-time-status" class="scorm-select" data-interaction="41" value="">
+        <label class="know-label" for="cc-time-know">What would you need to know to do this well?</label>
+        <textarea id="cc-time-know" class="scorm-input" data-interaction="42" rows="2" placeholder="e.g., how long my own tasks really take; how to split a big assignment into pieces I can estimate"></textarea>
+      </div>
+
+      <div class="piece">
+        <div class="piece-head"><h3>Goal setting</h3><span class="piece-parent">Career &amp; Self-Development</span></div>
+        <p class="piece-what">Turning a vague intention into a specific target you can check, with a plan behind it.</p>
+        <div class="piece-status" role="radiogroup" aria-label="Goal setting status">
+          <label><input type="radio" name="st-goal" value="have" data-status-for="43"> I have it</label>
+          <label><input type="radio" name="st-goal" value="building" data-status-for="43"> Building it</label>
+          <label><input type="radio" name="st-goal" value="need" data-status-for="43"> I need it</label>
+        </div>
+        <input type="hidden" id="cc-goal-status" class="scorm-select" data-interaction="43" value="">
+        <label class="know-label" for="cc-goal-know">What would you need to know to do this well?</label>
+        <textarea id="cc-goal-know" class="scorm-input" data-interaction="44" rows="2" placeholder="e.g., what makes a goal specific enough to check; what I do when I miss one"></textarea>
+      </div>
+
+      <div class="piece">
+        <div class="piece-head"><h3>Information literacy</h3><span class="piece-parent">Critical Thinking</span></div>
+        <p class="piece-what">Finding, judging, and citing sources. The part of data literacy that has nothing to do with AI.</p>
+        <div class="piece-status" role="radiogroup" aria-label="Information literacy status">
+          <label><input type="radio" name="st-info" value="have" data-status-for="45"> I have it</label>
+          <label><input type="radio" name="st-info" value="building" data-status-for="45"> Building it</label>
+          <label><input type="radio" name="st-info" value="need" data-status-for="45"> I need it</label>
+        </div>
+        <input type="hidden" id="cc-info-status" class="scorm-select" data-interaction="45" value="">
+        <label class="know-label" for="cc-info-know">What would you need to know to do this well?</label>
+        <textarea id="cc-info-know" class="scorm-input" data-interaction="46" rows="2" placeholder="e.g., how to tell a peer-reviewed source from a blog; how to check a claim against a second source"></textarea>
+      </div>
+
+      <div class="piece">
+        <div class="piece-head"><h3>Learning how to learn</h3><span class="piece-parent">Career &amp; Self-Development</span></div>
+        <p class="piece-what">Knowing which study strategies work and using them, instead of rereading and hoping.</p>
+        <div class="piece-status" role="radiogroup" aria-label="Learning how to learn status">
+          <label><input type="radio" name="st-learn" value="have" data-status-for="47"> I have it</label>
+          <label><input type="radio" name="st-learn" value="building" data-status-for="47"> Building it</label>
+          <label><input type="radio" name="st-learn" value="need" data-status-for="47"> I need it</label>
+        </div>
+        <input type="hidden" id="cc-learn-status" class="scorm-select" data-interaction="47" value="">
+        <label class="know-label" for="cc-learn-know">What would you need to know to do this well?</label>
+        <textarea id="cc-learn-know" class="scorm-input" data-interaction="48" rows="2" placeholder="e.g., why testing myself beats rereading; how to space practice across a week"></textarea>
+      </div>
+
+      <div class="piece">
+        <div class="piece-head"><h3>Self-advocacy</h3><span class="piece-parent">Communication</span></div>
+        <p class="piece-what">Asking for the raise, the accommodation, the extension, the introduction, and knowing how the ask is usually made.</p>
+        <div class="piece-status" role="radiogroup" aria-label="Self-advocacy status">
+          <label><input type="radio" name="st-adv" value="have" data-status-for="49"> I have it</label>
+          <label><input type="radio" name="st-adv" value="building" data-status-for="49"> Building it</label>
+          <label><input type="radio" name="st-adv" value="need" data-status-for="49"> I need it</label>
+        </div>
+        <input type="hidden" id="cc-adv-status" class="scorm-select" data-interaction="49" value="">
+        <label class="know-label" for="cc-adv-know">What would you need to know to do this well?</label>
+        <textarea id="cc-adv-know" class="scorm-input" data-interaction="50" rows="2" placeholder="e.g., what I'm entitled to ask for; what a reasonable counter-offer looks like"></textarea>
+      </div>
+
+      <p class="piece-hint" style="margin-top:8px">These six are a starting list, not the whole pillar. Your campus may add its own. The test for adding one: does every graduate need it, in every field, and is there something specific to know underneath it?</p>
+    </div>
+
+    <!-- PAGE 8: ELOs -->
+    <div class="page hidden" data-page="8" data-section="0.1" data-part="A">
+      <div class="section-header"><span class="section-tag">Section 0.1 - Part A</span><h1>The Framework</h1></div>
+      <div class="cr-path-diagram-container" id="diagram-p8">
+        <img src="images/cr-path-elo.png" alt="CR Path diagram with ELOs pillar highlighted">
+      </div>
+      <p class="diagram-caption">CR Path: Career Readiness Through Iteration. (c) 2026 Caleb B. Bragg. CC BY-NC 4.0</p>
+      <div class="component-card card-elo">
+        <div class="card-header"><span class="card-icon">&#128260;</span><h3>Component 3: ELOs</h3></div>
+        <p class="card-subtitle">Experiential Learning Opportunities</p>
+        <p><strong>What it is:</strong> Where your knowledge becomes skill -- internships, research labs, service learning, jobs, volunteer work, leadership roles.</p>
+        <p><strong>In plain language:</strong> "This is where I actually used what I know in a real situation."</p>
+        <p><strong>The critical addition:</strong> <em>Focused reflection.</em> Experience alone doesn't make you career ready. Understanding what you learned from that experience -- and being able to explain it -- that's what makes the difference.</p>
+        <div class="card-fact"><span>&#128176;</span> Graduates who completed ELOs earned ~$15,000 more on average and reported higher career satisfaction -- but only 1 in 5 new hires completed them as undergrads (Kahn &amp; Patil, 2025). This is your competitive advantage.</div>
+      </div>
+    </div>
+
+    <!-- PAGE 9: CAREER MENTORSHIP + CYCLE + NAME IT TO CLAIM IT -->
+    <div class="page hidden" data-page="9" data-section="0.1" data-part="A">
+      <div class="section-header"><span class="section-tag">Section 0.1 - Part A</span><h1>The Framework</h1></div>
+      <div class="cr-path-diagram-container" id="diagram-p9">
+        <img src="images/cr-path-mentorship.png" alt="CR Path diagram with Career Mentorship pillar highlighted">
+      </div>
+      <p class="diagram-caption">CR Path: Career Readiness Through Iteration. (c) 2026 Caleb B. Bragg. CC BY-NC 4.0</p>
+      <div class="component-card card-cm">
+        <div class="card-header"><span class="card-icon">&#128101;</span><h3>Component 4: Career Mentorship</h3></div>
+        <p class="card-subtitle">Contextualizes Experience and Reveals What's Next</p>
+        <p><strong>What it is:</strong> A person (or people) doing something you want to do -- or something close to it -- who helps you see what's next.</p>
+        <p><strong>In plain language:</strong> "This person shows me what my skills look like in the real world, right now."</p>
+        <p><strong>Important:</strong> You don't need a formal "mentor." A professor who talks about their career path. A supervisor who gives you real feedback. A family contact in an interesting field. Any of those count.</p>
+        <div class="card-fact"><span>&#128279;</span> Career mentorship builds professional networks -- which leads to more job opportunities (De Weerdt et al., 2024).</div>
+      </div>
+
+      <div class="activity-box" style="margin-top:24px">
+        <div class="activity-header"><span class="activity-icon">&#128273;</span><h3>Name It to Claim It</h3></div>
+        <p class="activity-purpose first-only"><em>Why this matters: If you can't explain it simply, you don't own it yet. When you return, you'll rewrite these -- and notice how much sharper they get.</em></p>
+        <p class="activity-purpose return-only"><em>Why this matters: This is the drift check. Define each one again without looking, then compare to your last answer.</em></p>
+        <p class="first-only">You've now seen all four components. Put each one in your own words -- one sentence, no jargon. How would you explain it to a friend who's never heard of the CR Path?</p>
+        <p class="return-only">One sentence each, no jargon, no peeking. If a definition got shorter and clearer since last time, that's ownership.</p>
+        <label for="define-csksa"><strong>CS KSAs:</strong></label>
+        <textarea id="define-csksa" class="scorm-input" data-interaction="25" rows="2" placeholder="In one sentence, what are CS KSAs?"></textarea>
+        <label for="define-core"><strong>Core Competencies:</strong></label>
+        <textarea id="define-core" class="scorm-input" data-interaction="26" rows="2" placeholder="In one sentence, what are Core Competencies?"></textarea>
+        <label for="define-elo"><strong>ELOs:</strong></label>
+        <textarea id="define-elo" class="scorm-input" data-interaction="27" rows="2" placeholder="In one sentence, what are ELOs?"></textarea>
+        <label for="define-cm"><strong>Career Mentorship:</strong></label>
+        <textarea id="define-cm" class="scorm-input" data-interaction="28" rows="2" placeholder="In one sentence, what is Career Mentorship?"></textarea>
+        <p class="activity-note">Unscored -- there's no perfect answer. The point is retrieval, not performance.</p>
+      </div>
+
+      <div class="cycle-callout">
+        <h3>Why Is It a Cycle?</h3>
+        <p>Because career readiness doesn't happen once. Every time you go around -- learning something new, applying it, reflecting on it, and getting guidance -- you come back stronger, more articulate, and more prepared.</p>
+        <p><strong>You're already somewhere on this cycle.</strong> The next section helps you figure out where.</p>
+        <p style="margin-top:10px;font-size:14px;color:var(--muted)"><em>Note: We taught the components in this order (1-2-3-4) because it builds understanding. But the cycle doesn't have a fixed starting point -- you might enter at ELOs, circle back to CS KSAs, and then seek Career Mentorship. The numbers are labels, not steps. Your path through the cycle is your own.</em></p>
+      </div>
+    </div>
+
+    <!-- PAGE 10: COMPONENT STRENGTH SORT -->
+    <div class="page hidden" data-page="10" data-section="0.2" data-part="A">
+      <div class="section-header"><span class="section-tag">Section 0.2 - Part A</span><h1>Where Do You Fit?</h1><p class="time-estimate">~10 minutes</p></div>
+      <div class="cr-path-diagram-container" id="diagram-p10">
+        <img src="images/cr-path-full.png" alt="CR Path full diagram">
+      </div>
+      <div class="key-message"><p>"Your year in college might predict where you are on this cycle -- or it might not. A senior who has never had an internship might rank ELOs lowest. A first-year who worked full-time before enrolling might rank them highest. Trust your own assessment."</p></div>
+      <div class="activity-box">
+        <div class="activity-header"><span class="activity-icon">&#128202;</span><h3>Component Strength Sort</h3></div>
+        <p class="activity-purpose first-only"><em>Why this matters: This helps you and your supervisor know where to focus your development. When you return, you'll re-rank and see how your experiences have shifted the balance.</em></p>
+        <p class="activity-purpose return-only"><em>Why this matters: Re-rank based on what you have now, not on what you ranked before. What moved is your evidence of growth; what didn't is your next priority.</em></p>
+        <p>Rank the four CR Path components from <strong>strongest (1)</strong> to <strong>most in need of development (4)</strong>:</p>
+        <div class="rank-grid">
+          <div class="rank-item"><label for="rank-csksa"><strong>CS KSAs</strong> <span class="rank-desc">(career-specific knowledge from my major courses)</span></label><select id="rank-csksa" class="scorm-select" data-interaction="1"><option value="">Select rank...</option><option value="1">1 -- Strongest</option><option value="2">2</option><option value="3">3</option><option value="4">4 -- Most needs development</option></select></div>
+          <div class="rank-item"><label for="rank-core"><strong>Core Competencies</strong> <span class="rank-desc">(transferable skills like communication, teamwork, critical thinking)</span></label><select id="rank-core" class="scorm-select" data-interaction="2"><option value="">Select rank...</option><option value="1">1 -- Strongest</option><option value="2">2</option><option value="3">3</option><option value="4">4 -- Most needs development</option></select></div>
+          <div class="rank-item"><label for="rank-elo"><strong>ELOs</strong> <span class="rank-desc">(real-world experience -- internships, research, jobs, etc.)</span></label><select id="rank-elo" class="scorm-select" data-interaction="3"><option value="">Select rank...</option><option value="1">1 -- Strongest</option><option value="2">2</option><option value="3">3</option><option value="4">4 -- Most needs development</option></select></div>
+          <div class="rank-item"><label for="rank-cm"><strong>Career Mentorship</strong> <span class="rank-desc">(connection to someone doing what I want to do)</span></label><select id="rank-cm" class="scorm-select" data-interaction="4"><option value="">Select rank...</option><option value="1">1 -- Strongest</option><option value="2">2</option><option value="3">3</option><option value="4">4 -- Most needs development</option></select></div>
+        </div>
+        <div class="follow-up-prompts">
+          <div class="follow-up"><label for="strongest-explain"><strong class="first-only">My #1 (strongest) is my strongest because:</strong><strong class="return-only">My #1 is my strongest now because (name what changed, if anything):</strong></label><textarea id="strongest-explain" class="scorm-input" data-interaction="5" placeholder="In 1-2 sentences, why did you rank this first?" rows="3"></textarea></div>
+          <div class="follow-up"><label for="weakest-explain"><strong class="first-only">My #4 (least developed) needs work because:</strong><strong class="return-only">My #4 still needs work -- or newly needs work -- because:</strong></label><textarea id="weakest-explain" class="scorm-input" data-interaction="6" placeholder="In 1-2 sentences, why did you rank this last?" rows="3"></textarea></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 11: DEMOGRAPHICS + ENTRY POINTS (UPDATED) -->
+    <div class="page hidden" data-page="11" data-section="0.2" data-part="A">
+      <div class="section-header"><span class="section-tag">Section 0.2 - Part A</span><h1>About You</h1></div>
+      <div class="cr-path-diagram-container" id="diagram-p11">
+        <img src="images/cr-path-full.png" alt="CR Path full diagram">
+      </div>
+      <div class="activity-box activity-box-light">
+        <div class="activity-header"><span class="activity-icon">&#128203;</span><h3>About You</h3></div>
+        <p class="activity-purpose"><em>This information helps your campus understand how students across <span class="campus-name">your campus</span> experience the CR Path. It does not affect your module content.</em></p>
+        <div class="form-group name-field"><label for="learner-name">Your name (first and last):</label><input type="text" id="learner-name" class="scorm-input-short" data-interaction="34" placeholder="e.g., Jordan Rivera" autocomplete="name"></div>
+        <div class="form-group"><label for="demo-year">Current year:</label><select id="demo-year" class="scorm-select" data-interaction="7"><option value="">Select...</option><option value="First-Year">First-Year</option><option value="Sophomore">Sophomore</option><option value="Junior">Junior</option><option value="Senior">Senior</option><option value="Graduate Student">Graduate Student</option><option value="Transfer">Transfer Student</option><option value="Returning Adult Learner">Returning / Adult Learner</option></select></div>
+        <div class="form-group"><label for="demo-school">My school, college, or division:</label><input type="text" id="demo-school" class="scorm-input-short" data-interaction="8" placeholder="e.g., School of Business, Liberal Arts, Undeclared..."></div>
+        <div class="form-group"><label for="demo-major">My major (or intended major):</label><input type="text" id="demo-major" class="scorm-input-short" data-interaction="9" placeholder="e.g., Psychological Science, Nursing, Computer Science..."></div>
+        <div class="form-group"><label for="course-other">My course or program (where you were asked to do this):</label><input type="text" id="course-other" class="scorm-input-short" data-interaction="30" placeholder="e.g., FYE 101, Career Launch, a workshop..."></div>
+      </div>
+      <div class="context-message">
+        <h3>A Note on Entry Points</h3>
+        <ul>
+          <li><strong>If you're early in your major:</strong> You're building your CS KSA foundation right now. Every class is adding to this cycle. Your goal this year is to understand the map.</li>
+          <li><strong>If you have some coursework but limited real-world experience:</strong> You've got enough foundation to start testing it. Look for opportunities to put your skills in motion.</li>
+          <li><strong>If you've done internships, research, or significant work:</strong> You have experiences to talk about and questions worth asking. Now is the time to find someone doing what you want to do.</li>
+          <li><strong>If you're approaching graduation:</strong> You've been around this cycle. The work now is naming what you've built -- in your resume, in interviews, in the room.</li>
+          <li><strong>If you're a transfer student or returning adult learner:</strong> Your work and life experience are real CS KSAs and ELOs. Your task is translation -- connecting what you already know to this framework.</li>
+        </ul>
+        <button class="toggle-btn" onclick="toggleContent('entry-point-handout')" style="margin-top:12px">See Entry Point Examples</button>
+        <div id="entry-point-handout" class="toggle-content hidden"><div class="handout-embed"><p style="font-size:14px;margin-bottom:10px">These examples show how different students enter the CR Path based on their experiences.</p><iframe src="docs/HandoutCRPath.html" width="100%" height="600" style="border:none;border-radius:4px"></iframe><p class="handout-note">Having trouble viewing? <a href="docs/HandoutCRPath.html" target="_blank">Open in a new tab</a>.</p></div></div>
+      </div>
+    </div>
+
+    <!-- PAGE 12: PART A REVIEW -->
+    <div class="page hidden" data-page="12" data-section="review-a" data-part="A">
+      <div class="section-header"><span class="section-tag">Part A -- Review</span><h1>Review Before Submitting</h1></div>
+      <div class="email-capture">
+        <h4>Where should your confirmation go?</h4>
+        <p class="catcher-only">When you submit Part A, you'll get an email with the day and time Part B unlocks<span class="resume-link-ui"> and a link that reopens this module with your answers on any device</span>. After Part B, the same address gets your complete CR Path record.</p><p class="no-catcher-only">Nothing is sent anywhere. Your record stays with you: this browser saves it, and the Resume Link below carries it to any other device. Your email is optional here and is only stored in your own record.</p>
+        <div class="email-row"><div class="email-field">
+          <label for="student-email">Your email <span class="required-star catcher-only" aria-hidden="true">*</span><span class="no-catcher-only" style="font-weight:400;color:var(--muted)"> (optional)</span></label>
+          <input type="email" id="student-email" class="scorm-input" data-interaction="23" placeholder="yourname@school.edu" autocomplete="email">
+          <div class="email-warning" id="email-warn">Please enter a valid email address.</div>
+        </div></div>
+      </div>
+      <div class="keep-notice resume-link-ui"><h3>&#128279; Coming back on a different device?</h3>
+<p>Your work is saved in this browser, and the email above will carry a resume link. If you'd rather have the link now, copy it here and keep it in your notes.</p>
+<div style="margin-top:10px"><button type="button" class="nav-btn" onclick="copyResumeLink(this)">&#128279; Copy My Resume Link</button></div></div>
+<div class="review-intro"><h3>Before you submit Part A, review what you've entered:</h3><p>You can go back and edit any response using the Back button.</p></div>
+      <div class="review-section"><h4>Your Starting Point (Section 0.0)</h4><div class="review-display" id="review-opening"></div></div>
+      <div class="review-section"><h4>Name It to Claim It (Section 0.1)</h4><div class="review-display" id="review-definitions"></div></div>
+      <div class="review-section"><h4>Inside the Pillar (Section 0.1)</h4><div class="review-display" id="review-pillar"></div></div>
+      <div class="review-section"><h4>Component Strength Sort (Section 0.2)</h4><div class="review-display" id="review-rankings"></div></div>
+      <div class="review-section"><h4>Strongest -- Your Explanation</h4><div class="review-display" id="review-strongest"></div></div>
+      <div class="review-section"><h4>Least Developed -- Your Explanation</h4><div class="review-display" id="review-weakest"></div></div>
+      <div class="review-section"><h4>About You</h4><div class="review-display" id="review-demographics"></div></div>
+    </div>
+
+    <!-- PAGE 13: TIMER GATE -->
+    <div class="page hidden" data-page="13" data-section="gate" data-part="gate">
+      <div class="section-header"><span class="section-tag">Part A Complete</span><h1>Part A Complete</h1></div>
+      <div class="completion-card">
+        <div class="check-icon">&#9989;</div>
+        <h2>Part A Complete</h2>
+        <p>You now have the vocabulary and your self-assessment. <strong>Part B</strong> will ask you to apply the framework to your own degree and experiences.</p>
+        <p>The spacing is intentional -- it gives the framework time to settle before you use it.</p>
+      </div>
+      <div id="timer-display" class="timer-card">
+        <div id="timer-locked" class="hidden">
+          <h3>Part B unlocks in:</h3>
+          <p id="countdown" class="countdown-text">--:--:--</p>
+          <p class="unlock-line">Part B unlocks <strong id="unlock-at">--</strong>.</p>
+          <p class="timer-note">That's the minimum spacing. You can close this window and come back anytime after that. <span class="catcher-only">Check your email -- your Part A confirmation has the same time<span class="resume-link-ui"> and a link that reopens this module on any device</span>.</span></p>
+          <div class="resume-link-ui" style="margin-top:14px"><button type="button" class="nav-btn" onclick="copyResumeLink(this)">&#128279; Copy My Resume Link</button>
+          <p style="font-size:12px;color:var(--muted);margin-top:6px">Coming back on a different device or browser? Paste this link there and your Part A answers and timer come with you.</p></div>
+        </div>
+        <div id="timer-unlocked" class="hidden">
+          <h3>Part B is ready!</h3>
+          <p>Click Next to continue.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 14: SCHOOL EXAMPLES -->
+    <div class="page hidden" data-page="14" data-section="0.3" data-part="B">
+      <div class="section-header"><span class="section-tag">Section 0.3 - Part B</span><h1>Your Degree Through the CR Path</h1><p class="time-estimate">~12 minutes</p></div>
+      <div class="keep-notice"><h3>&#128204; Before you start Part B</h3>
+<p>On the review page at the end, three buttons matter: <strong>Copy My Responses as Text</strong> (a labeled copy of everything you wrote, ready to paste into your notes or an email to yourself), <strong>Print / Save Your Responses</strong> (the same record as a sheet or PDF), and <strong>Copy My Resume Link</strong> (carries your saved work to any device). Use at least one before you submit &mdash; it is how you bring this work with you the next time you return to the CR Path.</p></div>
+      <div class="cr-path-diagram-container compact" id="diagram-p14">
+        <img src="images/cr-path-compact.png" alt="CR Path compact diagram">
+      </div>
+      <div class="key-message"><p>"The CR Path isn't a psychology framework. It isn't a business framework or a nursing framework. It works for every major, on every campus. The four components look different depending on your field -- but they're all there."</p></div>
+      <h2 style="font-size:17px;color:var(--navy);margin-bottom:8px">Examples by School</h2>
+      <p style="font-size:14px;color:var(--muted);margin-bottom:14px">Select your school to see examples relevant to your major. Then you'll build your own map on the next page.</p>
+      <p style="font-size:13px;color:var(--muted);background:rgba(232,115,58,.06);border-left:3px solid var(--orange);padding:9px 14px;border-radius:0 var(--r) var(--r) 0;margin-bottom:14px"><strong>Undeclared or exploring?</strong> Look at two or three schools that interest you -- you'll start to see which examples resonate.</p>
+
+      <div class="school-tabs">
+        <button class="tab-btn active" data-tab="class-tab">CLASS</button>
+        <button class="tab-btn" data-tab="business-tab">Business</button>
+        <button class="tab-btn" data-tab="education-tab">Education</button>
+        <button class="tab-btn" data-tab="health-tab">Health Sciences</button>
+        <button class="tab-btn" data-tab="sest-tab">Engineering / Science / Tech</button>
+      </div>
+
+      <div class="tab-content active" id="class-tab">
+        <h3>Carol A. Ammon College of Liberal Arts &amp; Social Sciences</h3>
+        <p class="school-programs"><em>Psychological Science, Communication, English, History, Political Science, Sociology, Criminal Justice, Art, Music, Philosophy, Languages, Geography, Anthropology, Interdisciplinary Studies</em></p>
+        <table class="example-table"><thead><tr><th>Component</th><th>Example</th><th>What a student might say</th></tr></thead><tbody>
+          <tr><td><strong>CS KSA</strong></td><td>Research methods course; rhetorical analysis paper; GIS mapping project</td><td>"I learned how to design a study and run stats in SPSS -- I can actually analyze survey data now"</td></tr>
+          <tr><td><strong>Core Competency</strong></td><td>Navigating cross-cultural perspectives in community fieldwork; evaluating sources for bias in a policy brief</td><td>"I did fieldwork in a neighborhood that wasn't mine. I had to listen more than I talked and check my assumptions."</td></tr>
+          <tr><td><strong>ELO</strong></td><td>Research assistant position; nonprofit internship; service-learning placement</td><td>"I coded interview transcripts for a professor's research project over a whole semester"</td></tr>
+          <tr><td><strong>Career Mentorship</strong></td><td>Professor who discusses career paths; supervisor at internship; alumna in social work</td><td>"My internship supervisor helped me understand what entry-level jobs actually look like in this field"</td></tr>
+        </tbody></table>
+      </div>
+
+      <div class="tab-content" id="business-tab">
+        <h3>School of Business</h3>
+        <p class="school-programs"><em>Accounting, Finance, Management, Marketing, Economics, Business Data Analytics, International Business</em></p>
+        <table class="example-table"><thead><tr><th>Component</th><th>Example</th><th>What a student might say</th></tr></thead><tbody>
+          <tr><td><strong>CS KSA</strong></td><td>Financial modeling project; marketing campaign analysis; SQL database queries</td><td>"I built a financial projection spreadsheet -- I can work with formulas and present the results"</td></tr>
+          <tr><td><strong>Core Competency</strong></td><td>Managing interpersonal conflict under deadline on a consulting team; presenting to non-finance stakeholders</td><td>"Two of us wanted completely different approaches and we had 48 hours. I had to find the overlap and propose a hybrid -- professionally."</td></tr>
+          <tr><td><strong>ELO</strong></td><td>Accounting internship; Small Business Development Center project; consulting competition</td><td>"I did a 200-hour internship at an accounting firm -- I helped prepare actual financial statements"</td></tr>
+          <tr><td><strong>Career Mentorship</strong></td><td>Alumni mentor from Business School network; internship supervisor; professional contact from class speaker</td><td>"A CFO from the alumni network met with me twice and told me what he wished he'd done differently early on"</td></tr>
+        </tbody></table>
+      </div>
+
+      <div class="tab-content" id="education-tab">
+        <h3>School of Education</h3>
+        <p class="school-programs"><em>Elementary Education, Secondary Education, Special Education, Physical Education, Early Childhood Education</em></p>
+        <table class="example-table"><thead><tr><th>Component</th><th>Example</th><th>What a student might say</th></tr></thead><tbody>
+          <tr><td><strong>CS KSA</strong></td><td>Lesson planning; differentiated instruction; assessment design; child development theory</td><td>"I can design a week-long unit plan aligned to state standards and adapt it for different learning levels"</td></tr>
+          <tr><td><strong>Core Competency</strong></td><td>Demonstrating dependability across a 15-week placement; adapting communication for parent conferences</td><td>"My cooperating teacher expected me to be prepared and accountable every single day -- no excuses."</td></tr>
+          <tr><td><strong>ELO</strong></td><td>Student teaching placement; field experience hours; tutoring center</td><td>"I was the lead teacher for two sections of 4th grade ELA for 15 weeks straight"</td></tr>
+          <tr><td><strong>Career Mentorship</strong></td><td>Cooperating teacher; field supervisor; school administrator observed during placement</td><td>"My cooperating teacher met with me every Friday to review what went well and what I should change"</td></tr>
+        </tbody></table>
+      </div>
+
+      <div class="tab-content" id="health-tab">
+        <h3>College of Health &amp; Rehabilitation Sciences</h3>
+        <p class="school-programs"><em>Nursing, Exercise Science, Physical Therapy, Public Health, Nutrition</em></p>
+        <table class="example-table"><thead><tr><th>Component</th><th>Example</th><th>What a student might say</th></tr></thead><tbody>
+          <tr><td><strong>CS KSA</strong></td><td>Patient assessment; SOAP notes; exercise prescription; nutritional analysis</td><td>"I can conduct a full patient health assessment and document it properly"</td></tr>
+          <tr><td><strong>Core Competency</strong></td><td>Coordinating care across disciplines in interprofessional simulation; maintaining HIPAA compliance</td><td>"In the interprofessional sim, I had to coordinate with nursing, PT, and dietetics students who each had their own priorities."</td></tr>
+          <tr><td><strong>ELO</strong></td><td>Clinical rotation; community health placement; hospital practicum</td><td>"I did 120 hours at Hartford Hospital working directly with patients under an RN's supervision"</td></tr>
+          <tr><td><strong>Career Mentorship</strong></td><td>Clinical preceptor; licensed professional during practicum; Health Sciences alumni</td><td>"My preceptor at the rehab facility helped me see what specialization options look like after licensure"</td></tr>
+        </tbody></table>
+      </div>
+
+      <div class="tab-content" id="sest-tab">
+        <h3>School of Engineering, Science &amp; Technology</h3>
+        <p class="school-programs"><em>Computer Science, Mechanical Engineering, Civil Engineering, Manufacturing Engineering Technology, Mathematics, Biology, Chemistry, Physics, Data Science</em></p>
+        <table class="example-table"><thead><tr><th>Component</th><th>Example</th><th>What a student might say</th></tr></thead><tbody>
+          <tr><td><strong>CS KSA</strong></td><td>Python programming; CAD design; lab data collection; statistical modeling; network security</td><td>"I wrote a Python script that cleaned a messy 10,000-row dataset -- cut processing time in half"</td></tr>
+          <tr><td><strong>Core Competency</strong></td><td>Learning an unfamiliar framework mid-project; peer code review as collaborative accountability</td><td>"Halfway through our capstone, we realized the original tool wouldn't scale. I had to teach myself a new framework in a week."</td></tr>
+          <tr><td><strong>ELO</strong></td><td>Co-op rotation; undergraduate research in science lab; hackathon; IT help desk</td><td>"I did a co-op at Pratt &amp; Whitney -- worked on actual production engineering problems for six months"</td></tr>
+          <tr><td><strong>Career Mentorship</strong></td><td>Research faculty advisor; co-op supervisor; STEM alumni through ACM, ASCE, or IEEE</td><td>"My co-op supervisor still checks in with me about career stuff -- he recommended me for my next interview"</td></tr>
+        </tbody></table>
+      </div>
+    </div>
+
+    <!-- PAGE 15: MAPPING TABLE -->
+    <div class="page hidden" data-page="15" data-section="0.3" data-part="B">
+      <div class="section-header"><span class="section-tag">Section 0.3 - Part B</span><h1>Build Your Own Map</h1></div>
+      <div class="cr-path-diagram-container compact" id="diagram-p15">
+        <img src="images/cr-path-compact.png" alt="CR Path compact diagram">
+      </div>
+      <div class="activity-box">
+        <div class="activity-header"><span class="activity-icon">&#128506;&#65039;</span><h3>Build Your CR Path Map</h3></div>
+        <p class="activity-purpose first-only"><em>Why this matters: This is your career readiness inventory. Each time you return with a new experience, you'll add to it -- and watch the gaps fill in.</em></p>
+        <p class="activity-purpose return-only"><em>Why this matters: Your last map is already here. Add what's new. Keep what still holds. Fix what was vague.</em></p>
+        <p>For each component, write: (1) your experience or course, (2) what you learned or gained, (3) in plain language, why might this matter to someone hiring you?</p>
+<p>Then the fourth line, the one most career tools skip: (4) what did you have to <strong>know</strong> to do it? Name the body of knowledge, not the label. "Critical thinking" is a label. "Which cost variance is driving the overrun" or "what a release of information covers" is knowledge, and it is the part that transfers.</p>
+        <p class="note-text">If a row feels empty -- that's important information, not a failure. That empty row is where your next experience should go.</p>
+        <div class="mapping-table">
+          <div class="map-row"><div class="map-label"><strong>CS KSAs</strong><span>What have I learned in my major?</span></div><div class="map-fields"><label>My experience or course:</label><textarea class="scorm-input map-input" data-interaction="10" rows="2" placeholder="e.g., 'Research Methods,' 'Financial Accounting,' a specific project..."></textarea><label>What I learned or gained:</label><textarea class="scorm-input map-input" data-interaction="11" rows="2" placeholder="What can I actually do now that I couldn't before?"></textarea><label>In plain language, why might this matter to someone hiring me?</label><textarea class="scorm-input map-input" data-interaction="12" rows="2" placeholder="Take your best shot -- this will get better over time..."></textarea><label class="know-label">What I had to know to do that (name it):</label><textarea class="scorm-input map-input know-input" data-interaction="35" placeholder="The actual knowledge -- the method, the theory, the content -- not the course title and not a skill word..." rows="2"></textarea></div><div class="map-help"><button class="toggle-btn-sm" onclick="toggleContent('help-csksa')">Stuck?</button><div id="help-csksa" class="toggle-content hidden"><p>Think about what you've actually learned to <em>do</em> in your major courses -- not just topics you've covered. Can you analyze data? Write for a specific professional audience? Design something? Diagnose a problem?</p></div></div></div>
+          <div class="map-row"><div class="map-label"><strong>Core Competencies</strong><span>When have I used transferable skills?</span></div><div class="map-fields"><label>My experience or course:</label><textarea class="scorm-input map-input" data-interaction="13" rows="2" placeholder="e.g., a group project, a presentation, leading a meeting..."></textarea><label>What I learned or gained:</label><textarea class="scorm-input map-input" data-interaction="14" rows="2" placeholder="What skill did I practice or improve?"></textarea><label>In plain language, why might this matter to someone hiring me?</label><textarea class="scorm-input map-input" data-interaction="15" rows="2" placeholder="Take your best shot..."></textarea><label class="know-label">What I had to know for that skill to work here:</label><textarea class="scorm-input map-input know-input" data-interaction="36" placeholder="'Communicates well' is a label. What did you have to know about the topic, the people, or the setting?" rows="2"></textarea></div><div class="map-help"><button class="toggle-btn-sm" onclick="toggleContent('help-core')">Stuck?</button><div id="help-core" class="toggle-content hidden"><p>Think about any moment where you had to communicate something complex, work through a disagreement, lead something, meet a deadline under pressure, use software for a deliverable, or navigate different perspectives.</p></div></div></div>
+          <div class="map-row"><div class="map-label"><strong>ELOs</strong><span>Where have I applied skills in a real setting?</span></div><div class="map-fields"><label>My experience:</label><textarea class="scorm-input map-input" data-interaction="16" rows="2" placeholder="e.g., an internship, a job, volunteering, research, a club leadership role..."></textarea><label>What I learned or gained:</label><textarea class="scorm-input map-input" data-interaction="17" rows="2" placeholder="What did I practice? What surprised me? What would I do differently?"></textarea><label>In plain language, why might this matter to someone hiring me?</label><textarea class="scorm-input map-input" data-interaction="18" rows="2" placeholder="Take your best shot..."></textarea><label class="know-label">What I had to know to do this well:</label><textarea class="scorm-input map-input know-input" data-interaction="37" placeholder="The procedure, the population, the product, the rule, the numbers..." rows="2"></textarea></div><div class="map-help"><button class="toggle-btn-sm" onclick="toggleContent('help-elo')">Stuck?</button><div id="help-elo" class="toggle-content hidden"><p>This does NOT have to be a formal internship. A part-time job counts. A leadership role in a club counts. Volunteering counts. A research project counts. If you're a transfer student or adult learner, your previous jobs count -- probably more than you think.</p></div></div></div>
+          <div class="map-row"><div class="map-label"><strong>Career Mentorship</strong><span>Who has helped me see what's next?</span></div><div class="map-fields"><label>My connection (role, not name):</label><textarea class="scorm-input map-input" data-interaction="19" rows="2" placeholder="e.g., 'professor in my department,' 'supervisor at my internship,' 'family friend in healthcare'..."></textarea><label>What I gained from this relationship:</label><textarea class="scorm-input map-input" data-interaction="20" rows="2" placeholder="What did they help me see or understand?"></textarea><label>In plain language, why might this matter to someone hiring me?</label><textarea class="scorm-input map-input" data-interaction="21" rows="2" placeholder="Take your best shot..."></textarea><label class="know-label">What I know now because of this person:</label><textarea class="scorm-input map-input know-input" data-interaction="38" placeholder="Something specific about the field, the work, or the path that you didn't know before..." rows="2"></textarea></div><div class="map-help"><button class="toggle-btn-sm" onclick="toggleContent('help-cm')">Stuck?</button><div id="help-cm" class="toggle-content hidden"><p>Have you ever had a professor talk about their career path? A supervisor who gave you real feedback? A family member in a field you're interested in? An advisor who helped you think through a decision? Any of those count. If this row is empty -- that's your first development goal.</p></div></div></div>
+        </div>
+        <div class="special-note"><h4>Transfer Students &amp; Adult Learners</h4><p>If you came to college with work experience, military service, caregiving, or previous study -- your prior experiences are real CR Path data. A job you held before returning to school is an ELO. A manager who shaped your approach is a Career Mentor. Skills from another field are CS KSAs. <strong>Don't start your map from zero. Start from where you actually are.</strong></p></div>
+      </div>
+    </div>
+
+    <!-- PAGE 16: BASELINE REFLECTION -->
+    <div class="page hidden" data-page="16" data-section="0.4" data-part="B">
+      <div class="section-header"><span class="section-tag">Section 0.4 - Part B</span><h1>Your Baseline</h1><p class="time-estimate">~10 minutes</p></div>
+      <div class="cr-path-diagram-container compact" id="diagram-p16">
+        <img src="images/cr-path-compact.png" alt="CR Path compact diagram">
+      </div>
+      <div class="activity-box">
+        <div class="activity-header"><span class="activity-icon">&#9999;&#65039;</span><h3>The Career Readiness Question</h3></div>
+        <p class="activity-purpose first-only"><em>Why this matters: This is practice. Each time you come back with a new experience, you'll rewrite this -- and watch it get stronger, more specific, and more yours.</em></p>
+        <p class="activity-purpose return-only"><em>Why this matters: Rewrite it with your new evidence. Don't reread your last answer until you've finished -- then open it and compare.</em></p>
+        <p>Using what you've learned in this module, write a response to the following question as if you were answering it in an informational interview or advising appointment:</p>
+        <div class="prompt-highlight"><p><strong>"How has your degree prepared you for your career -- or for the next step toward it?"</strong></p></div>
+        <p>Reference at least two CR Path components in your response. You don't need to use technical language -- write the way you'd actually talk to someone.</p>
+<p>Name at least one body of knowledge behind a skill you claim -- the thing you would have had to study, not the skill word. That is the line a hiring manager can check.</p>
+        <textarea id="response-baseline" class="scorm-input baseline-input" data-interaction="22" rows="10" placeholder="Write 150-250 words. Reference at least two CR Path components. Write like you're talking to a real person, not writing an essay."></textarea>
+        <div class="word-count">Words: <span id="word-count-display">0</span> <span class="word-target">/ 150-250 target</span></div>
+      </div>
+      <div class="rubric-preview">
+        <h3>How This Will Be Assessed</h3>
+        <p style="font-size:14px;color:var(--muted);margin-bottom:10px">This is low-stakes -- completion is what matters most. But here's what we're looking for:</p>
+        <table class="rubric-table"><thead><tr><th>Criterion</th><th>Not Yet (1)</th><th>Getting There (2)</th><th>Solid (3)</th></tr></thead><tbody>
+          <tr><td><strong>Names 2+ CR Path components</strong></td><td>Neither referenced</td><td>One referenced</td><td>Both clearly named</td></tr>
+          <tr><td><strong>Connects to specific experiences</strong></td><td>No specific examples</td><td>Vague reference</td><td>Clear, specific example</td></tr>
+          <tr><td><strong>Names the knowledge behind a skill</strong></td><td>Skill labels only</td><td>One body of knowledge named</td><td>Knowledge named and tied to the skill it powers</td></tr>
+<tr><td><strong>Sounds like a real person talking</strong></td><td>Overly formal or empty</td><td>Somewhat natural</td><td>Genuine and conversational</td></tr>
+        </tbody></table>
+        <p class="note-text">Most students score "Getting There" on their first attempt -- that IS the expected baseline. The points for this activity are awarded for completion -- submitting a genuine, on-topic response that meets the word count. The rubric above is feedback to help you grow, not a grading formula.</p>
+      </div>
+    </div>
+
+    <!-- PAGE 17: THE ITERATION CYCLE -->
+    <div class="page hidden" data-page="17" data-section="0.5" data-part="B">
+      <div class="section-header"><span class="section-tag">Section 0.5 - Part B</span><h1>The Iteration Cycle</h1><p class="time-estimate">~5 minutes</p></div>
+      <div class="key-message"><p><span class="return-only">"You've just completed another pass around the CR Path -- and the comparison is the payoff. </span><span class="first-only">"You've just completed your first pass around the CR Path. This isn't the last time you'll be here. Every time you have a meaningful experience -- a course that clicks, a project that challenges you, a conversation that opens a door -- you'll come back and your map will grow."</p></div>
+
+      <div class="iteration-section">
+        <h2>What Counts as a CR Path Experience?</h2>
+        <p>Any of the following is worth returning for -- because each one adds something to your map:</p>
+        <div class="iteration-grid">
+          <div class="iteration-item">
+            <h4>CS KSA Builders</h4>
+            <p>A course where you learned a new technical skill. A project that required domain-specific knowledge.</p>
+            <p class="example">e.g., "I just finished a stats course and can now run a regression."</p>
+          </div>
+          <div class="iteration-item">
+            <h4>Core Competency Moments</h4>
+            <p>A situation that tested your communication, teamwork, leadership, or critical thinking under real pressure.</p>
+            <p class="example">e.g., "I led a team presentation and had to navigate a conflict about our approach."</p>
+          </div>
+          <div class="iteration-item">
+            <h4>ELO Experiences</h4>
+            <p>A micro-internship, a research project, a job, a volunteer role, a class project with a real client -- anywhere you applied what you know in a real setting.</p>
+            <p class="example">e.g., "I completed a 40-hour micro-internship at a local nonprofit."</p>
+          </div>
+          <div class="iteration-item">
+            <h4>Career Mentorship Conversations</h4>
+            <p>A coffee chat with an alum. An informational interview. A supervisor who gave you career advice. A professor who showed you what's possible.</p>
+            <p class="example">e.g., "I had a 30-minute Zoom call with an alum from my school working in my target field."</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="return-instructions">
+        <h3>When You Return: How to Update Your Map</h3>
+        <ol>
+          <li><strong>Reopen this module.</strong> If you are on the same device and browser you used last time -- or inside the same Blackboard course -- your answers will still be here. If not, open your saved copy (the text you copied, the email, or the PDF) and paste each answer back into the field with the same label. The text copy is labeled in the same order as these pages, so this takes a couple of minutes.</li>
+          <li><strong>Navigate to your CR Path Map</strong> (Section 0.3) and add your new experience to the appropriate component row. Update what you wrote -- make it more specific, more confident, more real.</li>
+          <li><strong>Re-rank your Component Strength Sort</strong> (Section 0.2). Has anything shifted? Did your #4 move up? Did a new gap reveal itself?</li>
+          <li><strong>Rewrite your Baseline Reflection</strong> (Section 0.4). Answer the same question again with your new evidence. Watch how much stronger your answer is.</li>
+          <li><strong>Submit again.</strong> Each submission creates a new record -- so you (and your supervisor, advisor, or mentor) can see your growth over time.</li>
+        </ol>
+      </div>
+
+      <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--rl);padding:22px;margin-top:20px">
+        <h3 style="font-size:16px;color:var(--navy);margin-bottom:10px">Why This Works</h3>
+        <p style="font-size:14px;line-height:1.6;margin-bottom:10px">Career readiness isn't a checkbox -- it's a practice. Each time you return to this map with a new experience, three things happen:</p>
+        <ul style="padding-left:18px;margin:10px 0">
+          <li style="margin-bottom:7px;font-size:14px"><strong>Your map gets more specific.</strong> Vague entries become concrete, named skills.</li>
+          <li style="margin-bottom:7px;font-size:14px"><strong>Your language gets more articulate.</strong> "I learned stuff" becomes "I can do X because of Y."</li>
+          <li style="font-size:14px"><strong>Your gaps become priorities.</strong> Empty rows stop being embarrassing and start being action items.</li>
+        </ul>
+        <p style="font-size:14px;line-height:1.6;margin-top:10px"><strong>This is what intentional career development looks like.</strong> Not a single moment of clarity -- a pattern of reflection that compounds over time.</p>
+      </div>
+    </div>
+
+    <!-- PAGE 18: PART B REVIEW + EMAIL (UPDATED) -->
+    <div class="page hidden" data-page="18" data-section="review-b" data-part="B">
+      <div class="section-header"><span class="section-tag">Part B -- Review</span><h1>Review Before Submitting</h1></div>
+      <div class="keep-notice"><h3>&#9888;&#65039; Save a copy before you submit. Three ways below.</h3>
+<p><strong>Copy My Responses as Text</strong> puts a labeled, plain-text copy of everything you wrote in Part A and Part B on your clipboard. Paste it into your notes, a document, or an email to yourself. This is the easiest one to bring back: when you return, you paste each answer into the field with the same label. <strong>Print / Save Your Responses</strong> gives you the same record as a printable sheet &mdash; choose &ldquo;Save as PDF&rdquo; to keep a digital copy. <strong>Copy My Resume Link</strong> puts a private link on your clipboard that carries your saved answers to another device or browser. You will return to the CR Path with new experiences &mdash; this is how your past self hands your work to your future self.</p></div>
+<div class="review-intro"><h3>Before you submit, review what you've entered in Part B:</h3><p>You can go back and edit any response using the Back button.</p></div>
+      <div class="review-section"><h4>Your CR Path Map (Section 0.3)</h4><div class="review-display" id="review-map"></div></div>
+      <div class="review-section"><h4>Baseline Reflection (Section 0.4)</h4><div class="review-display" id="review-baseline"></div></div>
+      <div class="save-actions"><button type="button" class="nav-btn primary copy-text-btn" onclick="copyResponsesText(this)">&#128203; Copy My Responses as Text</button><button type="button" class="nav-btn print-btn" onclick="printReview()">&#128424;&#65039; Print / Save Your Responses</button><button type="button" class="nav-btn resume-link-ui" onclick="copyResumeLink(this)">&#128279; Copy My Resume Link</button><p style="font-size:12px;color:var(--muted);margin-top:6px;flex-basis:100%">All three cover your complete Module 0 record, Part A and Part B. You&rsquo;ll want it the next time you return to the CR Path.</p></div>
+      <span class="print-header-line">CR Path &mdash; Module 0 &mdash; My Responses &mdash; printed from the review page. Keep this for your next pass.</span>
+      <div class="email-capture">
+        <h4>Get a Copy of Your Responses</h4>
+        <p class="catcher-only">Your responses will be emailed to you automatically. You can also share your map with a supervisor, advisor, or mentor.</p><p class="no-catcher-only">Nothing is emailed. Use the three buttons above to keep your record. To share it with a mentor or advisor, paste the copied text into a message to them.</p>
+        <div class="email-row">
+          <div class="email-field">
+            <label for="student-email-b">Your email <span class="required-star catcher-only" aria-hidden="true">*</span><span class="no-catcher-only" style="font-weight:400;color:var(--muted)"> (optional)</span></label>
+            <input type="email" id="student-email-b" placeholder="yourname@school.edu" autocomplete="email">
+            <div class="email-warning" id="email-warn-b">Please enter a valid email address.</div>
+          </div>
+          <div class="email-field catcher-only">
+            <label for="mentor-email">Share with a Supervisor, Advisor, or Mentor (optional)</label>
+            <input type="email" id="mentor-email" class="scorm-input" data-interaction="24" placeholder="Their email address..." autocomplete="email">
+            <p style="font-size:12px;color:var(--muted);margin-top:2px">They'll get a copy of your map. A great conversation starter.</p>
+            <div class="email-warning" id="mentor-warn">Please enter a valid email address.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 19: COMPLETE -->
+    <div class="page hidden" data-page="19" data-section="complete" data-part="B">
+      <div class="section-header"><span class="section-tag">Module 0 Complete</span><h1>Module 0: Complete</h1></div>
+      <div class="completion-card final">
+        <div class="check-icon">&#127881;</div>
+        <h2><span class="first-only">Your first pass is done.</span><span class="return-only">Pass <span class="pass-done-n">2</span> is done.</span></h2>
+        <p class="first-only">Your responses have been saved. You've completed your first pass around the CR Path.</p>
+        <p class="return-only">Your responses have been saved as a new record. Open your last pass and this one side by side<span class="catcher-only"> -- the confirmation email has both if you used the same address</span>.</p>
+        <p style="font-weight:700;color:var(--navy);margin-top:10px">Now go have an experience. Then come back.</p>
+      </div>
+      <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--rl);padding:22px;margin-top:20px">
+        <h3 style="font-size:16px;color:var(--navy);margin-bottom:10px">Your Next Move</h3>
+        <p style="font-size:14px;line-height:1.6;margin-bottom:12px">You don't need to wait for something big. Any of these count as your "come back" moment:</p>
+        <ul style="padding-left:18px;margin:0">
+          <li style="margin-bottom:7px;font-size:14px">You finish a course and learn a new skill</li>
+          <li style="margin-bottom:7px;font-size:14px">You complete a class project with a real deliverable</li>
+          <li style="margin-bottom:7px;font-size:14px">You start or finish a micro-internship</li>
+          <li style="margin-bottom:7px;font-size:14px">You have a meaningful conversation with a mentor, alum, or supervisor</li>
+          <li style="margin-bottom:7px;font-size:14px">You lead something -- even informally</li>
+          <li style="font-size:14px">You practice a Core Competency under pressure and notice it</li>
+        </ul>
+        <p style="font-size:14px;line-height:1.6;margin-top:14px"><strong>When that happens:</strong> Reopen this module. If your answers aren&rsquo;t already here, paste them in from your saved copy. Update your map. Rewrite your reflection. Submit again. Watch your story grow.</p>
+        <p style="font-size:14px;line-height:1.6;margin-top:12px"><strong>Haven&rsquo;t saved a copy yet?</strong> Do it now &mdash; you can&rsquo;t come back to this page later.</p>
+        <div class="save-actions" style="margin-top:8px"><button type="button" class="nav-btn primary copy-text-btn" onclick="copyResponsesText(this)">&#128203; Copy My Responses as Text</button><button type="button" class="nav-btn print-btn" onclick="printReview()">&#128424;&#65039; Print / Save Your Responses</button></div>
+      </div>
+      <p class="hidden" style="font-size:14px;margin-top:16px">Questions about the CR Path at <span class="campus-name">your campus</span>? Contact <span id="campus-contact"></span>.</p>
+      <div class="summary-stats" style="margin-top:20px">
+        <p><strong>Responses saved:</strong> <span id="total-responses">0</span></p>
+        <p><strong>Part A completed:</strong> <span id="part-a-date">--</span></p>
+        <p><strong>Part B completed:</strong> <span id="part-b-date">--</span></p>
+      </div>
+    </div>
+
+  </main>
+
+  <footer id="nav-footer">
+    <button id="btn-back" class="nav-btn" disabled>Back</button>
+    <div id="nav-spacer"></div>
+    <button id="btn-next" class="nav-btn primary">Next</button>
+    <button id="btn-submit-a" class="nav-btn submit hidden">Submit Part A</button>
+    <button id="btn-submit-b" class="nav-btn submit hidden">Submit Part B</button>
+  </footer>
+</div>
+</div>
+
+<script>
+function toggleContent(id){var e=document.getElementById(id);if(e)e.classList.toggle('hidden');}
+</script>
+
+<script src="js/crpath-shared.js"></script>
+<script>
+(function(){
+  // Resume-link seeder: #s=<base64url JSON> restores saved state onto this device, then strips the hash.
+  CRShared.resume.seedFromHash('scorm_cmi.suspend_data');
+
+  // Framebuster: only when framed AND no LMS SCORM API anywhere above us.
+  // Inside a real SCORM player (API present) we stand down, so this file stays dual-use.
+  function findAPI(win){
+    var n = 0;
+    try {
+      while (win && n < 10) {
+        if (win.API_1484_11 || win.API) return true;
+        if (win === win.parent) break;
+        win = win.parent; n++;
+      }
+    } catch(e) { /* cross-origin parent: no API reachable */ }
+    return false;
+  }
+  if (window.top !== window.self && !findAPI(window)) {
+    try { window.top.location.replace(window.location.href); }
+    catch(e) {
+      document.addEventListener('DOMContentLoaded', function(){
+        document.body.innerHTML = '<div style="font:16px/1.5 Georgia,serif;max-width:560px;margin:80px auto;text-align:center;padding:20px">' +
+          '<h2>One more click</h2><p>Module 0 needs its own browser tab to save your progress reliably.</p>' +
+          '<p><a href="' + window.location.href + '" target="_blank" rel="opener" style="font-weight:bold">Open Module 0 in a new tab</a></p></div>';
+      });
+    }
+  }
+})();
+</script>
+<script src="js/scorm-wrapper.js"></script>
+<script src="js/app.js"></script>
+
+<div id="print-sheet" aria-hidden="true"></div>
+<script>
+// Build the full Part A+B record from the live inputs (restored from saved state on load),
+// mirroring app.js review mappings. Keeps app.js untouched.
+function buildResponseRecord(){
+  var r = {};
+  document.querySelectorAll('.scorm-input, .scorm-input-short, .scorm-select').forEach(function(el){
+    var id = el.getAttribute('data-interaction');
+    if (id !== null) { var v = (el.value || '').trim(); if (v) r[id] = v; }
+  });
+  var comps = ['CS KSAs','Core Competencies','ELOs','Career Mentorship'];
+  var E = '[empty]';
+  function kv(pairs){ return pairs.map(function(p){ return p[0] + ': ' + (p[1] || E); }).join('\n'); }
+  var mapText = [{n:'CS KSAs',s:10,k:35},{n:'Core Competencies',s:13,k:36},{n:'ELOs',s:16,k:37},{n:'Career Mentorship',s:19,k:38}].map(function(row){
+    return row.n + '\n' + kv([['  Experience', r[row.s]], ['  Learned', r[row.s+1]], ['  Why it matters', r[row.s+2]], ['  What I had to know', r[row.k]]]);
+  }).join('\n\n');
+  return {
+    partA: [
+      ['Your Starting Point -- Section 0.0', r[0] || E],
+      ['Name It to Claim It -- Section 0.1', kv([['CS KSAs', r[25]], ['Core Competencies', r[26]], ['ELOs', r[27]], ['Career Mentorship', r[28]]])],
+      ['Inside the Pillar -- Section 0.1', (window.pillarText ? window.pillarText(r) : '').trim() || E],
+      ['Component Strength Sort -- Section 0.2', kv([['CS KSAs', r[1]], ['Core Competencies', r[2]], ['ELOs', r[3]], ['Career Mentorship', r[4]]]) + '\n' + kv([['Strongest -- why', r[5]], ['Least developed -- why', r[6]]])],
+      ['About You', kv([['Name', r[34]], ['Year', r[7]], ['School', r[8]], ['Major', r[9]], ['Course or program', r[30]], ['CR Path pass', r[31] === 'no' ? (r[33] || '2') : (r[31] === 'yes' ? '1' : '')]])]
+    ],
+    partB: [
+      ['CR Path Map -- Section 0.3', mapText],
+      ['Baseline Reflection -- Section 0.4', r[22] || E]
+    ]
+  };
+}
+function responseRecordAsText(){
+  var rec = buildResponseRecord();
+  var d = new Date();
+  var lines = [
+    'CR PATH -- MODULE 0 -- MY RESPONSES',
+    'Saved: ' + d.toLocaleDateString(undefined, {year:'numeric', month:'short', day:'numeric'}),
+    'When you return: paste each answer back into the field with the same label.',
+    '', '===== PART A =====', ''
+  ];
+  rec.partA.forEach(function(sec){ lines.push('[' + sec[0] + ']', sec[1], ''); });
+  lines.push('===== PART B =====', '');
+  rec.partB.forEach(function(sec){ lines.push('[' + sec[0] + ']', sec[1], ''); });
+  return lines.join('\n');
+}
+function printReview(){
+  var rec = buildResponseRecord();
+  function esc(t){ return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+  function sec(title, body){ return '<div class="ps-sec"><h4>' + esc(title) + '</h4><div class="ps-body">' + esc(body) + '</div></div>'; }
+  var html = '<div class="ps-title">CR Path &mdash; Module 0 &mdash; My Complete Responses</div>'
+    + '<div class="ps-note">Printed from the review page. Keep this for your next pass on the CR Path. When you return, paste each answer back into the field with the same label.</div>'
+    + '<h3>Part A</h3>' + rec.partA.map(function(p){ return sec(p[0], p[1]); }).join('')
+    + '<h3>Part B</h3>' + rec.partB.map(function(p){ return sec(p[0], p[1]); }).join('');
+  document.getElementById('print-sheet').innerHTML = html;
+  document.body.classList.add('print-full-record');
+  window.print();
+  setTimeout(function(){ document.body.classList.remove('print-full-record'); }, 500);
+}
+function copyResponsesText(btn){
+  CRShared.copyToClipboard(responseRecordAsText(), btn, '\u2713 Copied \u2014 now paste it somewhere safe', 'Copy your responses');
+}
+function copyResumeLink(btn){ CRShared.resume.copy(btn, 'scorm_cmi.suspend_data'); }
+</script>
+</body>
+</html>
+
