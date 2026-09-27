@@ -11,6 +11,10 @@
  *   - CONFIG.campus replaces the CCSU instructor map, course dropdown and school list.
  *   - CONFIG.catcher: 'none' (default; the student keeps the record via copy / print / resume link)
  *     or 'qualtrics' (posts to CONFIG.qualtricsUrl as before). With 'none', email is optional.
+ *   - The follow-up under each piece follows its status (KNOW_PROMPT): evidence for "have it",
+ *     the gap for "need it". Page 7 renders from PIECES; a campus edits that list only.
+ *   TODO vK-GEARUP: carry page 7 + PIECES into a vK build for GEAR UP students with
+ *     catcher 'qualtrics'; add the twelve cc_* embedded-data fields to the survey flow first.
  * v2.6-K "vK" (2026-09-12) -- Knowledge build for the CPC graduate program. Additive to v2.5:
  *   - fields 35-38: "what I had to know" under each Build-Your-Own-Map row (SCORM long_fill_in)
  *   - Qualtrics: same catcher. Knowledge text is appended to map_*_learned as "What I had to know: ..."
@@ -83,15 +87,47 @@
   // Fields a returner answers fresh (last pass shown read-only above them). Everything else stays prefilled.
   var FRESH_FIELDS = [0, 1, 2, 3, 4, 5, 6, 22, 25, 26, 27, 28, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50];
   // Page 7 pieces, in field order. Label is what the student sees; parent is the NACE label it sits under.
+  // A campus edits this list (six is the cap). key -> element ids; s/k -> field numbers; parent -> the NACE label.
   var PIECES = [
-    { s: 39, k: 40, label: 'Financial literacy',    parent: 'Career & Self-Development' },
-    { s: 41, k: 42, label: 'Time management',       parent: 'Career & Self-Development' },
-    { s: 43, k: 44, label: 'Goal setting',          parent: 'Career & Self-Development' },
-    { s: 45, k: 46, label: 'Information literacy',  parent: 'Critical Thinking' },
-    { s: 47, k: 48, label: 'Learning how to learn', parent: 'Career & Self-Development' },
-    { s: 49, k: 50, label: 'Self-advocacy',         parent: 'Communication' }
+    { key:'finlit', s:39, k:40, label:'Financial literacy',    parent:'Career & Self-Development',
+      what:'Budgeting, credit, taxes, loans, interest, benefits. Demanded of every graduate in every field.',
+      ph:{ have:'e.g., I know what comes out of a paycheck before I see it, and how interest works on a loan',
+           building:'e.g., I can budget month to month; I do not yet understand credit scores',
+           need:'e.g., how compound interest works on a loan; what a 401(k) match is' } },
+    { key:'time', s:41, k:42, label:'Time management',       parent:'Career & Self-Development',
+      what:'Planning, estimating, and prioritizing when several things are due at once.',
+      ph:{ have:'e.g., I know how long my own tasks take and I plan a week around fixed commitments',
+           building:'e.g., I plan, but my estimates run short; I do not yet split big work into pieces',
+           need:'e.g., how long my own tasks really take; how to break a big assignment into pieces I can estimate' } },
+    { key:'goal', s:43, k:44, label:'Goal setting',          parent:'Career & Self-Development',
+      what:'Turning a vague intention into a specific target you can check, with a plan behind it.',
+      ph:{ have:'e.g., I set goals with a date and a number, and I know what I do when I miss one',
+           building:'e.g., I set goals, but they are vague; I do not yet check them',
+           need:'e.g., what makes a goal specific enough to check; what to do when I miss one' } },
+    { key:'info', s:45, k:46, label:'Information literacy',  parent:'Critical Thinking',
+      what:'Finding, judging, and citing sources. The part of data literacy that has nothing to do with AI.',
+      ph:{ have:'e.g., I can tell a peer-reviewed source from a blog and I check a claim against a second source',
+           building:'e.g., I can find sources; I do not yet know how to judge them',
+           need:'e.g., how to tell a peer-reviewed source from a blog; how to check a claim against a second source' } },
+    { key:'learn', s:47, k:48, label:'Learning how to learn', parent:'Career & Self-Development',
+      what:'Knowing which study and practice strategies work and using them, instead of rereading and hoping.',
+      ph:{ have:'e.g., I test myself instead of rereading, and I space practice across the week',
+           building:'e.g., I know rereading does not work; I do not yet have a replacement',
+           need:'e.g., why testing myself beats rereading; how to space practice across a week' } },
+    { key:'adv', s:49, k:50, label:'Self-advocacy',         parent:'Communication',
+      what:'Asking for the raise, the accommodation, the extension, the introduction, and knowing how the ask is usually made.',
+      ph:{ have:'e.g., I know what I am entitled to ask for and what a reasonable counter looks like',
+           building:'e.g., I ask, but late and apologetically; I do not yet know what is normal to ask for',
+           need:'e.g., what I am entitled to ask for; what a reasonable counter-offer looks like' } }
   ];
   var STATUS_LABEL = { have: 'I have it', building: 'Building it', need: 'I need it' };
+  // The follow-up question changes with the status: evidence for "have it", the gap for "need it".
+  var KNOW_PROMPT = {
+    '':       'What would you need to know to do this well?',
+    need:     'What would you need to know to do this well?',
+    building: 'What do you know so far, and what is still missing?',
+    have:     'What do you know that makes this true? Say it so an employer could hear it.'
+  };
 
 
   // ============================================================
@@ -268,18 +304,46 @@
     syncPieceRadios();
   }
 
-  /* Page 7: radios write to a hidden field so the existing save/restore path carries them. */
+  /* Page 7 is built from PIECES so a campus edits one list, not markup. Runs before state is restored. */
+  function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;'); }
+  function renderPieces() {
+    var host = document.getElementById('pieces');
+    if (!host) return;
+    host.innerHTML = PIECES.map(function (p) {
+      var radios = ['have', 'building', 'need'].map(function (v) {
+        return '<label><input type="radio" name="st-' + p.key + '" value="' + v + '" data-status-for="' + p.s + '"> ' + STATUS_LABEL[v] + '</label>';
+      }).join('');
+      return '<div class="piece" data-piece="' + p.key + '">' +
+        '<div class="piece-head"><h3>' + esc(p.label) + '</h3><span class="piece-parent">' + esc(p.parent) + '</span></div>' +
+        '<p class="piece-what">' + esc(p.what) + '</p>' +
+        '<div class="piece-status" role="radiogroup" aria-label="' + esc(p.label) + ' status">' + radios + '</div>' +
+        '<input type="hidden" id="cc-' + p.key + '-status" class="scorm-select" data-interaction="' + p.s + '" value="">' +
+        '<label class="know-label" for="cc-' + p.key + '-know" id="cc-' + p.key + '-q">' + KNOW_PROMPT[''] + '</label>' +
+        '<textarea id="cc-' + p.key + '-know" class="scorm-input" data-interaction="' + p.k + '" rows="2" placeholder="' + esc(p.ph.need) + '"></textarea>' +
+        '</div>';
+    }).join('');
+  }
+  /* The question under each piece follows its status. */
+  function updatePiecePrompt(p) {
+    var v = getField(p.s);
+    var q = document.getElementById('cc-' + p.key + '-q'), ta = document.getElementById('cc-' + p.key + '-know');
+    if (q)  q.textContent = KNOW_PROMPT[v] || KNOW_PROMPT[''];
+    if (ta) ta.placeholder = p.ph[v] || p.ph.need;
+  }
+  /* Radios write to a hidden field so the existing save/restore path carries them. */
   function syncPieceRadios() {
     document.querySelectorAll('input[type="radio"][data-status-for]').forEach(function (rb) {
       var v = getField(rb.getAttribute('data-status-for'));
       rb.checked = (v === rb.value);
     });
+    PIECES.forEach(updatePiecePrompt);
   }
   function bindPieceStatus() {
     document.addEventListener('change', function (e) {
       var rb = e.target;
       if (rb && rb.matches('input[type="radio"][data-status-for]') && rb.checked) {
         setField(rb.getAttribute('data-status-for'), rb.value);
+        PIECES.forEach(function (p) { if (String(p.s) === rb.getAttribute('data-status-for')) updatePiecePrompt(p); });
         state.responses = collectAllResponses();
         saveState();
       }
@@ -1055,7 +1119,8 @@
     PIECES.forEach(function (p) {
       if (!r[p.s] && !r[p.k]) return;
       out += p.label + ' (' + p.parent + '): ' + (STATUS_LABEL[r[p.s]] || '[no status]') + '\n';
-      if (r[p.k]) out += '  What I would need to know: ' + r[p.k] + '\n';
+      var kl = { have: '  What I know: ', building: '  What I know so far: ', need: '  What I would need to know: ' }[r[p.s]] || '  What I would need to know: ';
+      if (r[p.k]) out += kl + r[p.k] + '\n';
     });
     return out;
   }
@@ -1151,6 +1216,7 @@
       };
     }
     SCORM.init();
+    renderPieces();                                       // before loadState: the fields must exist to be restored
     document.body.classList.toggle('in-lms', CRShared.isLMS());
     document.body.classList.toggle('no-catcher', CONFIG.catcher === 'none');
     document.querySelectorAll('.campus-name').forEach(function (el) { el.textContent = CONFIG.campus.name; });
