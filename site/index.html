@@ -192,6 +192,7 @@
   @media (min-width: 760px) { .about { grid-template-columns: 1.4fr 1fr; } }
   .aside { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px 22px; box-shadow: var(--shadow); font-size: 0.95rem; }
   .aside h3 { font-size: 1rem; }
+  .portrait { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: calc(var(--radius) - 4px); margin: 0 0 16px; }
   .aside dl { margin: 0; }
   .aside dt { font-weight: 600; color: var(--text-strong); margin-top: 10px; }
   .aside dd { margin: 0; color: var(--text-muted); }
@@ -483,6 +484,7 @@
         </p>
       </div>
       <aside class="aside">
+        <img class="portrait" src="assets/caleb-bragg.jpg" alt="Caleb Bragg, wearing a gray vest and blue bow tie, outdoors in front of trees" width="800" height="1000" loading="lazy">
         <h3>At a glance</h3>
         <dl>
           <dt>Position</dt>
