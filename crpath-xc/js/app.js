@@ -828,6 +828,7 @@
       define_cm:             r[28] || '',
       course_section:        r[29] || '',
       course_other:          r[30] || '',
+      course_display:        (r[30] || '').trim() || 'Not selected',   // vK-2.6.1 parity: course as the student typed it
       map_csksa_knowledge:   r[35] || '',            // vK: captured once these four embedded-data
       map_core_knowledge:    r[36] || '',            //     fields are added to the survey flow;
       map_elo_knowledge:     r[37] || '',            //     until then Qualtrics drops them and the
@@ -1235,7 +1236,8 @@
     bindEmailMirror();
     renderPreviousAnswers();
     applyMode();
-    if (!CONFIG.demo) CRShared.attachDictation('textarea.scorm-input');
+    // Dictation hidden for now (2026-09-29), as on CR Path and vK. Re-enable by restoring the line below.
+    // if (!CONFIG.demo) CRShared.attachDictation('textarea.scorm-input');
 
     if (state.partBSubmittedOnce && state.partASubmitted) {
       goToPage(1);                                        // finished pass: page 1 offers the next pass or a review
