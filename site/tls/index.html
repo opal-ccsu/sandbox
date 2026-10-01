@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Translational Literacy in Science | Spring 2027 | SCALE at CCSU</title>
+<meta name="description" content="A 3-credit CCSU course for spring 2027. Learn to judge evidence from any field, test what AI tells you against the sources, and explain what you found to the people who decide. Top students earn a paid summer micro-internship.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Translational Literacy in Science, spring 2027">
+<meta property="og:description" content="Judge evidence from any field, check AI against the sources, and explain it to the people who decide. 3 credits, spring 2027, with a paid summer micro-internship for up to 20 students.">
+<meta name="theme-color" content="#372B68">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/icon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!--
+  Translational Literacy in Science: student recruitment page for the SCALE Pilot course.
+  Facts match the SCALE partner page (../scale/) as of October 1, 2026.
+  To update dates, the course number, or registration details, search this file for "UPDATE".
+-->
+<style>
+  :root{
+    --indigo:#372B68; --slate:#314F75; --steel:#4A6486; --mist:#798FA8; --coral:#F2513E;
+    --rule:#E6E9EC; --panel:#F4F6F8; --paper:#FFFFFF; --on-indigo:#D7D3E6;
+    --font:"Poppins",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+    --measure:40rem;
+    box-sizing:border-box;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  *,*::before,*::after{box-sizing:inherit;margin:0;padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{font-family:var(--font);font-size:1rem;line-height:1.72;color:var(--slate);background:var(--paper);}
+  img{max-width:100%;height:auto;display:block;}
+  a{color:var(--indigo);font-weight:500;text-underline-offset:.2em;text-decoration-thickness:1px;}
+  a:hover{text-decoration-color:var(--coral);text-decoration-thickness:2px;}
+  :focus-visible{outline:3px solid var(--coral);outline-offset:3px;border-radius:2px;}
+  .skip{position:absolute;left:-9999px;top:0;background:#fff;color:var(--indigo);padding:.6rem 1rem;z-index:10;}
+  .skip:focus{left:1rem;top:1rem;}
+  .vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
+  .wrap{max-width:62rem;margin:0 auto;padding:0 1.25rem;}
+  .prose{max-width:var(--measure);}
+  h1,h2,h3{font-family:var(--font);color:var(--indigo);line-height:1.15;}
+  h2{font-size:clamp(1.55rem,3.6vw,2.05rem);font-weight:600;letter-spacing:-.01em;margin-bottom:.9rem;}
+  h3{font-size:1.1rem;font-weight:600;margin-bottom:.35rem;}
+  p + p{margin-top:.85rem;}
+  section{padding:3.25rem 0 0;}
+  .eyebrow{font-weight:600;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--steel);margin-bottom:.4rem;}
+
+  /* header band */
+  .band{background:var(--indigo);color:#fff;padding:1.5rem 0 2.4rem;}
+  .topline{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;}
+  .lockup{display:flex;align-items:center;gap:.85rem;color:#fff;}
+  .lockup .tile{width:40px;height:40px;flex:none;background:#fff;border-radius:6px;padding:4px;}
+  .lockup .wm{font-weight:600;font-size:1.3rem;letter-spacing:.12em;line-height:1;}
+  .lockup .sep{width:1px;height:1.6rem;background:rgba(255,255,255,.35);}
+  .lockup .org{font-weight:400;font-size:1.2rem;letter-spacing:.06em;line-height:1;color:var(--on-indigo);}
+  .home{color:var(--on-indigo);font-weight:400;font-size:.95rem;}
+  .home:hover{color:#fff;}
+  .band .kicker{margin-top:2.3rem;font-weight:500;font-size:.95rem;letter-spacing:.06em;color:var(--on-indigo);}
+  .band h1{color:#fff;font-size:clamp(2.2rem,6.6vw,3.7rem);font-weight:700;letter-spacing:-.02em;line-height:1.08;margin:.4rem 0 1rem;max-width:16ch;}
+  .lead{font-size:1.1rem;line-height:1.65;max-width:38rem;color:#EEECF5;}
+  .lead b{color:#fff;font-weight:600;}
+  .facts{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.2);margin:2rem 0 1.8rem;}
+  .facts div{background:var(--indigo);padding:.8rem .9rem;}
+  .facts dt{font-weight:500;font-size:.82rem;letter-spacing:.04em;color:var(--on-indigo);}
+  .facts dd{font-size:.95rem;line-height:1.45;color:#fff;}
+  .facts .now{background:#fff;box-shadow:inset 0 4px 0 var(--coral);}
+  .facts .now dt{color:var(--steel);}
+  .facts .now dd{color:var(--indigo);font-weight:600;}
+  .actions{display:flex;flex-wrap:wrap;align-items:center;gap:.9rem 1.5rem;}
+  .btn{display:inline-block;font-family:var(--font);font-weight:600;font-size:1.05rem;line-height:1;text-decoration:none;padding:.95rem 1.35rem;border-radius:4px;background:#fff;color:var(--indigo);border:2px solid #fff;}
+  .btn:hover{background:var(--panel);color:var(--indigo);}
+  .band .actions a:not(.btn){color:#fff;font-weight:400;}
+  .btn-solid{background:var(--indigo);color:#fff;border-color:var(--indigo);}
+  .btn-solid:hover{background:var(--slate);border-color:var(--slate);color:#fff;}
+
+  /* the worked example */
+  .claim{margin-top:1.6rem;border:1px solid var(--rule);border-left:4px solid var(--coral);background:var(--panel);padding:1.2rem 1.3rem;max-width:46rem;}
+  .claim .said{font-size:1.05rem;color:var(--indigo);font-weight:500;}
+  .claim .traced{margin-top:.8rem;font-size:.95rem;}
+  .claim dl{display:grid;gap:.7rem;margin-top:1rem;grid-template-columns:repeat(auto-fit,minmax(12rem,1fr));}
+  .claim dl div{background:#fff;border-top:3px solid var(--indigo);padding:.6rem .75rem;}
+  .claim dt{font-weight:600;font-size:.85rem;color:var(--indigo);}
+  .claim dd{font-size:.9rem;line-height:1.5;}
+  .claim .cap{margin-top:.9rem;font-size:.82rem;color:var(--steel);}
+
+  /* gains */
+  .grid{display:grid;gap:1.4rem;margin-top:1.2rem;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));}
+  .card{border-top:3px solid var(--indigo);padding-top:.8rem;}
+  .card p{font-size:.95rem;}
+  .ksa{display:grid;gap:2rem;margin-top:1.4rem;grid-template-columns:repeat(auto-fit,minmax(17rem,1fr));}
+  .ksa h3 span{display:block;font-weight:500;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--steel);margin-bottom:.15rem;}
+  .ticks{list-style:none;}
+  .ticks li{position:relative;padding-left:1.25rem;margin-top:.7rem;}
+  .ticks li::before{content:"";position:absolute;left:0;top:.66rem;width:.5rem;height:.5rem;background:var(--coral);}
+  .ticks b{color:var(--indigo);font-weight:600;}
+  .note{margin-top:1.6rem;padding:.9rem 1rem;background:var(--panel);border-left:4px solid var(--indigo);max-width:46rem;font-size:.95rem;}
+
+  /* semester */
+  .weeks{list-style:none;margin-top:1.2rem;border-left:3px solid var(--rule);max-width:46rem;}
+  .weeks li{position:relative;padding:0 0 1.5rem 1.5rem;}
+  .weeks li:last-child{padding-bottom:0;}
+  .weeks li::before{content:"";position:absolute;left:-.6rem;top:.32rem;width:.9rem;height:.9rem;border-radius:50%;background:#fff;border:3px solid var(--steel);}
+  .weeks li.last::before{background:var(--coral);border-color:var(--coral);}
+  .weeks .when{font-weight:600;color:var(--indigo);}
+  .modules{display:grid;gap:1.6rem;margin-top:1.2rem;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));}
+  .modules ul{list-style:none;columns:2;column-gap:1.2rem;font-size:.95rem;}
+  .modules li{break-inside:avoid;padding:.15rem 0;}
+
+  /* internship */
+  .intern{background:var(--indigo);color:#EEECF5;margin-top:3.25rem;padding:3rem 0 3.2rem;}
+  .intern h2,.intern h3{color:#fff;}
+  .intern .eyebrow{color:var(--on-indigo);}
+  .intern .pull{font-size:1.25rem;font-weight:500;color:#fff;max-width:34rem;line-height:1.45;margin-bottom:1rem;}
+  .intern .facts{grid-template-columns:repeat(3,1fr);}
+  .intern a{color:#fff;}
+  .hosts{display:grid;gap:1.3rem;margin-top:1.4rem;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));}
+  .hosts div{border-top:2px solid rgba(255,255,255,.35);padding-top:.7rem;font-size:.92rem;line-height:1.55;}
+  .hosts h3{font-size:1rem;}
+
+  .qa{max-width:44rem;margin-top:.4rem;}
+  .qa dt{font-weight:600;font-size:1.05rem;color:var(--indigo);margin-top:1.3rem;}
+  .qa dd{margin-top:.2rem;}
+  .people{display:grid;gap:1.4rem;grid-template-columns:repeat(auto-fit,minmax(14.5rem,1fr));margin-top:1rem;}
+  .person{padding:1rem 1.1rem;background:var(--panel);}
+  .person h3{margin-bottom:.2rem;}
+  .person p{font-size:.9rem;line-height:1.5;color:var(--steel);}
+  .join{margin-top:1.2rem;}
+  footer{margin-top:3.5rem;padding:1.6rem 0 2.4rem;border-top:1px solid var(--rule);font-size:.85rem;color:var(--steel);}
+  footer p + p{margin-top:.4rem;}
+  footer .sigs{display:flex;align-items:center;gap:1rem;margin-bottom:1rem;}
+  footer .sigs img{width:44px;height:44px;}
+
+  @media (max-width:52rem){
+    .facts{grid-template-columns:1fr 1fr;}
+    .facts div:last-child{grid-column:1 / -1;}
+    .intern .facts{grid-template-columns:1fr 1fr;}
+    .intern .facts div:last-child{grid-column:auto;}
+  }
+  @media (max-width:34rem){
+    .band .kicker{margin-top:1.7rem;}
+    .modules ul{columns:1;}
+    .intern .facts{grid-template-columns:1fr;}
+  }
+  @media print{
+    .skip,.actions,.btn{display:none !important;}
+    .band,.intern{background:#fff;color:var(--indigo);}
+    .band h1,.lead,.lockup,.facts dd,.intern h2,.intern h3,.intern .pull{color:var(--indigo);}
+    .facts div{background:#fff;}
+    section{padding-top:1.6rem;break-inside:avoid;}
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="band">
+  <div class="wrap">
+    <div class="topline">
+      <div class="lockup">
+        <img class="tile" src="../assets/scale-mark.png" alt="" width="40" height="40">
+        <span class="wm">SCALE</span><span class="sep" aria-hidden="true"></span><span class="org">CCSU</span>
+        <span class="vh">, Scientific Communication + AI Literacy Experience, Central Connecticut State University</span>
+      </div>
+      <a class="home" href="../">Caleb Bragg, Ph.D.</a>
+    </div>
+
+    <p class="kicker">Spring 2027 &middot; 3 credits</p>
+    <h1>Translational Literacy in Science</h1>
+    <p class="lead">Finding information takes seconds. Knowing whether to act on it takes training. This course teaches you to <b>judge evidence from any field</b>, <b>test what AI tells you against the original sources</b>, and <b>explain what you found</b> to the people who have to make the decision.</p>
+
+    <!-- UPDATE: course number, meeting time, and registration details once they are set -->
+    <dl class="facts">
+      <div><dt>Credits</dt><dd>3</dd></div>
+      <div><dt>Term</dt><dd>Spring 2027, January to May</dd></div>
+      <div><dt>Class size</dt><dd>Up to 40 students</dd></div>
+      <div><dt>Taught by</dt><dd>Three faculty, together all semester</dd></div>
+      <div class="now"><dt>Then</dt><dd>Paid summer micro-internships for up to 20</dd></div>
+    </dl>
+
+    <div class="actions">
+      <a class="btn" href="mailto:bragg.cb@ccsu.edu?subject=Translational%20Literacy%20in%20Science%2C%20spring%202027&amp;body=Name%3A%0D%0AMajor%3A%0D%0AYear%3A%0D%0AQuestion%3A%0D%0A">Email me about the course</a>
+      <a href="#internship">See the summer internship</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <section aria-labelledby="what">
+    <div class="wrap">
+      <p class="eyebrow">The course</p>
+      <h2 id="what">Every field has its own rules for evidence</h2>
+      <div class="prose">
+        <p>A biologist, an economist, and an anthropologist can study the same question and hold their findings to different standards. This course makes those standards explicit. You learn to judge a claim by the rules of the field it came from, and then explain it to someone outside that field.</p>
+        <p>You will use generative AI all semester, as a tool you question. It is good at finding leads. It is also confidently wrong. You learn to tell which is which, and to leave a trail anyone can check.</p>
+        <p>Here is the kind of work you will be able to do by May.</p>
+      </div>
+
+      <div class="claim">
+        <p class="said">An AI-drafted summary for a board meeting says a vendor&rsquo;s reading app &ldquo;improves literacy outcomes by 30%.&rdquo;</p>
+        <p class="traced"><b>Traced to the source:</b> the vendor&rsquo;s own pilot. One school, 48 students, no comparison group. The 30% is a gain on the app&rsquo;s built-in quiz, not on an independent reading test.</p>
+        <dl>
+          <div><dt>What we know</dt><dd>Students who used the app scored higher on the app&rsquo;s own quiz.</dd></div>
+          <div><dt>What we don&rsquo;t know</dt><dd>Whether the app caused the gain, or whether reading improved anywhere outside the app.</dd></div>
+          <div><dt>What to verify next</dt><dd>Results from a study with a comparison group and an independent reading measure.</dd></div>
+        </dl>
+        <p class="cap">Illustrative example, condensed from the one-page brief students write for a decision-maker.</p>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="gain">
+    <div class="wrap">
+      <p class="eyebrow">What you leave with</p>
+      <h2 id="gain">Translational literacy, plus skills you can name in an interview</h2>
+      <p class="prose">Translational literacy is the ability to evaluate, verify, and communicate complex evidence accurately across fields, tools, and audiences. The course builds it in four parts.</p>
+      <div class="grid">
+        <div class="card"><h3>Cross-disciplinary evidence evaluation</h3><p>Judge a claim by the evidence standards of the field that produced it. Separate a warranted finding from an overclaim.</p></div>
+        <div class="card"><h3>AI interrogation</h3><p>Use generative AI to find leads, check what it says against primary sources, document where it fails, and leave a verification trail.</p></div>
+        <div class="card"><h3>Expert-to-public translation</h3><p>Turn complex evidence into plain language for non-specialists without losing the meaning or the uncertainty.</p></div>
+        <div class="card"><h3>Calibration</h3><p>Match your confidence to the evidence and deliver a clear recommendation: what we know, what we don&rsquo;t, and what to verify next.</p></div>
+      </div>
+
+      <h3 style="margin-top:2.6rem;font-size:1.35rem">The career-specific knowledge, skills, and abilities you build</h3>
+      <p class="prose">On the Career Readiness Pathway these are your CS KSAs: the specific things you can point to when an employer asks what you learned. This course is built to add to them, whatever your major.</p>
+      <div class="ksa">
+        <div>
+          <h3><span>Knowledge</span>How ten fields make and test claims</h3>
+          <ul class="ticks">
+            <li><b>Experiments, two ways.</b> Biology and psychology both run experiments, one on organisms and one on people. You learn what each one can and cannot conclude.</li>
+            <li><b>Models, two ways.</b> Physics predicts with mathematical certainty. Political science predicts with probability. You learn what a forecast from each one is worth.</li>
+            <li><b>Information literacy.</b> Where evidence comes from, and how to find the primary source behind a claim.</li>
+          </ul>
+        </div>
+        <div>
+          <h3><span>Skills</span>Work products you will have made</h3>
+          <ul class="ticks">
+            <li><b>A verification trail.</b> You run the same AI interrogation protocol all semester, and you can show your steps.</li>
+            <li><b>A one-page brief</b> for a non-specialist decision-maker, built on a realistic problem for a Connecticut employer.</li>
+            <li><b>A seven-minute pitch</b> delivered to the instructors, faculty from Communication and English, and partner organizations.</li>
+          </ul>
+        </div>
+        <div>
+          <h3><span>Abilities</span>What carries into any job</h3>
+          <ul class="ticks">
+            <li><b>Teaching yourself a new field.</b> For the final project you learn two discipline modules on your own, then use both on one problem.</li>
+            <li><b>Saying how sure you are.</b> Every brief ends with what is known, what is not, and what to check next.</li>
+          </ul>
+        </div>
+      </div>
+      <p class="note">On the <a href="https://doi.org/10.1037/stl0000480">Career Readiness Pathway</a>, the course builds your CS KSAs and core competencies. The summer micro-internship adds the other two components: a real experiential learning opportunity and a mentor who watches your work.</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="semester">
+    <div class="wrap">
+      <p class="eyebrow">How the semester runs</p>
+      <h2 id="semester">Fifteen weeks, three stages</h2>
+      <ol class="weeks">
+        <li><span class="when">Weeks 1&ndash;2.</span> Foundations, information literacy, and the AI interrogation protocol you will use all semester.</li>
+        <li><span class="when">Weeks 3&ndash;12.</span> Ten discipline modules, alternating natural and social science in deliberate pairs, so you see two fields handle the same kind of question differently.</li>
+        <li class="last"><span class="when">Weeks 13&ndash;15.</span> The final project: a cross-domain evidence pitch. You teach yourself two modules not covered in class, build a realistic problem for a Connecticut employer that needs both, run the AI interrogation protocol, write a one-page brief, and pitch it to a panel. Five criteria carry equal weight: module comprehension, synthesis, AI interrogation, calibration, and translation.</li>
+      </ol>
+
+      <h3 style="margin-top:2.4rem">Fifteen discipline modules, written by CCSU faculty in their own fields</h3>
+      <div class="modules">
+        <div><h3 style="font-size:.95rem;color:var(--steel)">Natural sciences</h3>
+          <ul><li>Biology</li><li>Biomolecular Sciences</li><li>Chemistry</li><li>Physics</li><li>Astronomy</li><li>Earth and Geological Sciences</li><li>Exercise Science</li><li>Physical Geography</li></ul></div>
+        <div><h3 style="font-size:.95rem;color:var(--steel)">Social and behavioral sciences</h3>
+          <ul><li>Psychological Science</li><li>Criminology</li><li>Economics</li><li>Political Science</li><li>Sociology</li><li>Human Geography</li><li>Anthropology</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="team">
+    <div class="wrap">
+      <p class="eyebrow">Who teaches it</p>
+      <h2 id="team">Three instructors, in the room together all semester</h2>
+      <div class="people">
+        <div class="person"><h3>Caleb Bragg, Ph.D.</h3><p>Professor, Psychological Science. Social science lead.</p></div>
+        <div class="person"><h3>Mark Jackson</h3><p>Professor and Chair, Biology. Natural science lead.</p></div>
+        <div class="person"><h3>Sharon Clapp</h3><p>Digital Projects &amp; AI Librarian, Elihu Burritt Library. Library and AI lead.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="intern" id="internship" role="region" aria-labelledby="intern-h">
+    <div class="wrap">
+      <p class="eyebrow">After the course</p>
+      <h2 id="intern-h">A paid summer micro-internship</h2>
+      <p class="pull">The course is the dress rehearsal. The micro-internship is the performance.</p>
+      <div class="prose">
+        <p>Up to 20 students from the course, selected on their final-project performance, complete paid micro-internships with Connecticut organizations in summer 2027. Each one applies what you learned to a real problem the host cares about, with a real audience for the result.</p>
+      </div>
+      <!-- UPDATE: confirm pay and tuition wording with the Hub before each recruiting cycle -->
+      <dl class="facts">
+        <div class="now"><dt>Pay</dt><dd>$1,000, paid through the Central Workforce and Innovation Hub</dd></div>
+        <div class="now"><dt>Credit</dt><dd>1 academic credit, with summer tuition covered</dd></div>
+        <div><dt>Hours</dt><dd>20&ndash;25 hours of project work, plus 5&ndash;10 hours of career readiness instruction</dd></div>
+        <div><dt>When</dt><dd>Summer 2027; projects are scoped in April</dd></div>
+        <div><dt>Format</dt><dd>Hybrid or virtual, arranged with each host</dd></div>
+        <div><dt>Support</dt><dd>Faculty supervision from Caleb Bragg, plus a project contact at your host</dd></div>
+      </dl>
+
+      <h3>What the work looks like</h3>
+      <div class="hosts">
+        <div><h3>Libraries and cultural organizations</h3>Turn program outcome data into a report the community can read, or evaluate a digital platform vendor&rsquo;s claims.</div>
+        <div><h3>Nonprofits</h3>Check an AI-drafted grant narrative against its sources, or summarize a funder&rsquo;s guidelines for the board.</div>
+        <div><h3>Manufacturers</h3>Evaluate a safety vendor&rsquo;s injury-reduction claim, or turn a revised safety data sheet into a one-page notice with the caveats intact.</div>
+        <div><h3>Finance, technology, and health</h3>Translate a regulatory change for clients, or explain health evidence to the public without distorting it.</div>
+      </div>
+      <p style="margin-top:1.4rem;font-size:.92rem">Employers can read about hosting on the <a href="../scale/">SCALE Pilot partner page</a>.</p>
+    </div>
+  </div>
+
+  <section aria-labelledby="faq">
+    <div class="wrap">
+      <p class="eyebrow">Questions</p>
+      <h2 id="faq">Questions students ask</h2>
+      <dl class="qa">
+        <dt>Do I have to do the internship?</dt>
+        <dd>No. The course stands on its own. The internship is an opportunity for up to 20 students, chosen on their final-project performance.</dd>
+        <dt>Will I use AI in this course?</dt>
+        <dd>Yes, every week, and on purpose. You learn to use it to find leads and then check everything it tells you against the sources.</dd>
+        <dt>Is the internship in person?</dt>
+        <dd>Each placement is hybrid or virtual, arranged with the host.</dd>
+        <dt>How are interns paid?</dt>
+        <dd>The Central Workforce and Innovation Hub handles onboarding, timesheets, and payroll. The $1,000 is split between the grant and your host organization.</dd>
+      </dl>
+
+      <div class="join">
+        <h3 style="margin-top:2.4rem">Want in?</h3>
+        <!-- UPDATE: replace with the course number and registration steps once they are set -->
+        <p class="prose">Email me for the course number and how to register, or with any question about whether the course fits your plans.</p>
+        <p style="margin-top:1rem"><a class="btn btn-solid" href="mailto:bragg.cb@ccsu.edu?subject=Translational%20Literacy%20in%20Science%2C%20spring%202027&amp;body=Name%3A%0D%0AMajor%3A%0D%0AYear%3A%0D%0AQuestion%3A%0D%0A">Email Caleb Bragg</a></p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="sigs">
+      <img src="../assets/scale-mark.png" alt="SCALE" width="44" height="44">
+      <img src="../assets/opal-mark.png" alt="OPAL" width="44" height="44">
+    </div>
+    <p>Translational Literacy in Science is part of the SCALE Pilot (Scientific Communication + AI Literacy Experience) at Central Connecticut State University, supported by a Connecticut Tech Talent Accelerator 3.0 Innovation Grant from the <a href="https://www.bhef.com">Business-Higher Education Forum</a> and the <a href="https://nebhe.org">New England Board of Higher Education</a>, funded by the <a href="https://portal.ct.gov/ows">Connecticut Office of Workforce Strategy</a>.</p>
+    <!-- UPDATE: date -->
+    <p>Page updated October 1, 2026. <a href="../">Back to Caleb Bragg, Ph.D.</a></p>
+  </div>
+</footer>
+</body>
+</html>
